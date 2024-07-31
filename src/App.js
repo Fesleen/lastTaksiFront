@@ -3,6 +3,11 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes, Link } from 'react-router-dom';
 import LoginPage from './LoginPage';
 import RegistrationForm from './RegistrationForm';
+import MainPage from './components/MainPage/MainPage';
+import FormPage from './components/MainPage/FormPage';
+import FormMailPage from './components/MainPage/FormMailPage';
+import SearchPage from './components/MainPage/SearchPage';
+import Search2Page from './components/MainPage/Search2Page';
 import './App.css'; // Import the CSS file
 
 const App = () => {
@@ -19,9 +24,18 @@ const App = () => {
                 <Routes>
                     <Route path="/login" element={<LoginPage />} />
                     <Route path="/register" element={<RegistrationForm />} />
+                    <Route path="/main" element={<MainPage />} />
                 </Routes>
             </div>
+            <Routes>
+                <Route path="/" element={<MainPage />} />
+                <Route path="/form" element={<FormPage />} />
+                <Route path="/form-mail" element={<FormMailPage />} />
+                <Route path="/search" element={<SearchPage />} />
+                <Route path="/search2" element={<Search2Page />} />
+            </Routes>
         </Router>
+        
     );
 };
 

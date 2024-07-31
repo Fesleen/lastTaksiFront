@@ -1,0 +1,110 @@
+/* General Form Container Styling */
+.formContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #f3f4f6, #dbe5ef);
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Form Styling */
+.form {
+    width: 100%;
+    max-width: 500px;
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Label Styling */
+.label {
+    margin-bottom: 12px;
+    font-size: 18px;
+    font-weight: bold; /* Make label text bold */
+    color: #333;
+    width: 100%;
+    text-align: left;
+}
+
+/* Input and Select Styling */
+.input, .select {
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    width: 100%; /* Ensure full width */
+    max-width: 100%; /* Prevent overflow */
+    background-color: #f7fafc;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; /* Prevent overflow */
+}
+
+/* Button Styling */
+.button {
+    background-color: #4a90e2;
+    color: #ffffff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold; /* Make button text bold */
+    text-align: center;
+    width: 100%;
+    max-width: 250px;
+    transition: background-color 0.3s, transform 0.2s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box; /* Prevent overflow */
+}
+
+.button:hover {
+    background-color: #357abd;
+    transform: translateY(-2px);
+}
+
+.button:active {
+    background-color: #2a5d9e;
+    transform: translateY(1px);
+}
+
+/* Return Button Styling */
+.returnContainer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.returnContainer .button {
+    background-color: #34c759;
+    font-weight: bold; /* Make return button text bold */
+}
+
+.returnContainer .button:hover {
+    background-color: #28a745;
+}
+
+.returnContainer .button:active {
+    background-color: #218838;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 600px) {
+    .form {
+        padding: 15px;
+    }
+
+    .button {
+        padding: 10px 20px;
+    }
+}
