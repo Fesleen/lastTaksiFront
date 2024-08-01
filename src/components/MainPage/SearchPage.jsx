@@ -66,7 +66,7 @@ const SearchPage = () => {
                 );
 
                 setAniqlik(true); // Set aniqlik to true when the user confirms
-                alert(`Telefon raqam: ${phone_number}`);
+                alert(`Telefon raqami pastdagi jadvalda chiqadi`);
 
                 // Fetch getrequest data
                 const getRequestResponse = await axios.get('https://taksibot.pythonanywhere.com/getrequests/', {
