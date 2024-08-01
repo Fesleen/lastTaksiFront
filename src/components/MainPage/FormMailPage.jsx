@@ -64,7 +64,7 @@ const FormMailPage = () => {
             {!submitted ? (
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <label className={styles.label}>
-                        Where:
+                        Qayerdan:
                         <select
                             className={styles.select}
                             name="where"
@@ -79,7 +79,7 @@ const FormMailPage = () => {
                         </select>
                     </label>
                     <label className={styles.label}>
-                        WhereTo:
+                        Qayerga:
                         <select
                             className={styles.select}
                             name="whereTo"
@@ -94,7 +94,7 @@ const FormMailPage = () => {
                         </select>
                     </label>
                     <label className={styles.label}>
-                        Phone Number:
+                        Telefon Raqam:
                         <input
                             className={styles.input}
                             type="text"
@@ -114,12 +114,12 @@ const FormMailPage = () => {
                             onChange={handleChange}
                         />
                     </label> */}
-                    <button className={styles.button} type="submit">Submit</button>
+                    <button className={styles.button} type="submit">Yuborish</button>
                 </form>
             ) : (
                 <div className={styles.returnContainer}>
-                    <p>Your request has been submitted successfully!</p>
-                    <button className={styles.button} onClick={handleReturn}>Return to Main Page</button>
+                    <p>Sizning so'rovingiz muvaffaqqiyatli jo'natildi adminlar so'rovni ko'rib chiqishadi va balans hisobingizga tushadi</p>
+                    <button className={styles.button} onClick={handleReturn}>Sahifaga qaytish</button>
                 </div>
             )}
         </div>

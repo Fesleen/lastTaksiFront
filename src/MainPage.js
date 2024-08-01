@@ -81,10 +81,10 @@ const MainPage = () => {
                 <span>Balance: {balance}</span>
             </div>
             <div className={styles.buttonContainer}>
-                <button className={styles.button} onClick={() => handleButtonClick('Give a passenger')}>Give a passenger</button>
-                <button className={styles.button} onClick={() => handleButtonClick('Get a passenger')}>Get a passenger</button>
-                <button className={styles.button} onClick={() => handleButtonClick('Give mail')}>Give mail</button>
-                <button className={styles.button} onClick={() => handleButtonClick('Get mail')}>Get mail</button>
+                <button className={styles.button} onClick={() => handleButtonClick('Give a passenger')}>Yo'lovchi berish</button>
+                <button className={styles.button} onClick={() => handleButtonClick('Get a passenger')}>Yo'lovchi olish</button>
+                <button className={styles.button} onClick={() => handleButtonClick('Give mail')}>Pochta berish</button>
+                <button className={styles.button} onClick={() => handleButtonClick('Get mail')}>Pochta olish</button>
             </div>
         </div>
     );

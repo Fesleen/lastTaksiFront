@@ -54,9 +54,9 @@ const Search2Page = () => {
                 }
 
                 const response = await axios.post('https://taksibot.pythonanywhere.com/getrequests/', {
-                    user: 1,
-                    request: 1,
-                    getrequest_type: 'yolovchi_olish',
+                    user: userId,
+                    request: requestId,
+                    getrequest_type: 'pochta_olish',
                 }, {
                     headers: { Authorization: `JWT ${token}` }
                 });
@@ -80,7 +80,7 @@ const Search2Page = () => {
         <div className={styles.searchContainer}>
             <div className={styles.inputContainer}>
                 <label>
-                    Where:
+                    Qayerdan:
                     <select value={where} onChange={(e) => setWhere(e.target.value)}>
                         <option value="toshkent">TASHKENT</option>
                         <option value="bog'dod-rishton-buvayda">BAGHDAD-RISHTON-BUVAYDA</option>
@@ -89,7 +89,7 @@ const Search2Page = () => {
                     </select>
                 </label>
                 <label>
-                    WhereTo:
+                    Qayerga:
                     <select value={whereTo} onChange={(e) => setWhereTo(e.target.value)}>
                         <option value="toshkent">TASHKENT</option>
                         <option value="bog'dod-rishton-buvayda">BAGHDAD-RISHTON-BUVAYDA</option>
@@ -97,16 +97,15 @@ const Search2Page = () => {
                         <option value="uchko'prik">UCHKOPRIK</option>
                     </select>
                 </label>
-                <button onClick={handleSearch}>Search</button>
+                <button onClick={handleSearch}>Qidirish</button>
             </div>
             <div className={styles.resultsContainer}>
                 {results.map((result, index) => (
                     <div key={index} className={styles.resultItem}>
-                        <p>Request Type: {result.request_type}</p>
-                        <p>Where: {result.where}</p>
-                        <p>WhereTo: {result.whereTo}</p>
+                        <p>Qayerdan: {result.where}</p>
+                        <p>Qayerga: {result.whereTo}</p>
                         <p>
-                            Phone Number: 
+                            Telefon Raqam: 
                             {result.phone_number ? (<button 
                                     className={styles.showPhoneNumberButton} 
                                     onClick={() => handleShowPhoneNumber(result.id, index)}
