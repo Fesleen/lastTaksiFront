@@ -9,16 +9,11 @@ const MainPage = () => {
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
-    const [accessToken, setAccessToken] = useState('');
-    const [refreshToken, setRefreshToken] = useState('');
 
     useEffect(() => {
         const fetchUserData = async () => {
             try {
                 const accessToken = localStorage.getItem('accessToken');
-                const refreshToken = localStorage.getItem('refreshToken');
-                setAccessToken(accessToken);
-                setRefreshToken(refreshToken);
 
                 if (!accessToken) {
                     throw new Error('No access token found');
@@ -57,12 +52,20 @@ const MainPage = () => {
                 route = '/form-mail';
                 break;
             case 'Get mail':
+                if (balance < 5000) {
+                    alert('Balansni to\'ldiring');
+                    return;
+                }
                 route = '/search2';
                 break;
             case 'Give a passenger':
                 route = '/form';
                 break;
             case 'Get a passenger':
+                if (balance < 7500) {
+                    alert('Balansni to\'ldiring');
+                    return;
+                }
                 route = '/search';
                 break;
             default:

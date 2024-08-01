@@ -1,16 +1,17 @@
-// src/LoginPage.js
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import './LoginPage.css';
+import { useNavigate, Link } from 'react-router-dom';
+import './LoginPage.css'; // Import your CSS file for styling
 
 const LoginPage = () => {
     const [number, setNumber] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
+    const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true);
 
         try {
             const response = await fetch('https://taksibot.pythonanywhere.com/users/login/', {
@@ -20,17 +21,20 @@ const LoginPage = () => {
             });
 
             const result = await response.json();
+            setLoading(false);
+
             if (response.ok) {
-                const { access, refresh, user } = result; 
-                console.log('Tokens:', access, refresh); // Debug token output
+                const { access, refresh, user } = result;
                 localStorage.setItem('accessToken', access);
                 localStorage.setItem('refreshToken', refresh);
+
                 navigate('/main', { state: { user } });
             } else {
                 setErrorMessage(result.message || 'Login failed. Please try again.');
             }
         } catch (error) {
             console.error('Error:', error);
+            setLoading(false);
             setErrorMessage('An error occurred. Please try again.');
         }
     };
@@ -55,9 +59,14 @@ const LoginPage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
-                <button type="submit">Kirish</button>
+                <button type="submit" disabled={loading}>
+                    {loading ? <div className="spinner"></div> : 'Kirish'}
+                </button>
             </form>
             {errorMessage && <p className="error-message">{errorMessage}</p>}
+            <p className="register-link">
+                Agar ro'yhatdan o'tmagan bo'lsangiz, <Link to="/register">ro'yhatdan o'ting</Link>.
+            </p>
         </div>
     );
 };

@@ -69,3 +69,35 @@
     color: #e74c3c;
     margin-top: 1rem;
 }
+/* Other existing styles */
+
+.register-link {
+    margin-top: 20px;
+    font-size: 14px;
+}
+
+.register-link a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.register-link a:hover {
+    text-decoration: underline;
+}
+/* Other existing styles */
+
+.spinner {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border-left-color: #09f;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}

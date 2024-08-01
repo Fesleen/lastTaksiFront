@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './FormPage.module.css';
@@ -7,10 +7,10 @@ const FormPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const params = new URLSearchParams(location.search);
-    const requestType = params.get('type');
+    const requestType = params.get('type') || 'yolovchi_berish';
 
-    const originalWhereOptions = ['toshkent', 'bog\'dod-rishton-buvayda', 'qo\'qon', 'uchko\'prik'];
-    const originalWhereToOptions = ['toshkent', 'bog\'dod-rishton-buvayda', 'qo\'qon', 'uchko\'prik'];
+    const originalWhereOptions = ['toshkent', "bog'dod-rishton-buvayda", "qo'qon", "uchko'prik"];
+    const originalWhereToOptions = ['toshkent', "bog'dod-rishton-buvayda", "qo'qon", "uchko'prik"];
 
     const whereOptions = originalWhereOptions.map(option => option.toUpperCase());
     const whereToOptions = originalWhereToOptions.map(option => option.toUpperCase());
@@ -19,25 +19,10 @@ const FormPage = () => {
         request_type: requestType,
         where: originalWhereOptions[0],
         whereTo: originalWhereToOptions[0],
-        phone_number: ''
+        phone_number: '',
+        yolovchiSoni: ''
     });
-    const [telegramId, setTelegramId] = useState(null);
     const [submitted, setSubmitted] = useState(false);
-
-    useEffect(() => {
-        const fetchTelegramId = async () => {
-            try {
-                const response = await axios.get('http://taksibot.pythonanywhere.com/users/profiles/');
-                const data = response.data;
-                const user = data.find(profile => profile.telegram_id === formData.telegram_id);
-                setTelegramId(user.id);
-            } catch (error) {
-                console.error('Error fetching telegram_id:', error);
-            }
-        };
-
-        fetchTelegramId();
-    }, [formData.telegram_id]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -50,10 +35,18 @@ const FormPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            await axios.post('http://taksibot.pythonanywhere.com/requests/', {
+            const token = localStorage.getItem('accessToken');
+            const response = await axios.get('https://taksibot.pythonanywhere.com/users/profile/', {
+                headers: { Authorization: `JWT ${token}` }
+            });
+            const userId = response.data.id;
+
+            await axios.post('https://taksibot.pythonanywhere.com/requests/', {
                 ...formData,
-                user: telegramId,
-                is_active: true
+                user: userId,
+                is_active: false
+            }, {
+                headers: { Authorization: `JWT ${token}` }
             });
             setSubmitted(true);
         } catch (error) {
@@ -107,6 +100,17 @@ const FormPage = () => {
                             type="text"
                             name="phone_number"
                             value={formData.phone_number}
+                            onChange={handleChange}
+                            required
+                        />
+                    </label>
+                    <label className={styles.label}>
+                        Number of Passengers:
+                        <input
+                            className={styles.input}
+                            type="number"
+                            name="yolovchiSoni"
+                            value={formData.yolovchiSoni}
                             onChange={handleChange}
                         />
                     </label>
