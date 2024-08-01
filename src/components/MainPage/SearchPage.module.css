@@ -91,3 +91,24 @@
     color: #007bff;
     text-decoration: underline;
 }
+.getRequestTable {
+    margin-top: 20px;
+}
+
+.getRequestTable table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: black;
+}
+
+.getRequestTable th, .getRequestTable td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid white;
+    color: white;
+}
+
+.getRequestTable th {
+    background-color: black;
+    color: white;
+}
