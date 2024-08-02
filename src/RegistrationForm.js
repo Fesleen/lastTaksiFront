@@ -11,8 +11,9 @@ const RegistrationForm = () => {
     phone_number: '',
     passport_photo: null,
     prava_photo: null,
+    balance: 0,
   });
-  const [balance, setBalance] = useState(0);
+  const [balance, setBalance] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false); // New loading state
   const navigate = useNavigate();
@@ -113,14 +114,14 @@ const RegistrationForm = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="balance">Balance:</label>
+          {/* <label htmlFor="balance">Balance:</label>
           <input
             type="number"
             id="balance"
             value={balance}
             onChange={(e) => setBalance(e.target.value)}
             required
-          />
+          /> */}
         </div>
         <div>
           <button type="submit" disabled={isLoading}>
