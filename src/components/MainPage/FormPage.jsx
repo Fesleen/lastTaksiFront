@@ -9,8 +9,8 @@ const FormPage = () => {
     const params = new URLSearchParams(location.search);
     const requestType = params.get('type') || 'yolovchi_berish';
 
-    const originalWhereOptions = ['toshkent', "bog'dod-rishton-buvayda", "qo'qon", "uchko'prik", "toshkent-viloyati"];
-    const originalWhereToOptions = ['toshkent', "bog'dod-rishton-buvayda", "qo'qon", "uchko'prik", "toshkent-viloyati"];
+    const originalWhereOptions = ['toshkent', "bog'dod-rishton-buvayda", "qo'qon", "uchko'prik", "toshkent-viloyati", "uch-uy-oltiariq-xongiz-chimyon-mindon"];
+    const originalWhereToOptions = ['toshkent', "bog'dod-rishton-buvayda", "qo'qon", "uchko'prik", "toshkent-viloyati", "uch-uy-oltiariq-xongiz-chimyon-mindon"];
     const toshkentDistricts = ['chilonzor', 'mirzo-ulugbek', 'shayhontohur', 'olmazor', 'sergeli', 'bektemir', 'm. gandi', 'm. yusuf'];
 
     const whereOptions = originalWhereOptions.map(option => option.toUpperCase());
