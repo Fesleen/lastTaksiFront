@@ -40,7 +40,7 @@ const Search2Page = () => {
     };
 
     const handleShowPhoneNumber = async (requestId, index) => {
-        const confirmOpen = window.confirm('Raqamni ko\'rishni istaysizmi?');
+        const confirmOpen = window.confirm('Raqamni ko\'rishni istaysizmi? Balansingizdan 7500 ayriladi');
         if (confirmOpen) {
             try {
                 const token = localStorage.getItem('accessToken');
