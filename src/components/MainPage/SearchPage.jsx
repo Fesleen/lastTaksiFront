@@ -98,8 +98,10 @@ const SearchPage = () => {
                     <select value={where} onChange={(e) => setWhere(e.target.value)}>
                         <option value="toshkent">TASHKENT</option>
                         <option value="bog'dod-rishton-buvayda">BAGHDAD-RISHTON-BUVAYDA</option>
-                        <option value="qo'qon">KOQAN</option>
+                        <option value="qo'qon">QO'QAN</option>
                         <option value="uchko'prik">UCHKOPRIK</option>
+                        <option value="toshkent-viloyati">TOSHKENT VILOYATI</option>
+                        <option value="uch-uy-oltiariq-xongiz-chimyon-mindon">UCH UY OLTIARIQ XONGIZ CHIMYON MINDON</option>
                     </select>
                 </label>
                 <label>
@@ -107,8 +109,10 @@ const SearchPage = () => {
                     <select value={whereTo} onChange={(e) => setWhereTo(e.target.value)}>
                         <option value="toshkent">TASHKENT</option>
                         <option value="bog'dod-rishton-buvayda">BAGHDAD-RISHTON-BUVAYDA</option>
-                        <option value="qo'qon">KOQAN</option>
+                        <option value="qo'qon">QO'QAN</option>
                         <option value="uchko'prik">UCHKOPRIK</option>
+                        <option value="toshkent-viloyati">TOSHKENT VILOYATI</option>
+                        <option value="uch-uy-oltiariq-xongiz-chimyon-mindon">UCH UY OLTIARIQ XONGIZ CHIMYON MINDON</option>
                     </select>
                 </label>
                 <button onClick={handleSearch}>Qidirish</button>
