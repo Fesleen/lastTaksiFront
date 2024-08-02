@@ -116,8 +116,8 @@ const SearchPage = () => {
             <div className={styles.resultsContainer}>
                 {results.map((result, index) => (
                     <div key={index} className={styles.resultItem}>
-                        <p>Qayerdan: {result.where}</p>
-                        <p>Qayerga: {result.whereTo}</p>
+                        <p>Qayerdan: {result.where} {result.tuman} {result.tuman2}</p>
+                        <p>Qayerga: {result.whereTo} {result.tuman} {result.tuman2}</p>
                         <p>
                             Telefon Raqam: {aniqlik ? (
                                 <span>{result.phone_number}</span>
@@ -149,6 +149,7 @@ const SearchPage = () => {
                             {getRequestData.slice(-1).map((request) => (
                                 <tr key={request.id}>
                                     <td>{request.phone_number}</td>
+
                                 </tr>
                             ))}
                         </tbody>

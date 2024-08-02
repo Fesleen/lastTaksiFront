@@ -3,14 +3,15 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './FormPage.module.css';
 
-const FormMailPage = () => {
+const FormPage = () => {
     const location = useLocation();
     const navigate = useNavigate();
     const params = new URLSearchParams(location.search);
     const requestType = params.get('type') || 'pochta_berish';
 
-    const originalWhereOptions = ['toshkent', "bog'dod-rishton-buvayda", "qo'qon", "uchko'prik"];
-    const originalWhereToOptions = ['toshkent', "bog'dod-rishton-buvayda", "qo'qon", "uchko'prik"];
+    const originalWhereOptions = ['toshkent', "bog'dod-rishton-buvayda", "qo'qon", "uchko'prik", "toshkent-viloyati"];
+    const originalWhereToOptions = ['toshkent', "bog'dod-rishton-buvayda", "qo'qon", "uchko'prik", "toshkent-viloyati"];
+    const toshkentDistricts = ['chilonzor', 'mirzo-ulugbek', 'shayhontohur', 'olmazor', 'sergeli', 'bektemir', 'm. gandi', 'm. yusuf'];
 
     const whereOptions = originalWhereOptions.map(option => option.toUpperCase());
     const whereToOptions = originalWhereToOptions.map(option => option.toUpperCase());
@@ -20,7 +21,9 @@ const FormMailPage = () => {
         where: originalWhereOptions[0],
         whereTo: originalWhereToOptions[0],
         phone_number: '',
-        yolovchiSoni: 1
+        yolovchiSoni: 1,
+        tuman: '',
+        tuman2: ''
     });
     const [submitted, setSubmitted] = useState(false);
 
@@ -78,6 +81,24 @@ const FormMailPage = () => {
                             ))}
                         </select>
                     </label>
+                    {formData.where === 'toshkent' && (
+                        <label className={styles.label}>
+                            Tuman:
+                            <select
+                                className={styles.select}
+                                name="tuman"
+                                value={formData.tuman}
+                                onChange={handleChange}
+                            >
+                                <option value="">Tumanni tanlang</option>
+                                {toshkentDistricts.map((tuman, index) => (
+                                    <option key={index} value={tuman}>
+                                        {tuman.toUpperCase()}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+                    )}
                     <label className={styles.label}>
                         Qayerga:
                         <select
@@ -93,6 +114,24 @@ const FormMailPage = () => {
                             ))}
                         </select>
                     </label>
+                    {formData.whereTo === 'toshkent' && (
+                        <label className={styles.label}>
+                            Tuman:
+                            <select
+                                className={styles.select}
+                                name="tuman2"
+                                value={formData.tuman2}
+                                onChange={handleChange}
+                            >
+                                <option value="">Tumanni tanlang</option>
+                                {toshkentDistricts.map((tuman, index) => (
+                                    <option key={index} value={tuman}>
+                                        {tuman.toUpperCase()}
+                                    </option>
+                                ))}
+                            </select>
+                        </label>
+                    )}
                     <label className={styles.label}>
                         Telefon Raqam:
                         <input
@@ -105,7 +144,7 @@ const FormMailPage = () => {
                         />
                     </label>
                     {/* <label className={styles.label}>
-                        Number of Passengers:
+                        Yo'lovchilar soni:
                         <input
                             className={styles.input}
                             type="number"
@@ -126,4 +165,4 @@ const FormMailPage = () => {
     );
 };
 
-export default FormMailPage;
+export default FormPage;
