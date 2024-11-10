@@ -22,9 +22,7 @@ const App = () => {
 
     return (
         <Router>
-            <div className="container">
-                <AppContent isLoggedIn={isLoggedIn} />
-            </div>
+            <AppContent isLoggedIn={isLoggedIn} />
         </Router>
     );
 };
@@ -35,19 +33,6 @@ const AppContent = ({ isLoggedIn }) => {
 
     return (
         <>
-            {!isMainPage && (
-                <div>
-                    <div className="logo">
-                        <img src="/public/fvlogo.png" alt="Logo" /> {/* Replace with your logo image path */}
-                    </div>
-                    {!isLoggedIn && (
-                        <nav className="nav">
-                            <Link to="/login">Kirish</Link>
-                            <Link to="/register">Ro'yhatdan o'tish</Link>
-                        </nav>
-                    )}
-                </div>
-            )}
             <Routes>
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/register" element={<RegistrationForm />} />
@@ -55,10 +40,10 @@ const AppContent = ({ isLoggedIn }) => {
                     <>
                         <Route path="/" element={<Navigate to="/main" />} />
                         <Route path="/main" element={<MainPage />} />
-                        <Route path="/form" element={<FormPageWithBack />} />
-                        <Route path="/form-mail" element={<FormMailPageWithBack />} />
-                        <Route path="/search" element={<SearchPageWithBack />} />
-                        <Route path="/search2" element={<Search2PageWithBack />} />
+                        <Route path="/form" element={<FormPage />} />
+                        <Route path="/form-mail" element={<FormMailPage />} />
+                        <Route path="/search" element={<SearchPage />} />
+                        <Route path="/search2" element={<Search2Page />} />
                     </>
                 ) : (
                     <Route path="/" element={<Navigate to="/login" />} />
@@ -68,21 +53,5 @@ const AppContent = ({ isLoggedIn }) => {
     );
 };
 
-const withBackButton = (Component) => {
-    return (props) => {
-        const navigate = useNavigate();
-        return (
-            <div>
-                <button onClick={() => navigate(-1)} className="back-button">Orqaga</button>
-                <Component {...props} />
-            </div>
-        );
-    };
-};
-
-const FormPageWithBack = withBackButton(FormPage);
-const FormMailPageWithBack = withBackButton(FormMailPage);
-const SearchPageWithBack = withBackButton(SearchPage);
-const Search2PageWithBack = withBackButton(Search2Page);
 
 export default App;

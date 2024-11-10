@@ -14,7 +14,7 @@ const LoginPage = () => {
         setLoading(true);
 
         try {
-            const response = await fetch('https://taksibot.pythonanywhere.com/users/login/', {
+            const response = await fetch('https://samarqandtaksi.pythonanywhere.com/users/login/', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ phone_number: number, password }),
@@ -40,33 +40,37 @@ const LoginPage = () => {
     };
 
     return (
-        <div className="login-container">
-            <h1>Farovon taksining haydovchilar bo'limiga <br /> HUSH KELIBSIZ!</h1>
+        <div className="container">
             <form onSubmit={handleSubmit}>
+                <h1>Farovon taksining haydovchilar bo'limiga <br /> XUSH KELIBSIZ!</h1>
                 <label htmlFor="number">Telefon raqam:</label>
                 <input
+                    className='input'
                     type="text"
                     id="number"
+                    placeholder='Telefon raqamingizni kiriting'
                     value={number}
                     onChange={(e) => setNumber(e.target.value)}
                     required
                 />
                 <label htmlFor="password">Parol:</label>
                 <input
+                    className='input'
                     type="password"
                     id="password"
+                    placeholder='Parolingizni kiriting'
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
+                {errorMessage && <p className="error-message">{errorMessage}</p>}
+                <p className="register-link">
+                    Agar ro'yhatdan o'tmagan bo'lsangiz, <Link to="/register">Ro'yhatdan o'ting</Link>.
+                </p>
                 <button type="submit" disabled={loading}>
                     {loading ? <div className="spinner"></div> : 'Kirish'}
                 </button>
             </form>
-            {errorMessage && <p className="error-message">{errorMessage}</p>}
-            <p className="register-link">
-                Agar ro'yhatdan o'tmagan bo'lsangiz, <Link to="/register">ro'yhatdan o'ting</Link>.
-            </p>
         </div>
     );
 };

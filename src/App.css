@@ -3,17 +3,15 @@
 
 body {
     font-family: 'Roboto', sans-serif;
+    overflow-x: hidden;
 }
+
 
 .container {
-    max-width: 1200px;
+    width: 100%;
+    max-width: 500px;
     margin: 0 auto;
-    padding: 20px;
-}
-
-.logo img {
-    max-width: 100px;
-    margin-bottom: 20px;
+    padding: 0 10px;
 }
 
 .nav {
@@ -23,24 +21,8 @@ body {
 
 .nav a {
     text-decoration: none;
-    color: #007bff;
+    color: #00778d;
     font-weight: bold;
-}
-
-.back-button {
-    background-color: #007bff;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    margin-bottom: 10px;
-}
-
-.back-button:hover {
-    background-color: #0056b3;
 }
 
 .button-container {
@@ -51,7 +33,7 @@ body {
 }
 
 .button {
-    background-color: #007bff;
+    background-color: #00818f;
     color: white;
     border: none;
     padding: 15px 30px;
@@ -63,7 +45,7 @@ body {
 }
 
 .button:hover {
-    background-color: #0056b3;
+    background-color: #0095b3;
 }
 
 .header {

@@ -1,14 +1,12 @@
 /* src/index.css */
 
-body {
+/* body va html uchun ham stil qo'shish */
+body, html {
+  background-color: #000a25;  /* Ko'k rang */
   margin: 0;
-  font-family: 'Roboto', sans-serif;
-  background: linear-gradient(135deg, #2c3e50, #4ca1af);
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  padding: 0;
+  height: 100%;
+  width: 100%;
 }
 
 a {

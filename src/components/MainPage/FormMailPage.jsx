@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import styles from './FormPage.module.css';
+import styles from './FormMailPage.module.css';
+
 
 const FormPage = () => {
     const location = useLocation();
@@ -9,12 +10,11 @@ const FormPage = () => {
     const params = new URLSearchParams(location.search);
     const requestType = params.get('type') || 'pochta_berish';
 
-    const originalWhereOptions = ['toshkent', "bog'dod-rishton-buvayda", "qo'qon", "uchko'prik", "toshkent-viloyati", "uch-uy-oltiariq-xongiz-chimyon-mindon"];
-    const originalWhereToOptions = ['toshkent', "bog'dod-rishton-buvayda", "qo'qon", "uchko'prik", "toshkent-viloyati", "uch-uy-oltiariq-xongiz-chimyon-mindon"];
-    const toshkentDistricts = ['chilonzor', 'mirzo-ulugbek', 'shayhontohur', 'olmazor', 'sergeli', 'bektemir', 'm. gandi', 'm. yusuf'];
+    const toshkentDistricts = ["Toshkent", "Mirobod", "Mirzo Ulug'bek", "Sirg'ali", "Chilonzor", "Yakkasaroy", "Shayxontohur", "Yunusobod", "Olmazor"];
+    const samarqandDistricts = ["Samarqand", "Kattakurgan", "Jomboy", "Narpay", "Oqdarya", "Pastdargom", "Payariq", "Bulung'ur", "Tayloq"]
 
-    const whereOptions = originalWhereOptions.map(option => option.toUpperCase());
-    const whereToOptions = originalWhereToOptions.map(option => option.toUpperCase());
+    const originalWhereOptions = ['toshkent', 'samarqand'];
+    const originalWhereToOptions = ['toshkent', 'samarqand'];
 
     const [formData, setFormData] = useState({
         request_type: requestType,
@@ -63,10 +63,11 @@ const FormPage = () => {
     };
 
     return (
-        <div className={styles.formContainer}>
+        <>
+        <div className={styles.container}>
             {!submitted ? (
                 <form className={styles.form} onSubmit={handleSubmit}>
-                    <label className={styles.label}>
+                    <label className={styles.form_label}>
                         Qayerdan:
                         <select
                             className={styles.select}
@@ -74,32 +75,14 @@ const FormPage = () => {
                             value={formData.where}
                             onChange={handleChange}
                         >
-                            {whereOptions.map((option, index) => (
+                            {toshkentDistricts.map((option, index) => (
                                 <option key={index} value={originalWhereOptions[index]}>
                                     {option}
                                 </option>
                             ))}
                         </select>
                     </label>
-                    {formData.where === 'toshkent' && (
-                        <label className={styles.label}>
-                            Tuman:
-                            <select
-                                className={styles.select}
-                                name="tuman"
-                                value={formData.tuman}
-                                onChange={handleChange}
-                            >
-                                <option value="">Tumanni tanlang</option>
-                                {toshkentDistricts.map((tuman, index) => (
-                                    <option key={index} value={tuman}>
-                                        {tuman.toUpperCase()}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-                    )}
-                    <label className={styles.label}>
+                    <label className={styles.form_label}>
                         Qayerga:
                         <select
                             className={styles.select}
@@ -107,32 +90,14 @@ const FormPage = () => {
                             value={formData.whereTo}
                             onChange={handleChange}
                         >
-                            {whereToOptions.map((option, index) => (
+                            {samarqandDistricts.map((option, index) => (
                                 <option key={index} value={originalWhereToOptions[index]}>
                                     {option}
                                 </option>
                             ))}
                         </select>
                     </label>
-                    {formData.whereTo === 'toshkent' && (
-                        <label className={styles.label}>
-                            Tuman:
-                            <select
-                                className={styles.select}
-                                name="tuman2"
-                                value={formData.tuman2}
-                                onChange={handleChange}
-                            >
-                                <option value="">Tumanni tanlang</option>
-                                {toshkentDistricts.map((tuman, index) => (
-                                    <option key={index} value={tuman}>
-                                        {tuman.toUpperCase()}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-                    )}
-                    <label className={styles.label}>
+                    <label className={styles.form_label}>
                         Telefon Raqam:
                         <input
                             className={styles.input}
@@ -143,16 +108,6 @@ const FormPage = () => {
                             required
                         />
                     </label>
-                    {/* <label className={styles.label}>
-                        Yo'lovchilar soni:
-                        <input
-                            className={styles.input}
-                            type="number"
-                            name="yolovchiSoni"
-                            value={formData.yolovchiSoni}
-                            onChange={handleChange}
-                        />
-                    </label> */}
                     <button className={styles.button} type="submit">Yuborish</button>
                 </form>
             ) : (
@@ -162,6 +117,7 @@ const FormPage = () => {
                 </div>
             )}
         </div>
+        </>
     );
 };
 

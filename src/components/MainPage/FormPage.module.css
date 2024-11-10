@@ -1,55 +1,72 @@
 /* General Form Container Styling */
-.formContainer {
+* {
+    box-sizing: border-box;
+}
+
+.container {
     display: flex;
     justify-content: center;
-    align-items: center;
     height: 100vh;
-    background: linear-gradient(135deg, #f3f4f6, #dbe5ef);
+    background-color: #000a25;
     padding: 20px;
-    box-sizing: border-box;
+    margin: 0 auto;
 }
 
 /* Form Styling */
 .form {
     width: 100%;
-    max-width: 500px;
-    background: #ffffff;
+    background: transparent;
     border-radius: 10px;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
     padding: 20px;
+    border: 2px solid rgb(35, 35, 35);
     box-sizing: border-box;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
 }
 
 /* Label Styling */
 .label {
-    margin-bottom: 12px;
+    margin-bottom: 15px;
     font-size: 18px;
     font-weight: bold; /* Make label text bold */
-    color: #333;
+    color: #ffffff;
     width: 100%;
     text-align: left;
 }
 
 /* Input and Select Styling */
-.input, .select {
+.select_group {
+    width: 100%;
+}
+
+.input {
     padding: 12px;
     margin-bottom: 15px;
     font-size: 16px;
-    border: 1px solid #e2e8f0;
     border-radius: 8px;
     width: 100%; /* Ensure full width */
-    max-width: 100%; /* Prevent overflow */
-    background-color: #f7fafc;
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #e2e8f0;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; /* Prevent overflow */
+}
+
+/* Specific styling for select */
+.select {
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    width: 100%; /* Ensure full width */
+    background-color: #000a25;
+    color: #ffffff;
+    border: 1px solid #e2e8f0;
     transition: border-color 0.3s, box-shadow 0.3s;
     box-sizing: border-box; /* Prevent overflow */
 }
 
 /* Button Styling */
 .button {
-    background-color: #4a90e2;
+    background-color: #008d88;
     color: #ffffff;
     padding: 12px 24px;
     border: none;
@@ -65,15 +82,16 @@
     justify-content: center;
     align-items: center;
     box-sizing: border-box; /* Prevent overflow */
+    margin-top: 10px;
 }
 
 .button:hover {
-    background-color: #357abd;
+    border: 2px solid #393939;
     transform: translateY(-2px);
 }
 
 .button:active {
-    background-color: #2a5d9e;
+    border: 2px solid #2c2c2c;
     transform: translateY(1px);
 }
 
@@ -98,13 +116,60 @@
     background-color: #218838;
 }
 
-/* Responsive Adjustments */
+/* Responsive Adjustments for Small Screens (phones) */
 @media (max-width: 600px) {
+    /* Form container and form adjustments */
     .form {
         padding: 15px;
     }
 
     .button {
         padding: 10px 20px;
+    }
+
+    /* Input and select adjustments */
+    .input{
+        width: 100%;
+        font-size: 14px; /* Smaller font size for smaller screens */
+        padding: 10px;
+    }
+    .select{
+        width: 100%;
+    }
+
+    .button {
+        width: 100%; /* Ensure the button takes full width on small screens */
+    }
+}
+
+/* Responsive Adjustments for Larger Screens (tablets, small laptops) */
+@media (max-width: 900px) {
+    .form {
+        padding: 15px;
+    }
+
+    .input {
+        font-size: 14px;
+    }
+    .select{
+        width: 100%;
+    }
+
+    .button {
+        font-size: 15px;
+        padding: 12px 20px;
+    }
+}
+
+/* Responsive Adjustments for Medium Screens (desktops) */
+@media (max-width: 1200px) {
+    .form {
+        max-width: 80%;
+    }
+
+
+    .button {
+        font-size: 14px;
+        padding: 12px 18px;
     }
 }

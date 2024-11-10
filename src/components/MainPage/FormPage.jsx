@@ -9,21 +9,22 @@ const FormPage = () => {
     const params = new URLSearchParams(location.search);
     const requestType = params.get('type') || 'yolovchi_berish';
 
-    const originalWhereOptions = ['toshkent', "bog'dod-rishton-buvayda", "qo'qon", "uchko'prik", "toshkent-viloyati", "uch-uy-oltiariq-xongiz-chimyon-mindon"];
-    const originalWhereToOptions = ['toshkent', "bog'dod-rishton-buvayda", "qo'qon", "uchko'prik", "toshkent-viloyati", "uch-uy-oltiariq-xongiz-chimyon-mindon"];
-    const toshkentDistricts = ['chilonzor', 'mirzo-ulugbek', 'shayhontohur', 'olmazor', 'sergeli', 'bektemir', 'm. gandi', 'm. yusuf'];
+    const toshkentDistricts = ["Bektemir", "Mirobod", "Mirzo Ulug'bek", "Sirg'ali", "Chilonzor", "Yakkasaroy", "Shayxontohur", "Yunusobod", "Olmazor"];
+    const samarqandDistricts = ["Samarqand", "Kattakurgan", "Jomboy", "Narpay", "Oqdarya", "Pastdargom", "Payariq", "Bulung'ur", "Tayloq"];
 
-    const whereOptions = originalWhereOptions.map(option => option.toUpperCase());
-    const whereToOptions = originalWhereToOptions.map(option => option.toUpperCase());
+    const originalWhereOptions = ['toshkent', 'samarqand'];
+    const originalWhereToOptions = ['toshkent', 'samarqand'];
 
     const [formData, setFormData] = useState({
         request_type: requestType,
-        where: originalWhereOptions[0],
-        whereTo: originalWhereToOptions[0],
+        where: 'toshkent',
+        whereTo: 'samarqand',
         phone_number: '',
         yolovchiSoni: '',
         tuman: '',
-        tuman2: ''
+        tuman2: '',
+        gender: '',
+        price: ''
     });
     const [submitted, setSubmitted] = useState(false);
 
@@ -31,14 +32,19 @@ const FormPage = () => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
-            [name]: value.toLowerCase()
+            [name]: value
         });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        const token = localStorage.getItem('accessToken');
+        if (!token) {
+            alert('Authorization token not found. Please log in again.');
+            return;
+        }
+
         try {
-            const token = localStorage.getItem('accessToken');
             const response = await axios.get('https://taksibot.pythonanywhere.com/users/profile/', {
                 headers: { Authorization: `JWT ${token}` }
             });
@@ -63,77 +69,96 @@ const FormPage = () => {
     };
 
     return (
-        <div className={styles.formContainer}>
-            {!submitted ? (
-                <form className={styles.form} onSubmit={handleSubmit}>
-                    <label className={styles.label}>
-                        Qayerdan:
+        <>
+            <div className={styles.container}>
+                {!submitted ? (
+                    <form className={styles.form} onSubmit={handleSubmit}>
+                        <label className={styles.label}>Qayerdan:</label>
                         <select
                             className={styles.select}
                             name="where"
                             value={formData.where}
                             onChange={handleChange}
                         >
-                            {whereOptions.map((option, index) => (
-                                <option key={index} value={originalWhereOptions[index]}>
-                                    {option}
+                            {originalWhereOptions.map((option, index) => (
+                                <option key={index} value={option}>
+                                    {option.toUpperCase()}
                                 </option>
                             ))}
                         </select>
-                    </label>
-                    {formData.where === 'toshkent' && (
-                        <label className={styles.label}>
-                            Tuman:
-                            <select
-                                className={styles.select}
-                                name="tuman"
-                                value={formData.tuman}
-                                onChange={handleChange}
-                            >
-                                <option value="">Tumanni tanlang</option>
-                                {toshkentDistricts.map((tuman, index) => (
-                                    <option key={index} value={tuman}>
-                                        {tuman.toUpperCase()}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-                    )}
-                    <label className={styles.label}>
-                        Qayerga:
+
+                        {formData.where === 'toshkent' && (
+                            <div className={styles.select_group}>
+                                <label className={styles.label}>Tuman:</label>
+                                <select
+                                    className={styles.select}
+                                    name="tuman"
+                                    value={formData.tuman}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">Tumanni tanlang</option>
+                                    {toshkentDistricts.map((tuman, index) => (
+                                        <option key={index} value={tuman}>
+                                            {tuman.toUpperCase()}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
+
+                        <label className={styles.label}>Qayerga:</label>
                         <select
                             className={styles.select}
                             name="whereTo"
                             value={formData.whereTo}
                             onChange={handleChange}
                         >
-                            {whereToOptions.map((option, index) => (
-                                <option key={index} value={originalWhereToOptions[index]}>
-                                    {option}
+                            {originalWhereToOptions.map((option, index) => (
+                                <option key={index} value={option}>
+                                    {option.toUpperCase()}
                                 </option>
                             ))}
                         </select>
-                    </label>
-                    {formData.whereTo === 'toshkent' && (
-                        <label className={styles.label}>
-                            Tuman:
-                            <select
-                                className={styles.select}
-                                name="tuman2"
-                                value={formData.tuman2}
-                                onChange={handleChange}
-                            >
-                                <option value="">Tumanni tanlang</option>
-                                {toshkentDistricts.map((tuman, index) => (
-                                    <option key={index} value={tuman}>
-                                        {tuman.toUpperCase()}
-                                    </option>
-                                ))}
-                            </select>
-                        </label>
-                    )}
-                    <label className={styles.label}>
-                        Telefon Raqam:
+
+                        {formData.whereTo === 'toshkent' && (
+                            <div className={styles.select_group}>
+                                <label className={styles.label}>Tuman:</label>
+                                <select
+                                    className={styles.select}
+                                    name="tuman2"
+                                    value={formData.tuman2}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">Tumanni tanlang</option>
+                                    {toshkentDistricts.map((tuman, index) => (
+                                        <option key={index} value={tuman}>
+                                            {tuman.toUpperCase()}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
+
+                        {formData.whereTo === 'samarqand' && (
+                            <div className={styles.select_group}>
+                                <label className={styles.label}>Tuman:</label>
+                                <select
+                                    className={styles.select}
+                                    name="tuman2"
+                                    value={formData.tuman2}
+                                    onChange={handleChange}
+                                >
+                                    <option value="">Tumanni tanlang</option>
+                                    {samarqandDistricts.map((tuman, index) => (
+                                        <option key={index} value={tuman}>
+                                            {tuman.toUpperCase()}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                        )}
+
+                        <label className={styles.label}>Telefon Raqam:</label>
                         <input
                             className={styles.input}
                             type="text"
@@ -142,9 +167,8 @@ const FormPage = () => {
                             onChange={handleChange}
                             required
                         />
-                    </label>
-                    <label className={styles.label}>
-                        Yo'lovchilar soni:
+
+                        <label className={styles.label}>Yo'lovchilar soni:</label>
                         <input
                             className={styles.input}
                             type="number"
@@ -152,16 +176,36 @@ const FormPage = () => {
                             value={formData.yolovchiSoni}
                             onChange={handleChange}
                         />
-                    </label>
-                    <button className={styles.button} type="submit">Yuborish</button>
-                </form>
-            ) : (
-                <div className={styles.returnContainer}>
-                    <p>Sizning so'rovingiz muvaffaqqiyatli jo'natildi adminlar so'rovni ko'rib chiqishadi va balans hisobingizga tushadi</p>
-                    <button className={styles.button} onClick={handleReturn}>Sahifaga qaytish</button>
-                </div>
-            )}
-        </div>
+
+                        <label className={styles.label}>Jins:</label>
+                        <select
+                            name="gender"
+                            className={styles.select}
+                            value={formData.gender}
+                            onChange={handleChange}
+                        >
+                            <option value="">Tanlang</option>
+                            <option value="male">Erkak</option>
+                            <option value="female">Ayol</option>
+                        </select>
+                        <label className={styles.label}>Narxni kiriting</label>
+                        <input
+                            className={styles.input}
+                            type="number"
+                            name="Narxni kiriting"
+                            value={formData.price}
+                            onChange={handleChange}
+                        />
+                        <button className={styles.button} type="submit">Yuborish</button>
+                    </form>
+                ) : (
+                    <div className={styles.returnContainer}>
+                        <p>Sizning so'rovingiz muvaffaqqiyatli jo'natildi, adminlar so'rovni ko'rib chiqishadi va balans hisobingizga tushadi</p>
+                        <button className={styles.button} onClick={handleReturn}>Sahifaga qaytish</button>
+                    </div>
+                )}
+            </div>
+        </>
     );
 };
 

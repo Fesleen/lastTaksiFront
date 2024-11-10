@@ -9,7 +9,6 @@ const SearchPage = () => {
     const [userId, setUserId] = useState(null);
     const [aniqlik, setAniqlik] = useState(false);
     const [getRequestData, setGetRequestData] = useState([]);
-    const [requestData, setRequestData] = useState({});
 
     useEffect(() => {
         const fetchUserProfile = async () => {
@@ -58,7 +57,7 @@ const SearchPage = () => {
                 });
 
                 const { phone_number } = response.data; // assuming response contains phone_number
-                
+
                 setResults((prevResults) =>
                     prevResults.map((result, idx) =>
                         idx === index ? { ...result, phone_number: phone_number } : result
@@ -91,76 +90,74 @@ const SearchPage = () => {
     };
 
     return (
-        <div className={styles.searchContainer}>
-            <div className={styles.inputContainer}>
-                <label>
-                    Qayerdan:
-                    <select value={where} onChange={(e) => setWhere(e.target.value)}>
-                        <option value="toshkent">TASHKENT</option>
-                        <option value="bog'dod-rishton-buvayda">BAGHDAD-RISHTON-BUVAYDA</option>
-                        <option value="qo'qon">QO'QAN</option>
-                        <option value="uchko'prik">UCHKOPRIK</option>
-                        <option value="toshkent-viloyati">TOSHKENT VILOYATI</option>
-                        <option value="uch-uy-oltiariq-xongiz-chimyon-mindon">UCH UY OLTIARIQ XONGIZ CHIMYON MINDON</option>
-                    </select>
-                </label>
-                <label>
-                    Qayerga:
-                    <select value={whereTo} onChange={(e) => setWhereTo(e.target.value)}>
-                        <option value="toshkent">TASHKENT</option>
-                        <option value="bog'dod-rishton-buvayda">BAGHDAD-RISHTON-BUVAYDA</option>
-                        <option value="qo'qon">QO'QAN</option>
-                        <option value="uchko'prik">UCHKOPRIK</option>
-                        <option value="toshkent-viloyati">TOSHKENT VILOYATI</option>
-                        <option value="uch-uy-oltiariq-xongiz-chimyon-mindon">UCH UY OLTIARIQ XONGIZ CHIMYON MINDON</option>
-                    </select>
-                </label>
-                <button onClick={handleSearch}>Qidirish</button>
-            </div>
-            <div className={styles.resultsContainer}>
-                {results.map((result, index) => (
-                    <div key={index} className={styles.resultItem}>
-                        <p>Qayerdan: {result.where} {result.tuman} {result.tuman2}</p>
-                        <p>Qayerga: {result.whereTo} {result.tuman} {result.tuman2}</p>
-                        <p>
-                            Telefon Raqam: {aniqlik ? (
-                                <span>{result.phone_number}</span>
-                            ) : (
-                                result.phone_number ? (
-                                    <button 
-                                        className={styles.showPhoneNumberButton} 
-                                        onClick={() => handleShowPhoneNumber(result.id, index)}
-                                    >
-                                        telefon raqamni ko'rish
-                                    </button>
-                                ) : (
+        <>
+            <div className={styles.container}>
+                <form className={styles.form}>
+                    <label className='form_label'>Qayerdan:</label>
+                        <select value={where} onChange={(e) => setWhere(e.target.value)}>
+                            <option value="toshkent">TASHKENT</option>
+                            <option value="bog'dod-rishton-buvayda">BAGHDAD-RISHTON-BUVAYDA</option>
+                            <option value="qo'qon">QO'QAN</option>
+                            <option value="uchko'prik">UCHKOPRIK</option>
+                            <option value="toshkent-viloyati">TOSHKENT VILOYATI</option>
+                            <option value="uch-uy-oltiariq-xongiz-chimyon-mindon">UCH UY OLTIARIQ XONGIZ CHIMYON MINDON</option>
+                        </select>
+                        <label className='form_label'>Qayerga:</label>
+                        <select value={whereTo} onChange={(e) => setWhereTo(e.target.value)}>
+                            <option value="toshkent">TASHKENT</option>
+                            <option value="bog'dod-rishton-buvayda">BAGHDAD-RISHTON-BUVAYDA</option>
+                            <option value="qo'qon">QO'QAN</option>
+                            <option value="uchko'prik">UCHKOPRIK</option>
+                            <option value="toshkent-viloyati">TOSHKENT VILOYATI</option>
+                            <option value="uch-uy-oltiariq-xongiz-chimyon-mindon">UCH UY OLTIARIQ XONGIZ CHIMYON MINDON</option>
+                        </select>
+                    <button onClick={handleSearch}>Qidirish</button>
+                </form>
+                <div className={styles.resultsContainer}>
+                    {results.map((result, index) => (
+                        <div key={index} className={styles.resultItem}>
+                            <p>Qayerdan: {result.where} {result.tuman} {result.tuman2}</p>
+                            <p>Qayerga: {result.whereTo} {result.tuman} {result.tuman2}</p>
+                            <p>
+                                Telefon Raqam: {aniqlik ? (
                                     <span>{result.phone_number}</span>
-                                )
-                            )}
-                        </p>
-                    </div>
-                ))}
-            </div>
-            {getRequestData.length > 0 && (
-                <div className={styles.getRequestTable}>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Telefon Raqam</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {getRequestData.slice(-1).map((request) => (
-                                <tr key={request.id}>
-                                    <td>{request.phone_number}</td>
-
-                                </tr>
-                            ))}
-                        </tbody>
-                    </table>
+                                ) : (
+                                    result.phone_number ? (
+                                        <button
+                                            className={styles.showPhoneNumberButton}
+                                            onClick={() => handleShowPhoneNumber(result.id, index)}
+                                        >
+                                            telefon raqamni ko'rish
+                                        </button>
+                                    ) : (
+                                        <span>{result.phone_number}</span>
+                                    )
+                                )}
+                            </p>
+                        </div>
+                    ))}
                 </div>
-            )}
-        </div>
+                {getRequestData.length > 0 && (
+                    <div className={styles.getRequestTable}>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Telefon Raqam</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {getRequestData.slice(-1).map((request) => (
+                                    <tr key={request.id}>
+                                        <td>{request.phone_number}</td>
+
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                )}
+            </div>
+        </>
     );
 };
 

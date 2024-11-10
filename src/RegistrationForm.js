@@ -1,5 +1,4 @@
-// src/RegistrationForm.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import './RegistrationForm.css';
@@ -11,12 +10,17 @@ const RegistrationForm = () => {
     phone_number: '',
     passport_photo: null,
     prava_photo: null,
-    balance: 0,
   });
+
   const [balance, setBalance] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoading, setIsLoading] = useState(false); // New loading state
+  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setBalance('0');
+    setPassword('cradev1234');
+  }, []);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -30,72 +34,80 @@ const RegistrationForm = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    
-    setIsLoading(true); // Set loading state to true
-    
+    setIsLoading(true);
+
     const formDataToSend = new FormData();
     formDataToSend.append('first_name', formData.first_name);
     formDataToSend.append('last_name', formData.last_name);
     formDataToSend.append('phone_number', formData.phone_number);
     formDataToSend.append('passport_photo', formData.passport_photo);
     formDataToSend.append('prava_photo', formData.prava_photo);
+
     formDataToSend.append('balance', balance);
-    formDataToSend.append('password', password || 'cradev1234'); // Use default password if balance is 0
+    formDataToSend.append('password', password);
 
     try {
-      await axios.post('https://taksibot.pythonanywhere.com/users/register/', formDataToSend, {
+      await axios.post('https://samarqandtaksi.pythonanywhere.com/users/register/', formDataToSend, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
+
       alert('Registration successful!');
       navigate('/login');
     } catch (error) {
-      console.error('Registration failed:', error);
-      alert('Registration failed. Please try again.');
+      console.error('Registration failed:', error.response?.data || error.message);
+      alert(`Registration failed. ${error.response?.data?.message || 'Please try again.'}`);
     } finally {
-      setIsLoading(false); // Reset loading state
+      setIsLoading(false);
     }
   };
 
   return (
-    <div className="registration-form">
-      <h2>Ro'yhatdan o'tish</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label htmlFor="first_name">Ism:</label>
+    <div className="container">
+      <form className="form_group" onSubmit={handleSubmit}>
+        <h2>Ro'yxatdan o'tish!</h2>
+        <div className="input_group">
+          <label className='label' htmlFor="first_name">Ismingiz:</label>
           <input
+            className='input'
             type="text"
             id="first_name"
             name="first_name"
+            placeholder='Ismingizni kiriting'
             value={formData.first_name}
             onChange={handleChange}
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="last_name">Familya:</label>
+        <div className="input_group">
+          <label className='label' htmlFor="last_name">Familya:</label>
           <input
+            className='input'
             type="text"
             id="last_name"
             name="last_name"
+            placeholder='Familyangizni  kiriting'
             value={formData.last_name}
             onChange={handleChange}
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="phone_number">Telefon Raqam:</label>
+        <div className="input_group">
+          <label className='label' htmlFor="phone_number">Telefon Raqam:</label>
           <input
+            className='input'
             type="text"
             id="phone_number"
             name="phone_number"
+            placeholder='+998'
             value={formData.phone_number}
             onChange={handleChange}
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="passport_photo">Passport Rasm:</label>
+        <div className="input_group">
+          <label className='label' htmlFor="passport_photo">Passport Rasm:</label>
           <input
+            className='input'
             type="file"
             id="passport_photo"
             name="passport_photo"
@@ -103,9 +115,10 @@ const RegistrationForm = () => {
             required
           />
         </div>
-        <div className="form-group">
-          <label htmlFor="prava_photo">Prava Rasm:</label>
+        <div className="input_group">
+          <label className='label' htmlFor="prava_photo">Haydovchilik guvohnomasi fotosurati:</label>
           <input
+            className='input'
             type="file"
             id="prava_photo"
             name="prava_photo"
@@ -113,28 +126,14 @@ const RegistrationForm = () => {
             required
           />
         </div>
-        <div className="form-group">
-          {/* <label htmlFor="balance">Balance:</label>
-          <input
-            type="number"
-            id="balance"
-            value={balance}
-            onChange={(e) => setBalance(e.target.value)}
-            required
-          /> */}
-        </div>
-        <div>
-          <button type="submit" disabled={isLoading}>
-            {isLoading ? (
-              <>
-                <div className="spinner"></div>
-                Kutilmoqda...
-              </>
-            ) : (
-              'Davom etish'
-            )}
+
+        {isLoading ? (
+          <span>Yuklanmoqda...</span>
+        ) : (
+          <button type="submit" className="submitButton">
+            Ro'yxatdan o'tish
           </button>
-        </div>
+        )}
       </form>
     </div>
   );

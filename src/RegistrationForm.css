@@ -1,83 +1,180 @@
-/* RegistrationForm.css */
-.registration-form {
-  background: rgba(0, 0, 0, 0.7);
-  padding: 2rem;
-  border-radius: 10px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 600px;
+.container {
   width: 100%;
-  text-align: center;
-  margin: auto; /* Center form horizontally */
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #000a25;
 }
-
-.registration-form h2 {
-  font-size: 1.5rem;
-  margin-bottom: 1.5rem;
+.container h2 {
+  font-size: 28px;
+  color: #fff;
+  font-family: "Roboto", sans-serif;
+  
 }
-
-.registration-form form {
+.form_group{
+  display: flex;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: 20px;
+  border: 1px solid #232323;
+  padding: 20px;
+  border-radius: 6px;
 }
-
-.registration-form .form-group {
-  width: 100%;
-  margin-bottom: 1rem;
+.input_group{
+  display: flex;
+  flex-direction: column;
 }
-
-.registration-form label {
-  display: block;
-  margin-bottom: 0.5rem;
-  text-align: left;
-  width: 100%;
-}
-
-.registration-form input {
-  padding: 0.5rem;
-  border: none;
-  border-radius: 5px;
-  width: 100%;
-}
-
-.registration-form input[type="file"] {
-  padding: 0;
-}
-
-.registration-form button {
-  padding: 0.7rem;
-  background-color: #4ca1af;
-  border: none;
-  border-radius: 5px;
+.label {
+  font-size: 18px;
   color: #fff;
-  font-weight: bold;
+  margin-bottom: 10px;
+  font-family: "Roboto", sans-serif;
+}
+
+.input {
+  font-size: 22px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  background-color: transparent;
+  color: #fff;
+  margin-bottom: 25px;
+}
+
+input[type="file"] {
+  font-size: 22px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  padding: 10px;
+  border-radius: 5px;
+  border: 1px solid #fff;
+  background-color: transparent;
+  color: #fff;
+  margin-bottom: 25px;
+}
+.submitButton {
+  padding: 12px;
+  font-size: 18px;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  background-color: #008d88;
+  color: white;
   cursor: pointer;
-  position: relative;
-  width: 100%;
-  max-width: 200px;
-  margin-top: 1rem;
+  transition: background-color 0.3s ease;
+}
+@media (max-width: 1024px) {
+  .container {
+    width: 100%;
+    max-width: 480px;
+    padding: 15px;
+  }
+
+  .input {
+    width: 100%;
+    font-size: 16px;
+    padding: 8px;
+  }
+
+  .submitButton {
+    font-size: 16px;
+    padding: 10px;
+  }
 }
 
-.registration-form button:disabled {
-  background-color: #7f8c8d;
-  cursor: not-allowed;
+@media (max-width: 768px) {
+  .container {
+    width: 100%;
+    max-width: 450px;
+    padding: 12px;
+  }
+
+  .input {
+    width: 100%;
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .submitButton {
+    font-size: 16px;
+    padding: 10px;
+  }
 }
 
-.registration-form button .spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-  border-top: 4px solid #fff;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -10px;
-  margin-top: -10px;
-  animation: spin 1s linear infinite;
+@media (max-width: 600px) {
+  .container {
+    width: 100%;
+    max-width: 400px;
+    padding: 10px;
+  }
+
+  .input {
+    width: 100%;
+    font-size: 14px;
+    padding: 8px;
+  }
+
+  .submitButton {
+    font-size: 14px;
+    padding: 10px;
+  }
 }
 
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
+@media (max-width: 480px) {
+  .container {
+    width: 100%;
+    max-width: 320px;
+    padding: 8px;
+  }
+
+  .input {
+    width: 100%;
+    padding: 6px;
+    font-size: 12px;
+  }
+
+  input[type="file"] {
+    width: 100%;
+    padding: 6px;
+  }
+
+  .submitButton {
+    font-size: 14px;
+    padding: 10px;
+  }
+
+  .customFileButton {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .input {
+    width: 100%;
+    padding: 5px;
+    font-size: 12px;
+  }
+
+  input[type="file"] {
+    width: 100%;
+    padding: 5px;
+  }
+
+  .submitButton {
+    font-size: 12px;
+    padding: 8px;
+  }
+
+  .customFileButton {
+    padding: 5px 10px;
+    font-size: 12px;
+  }
 }

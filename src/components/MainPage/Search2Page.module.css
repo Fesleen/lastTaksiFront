@@ -1,63 +1,49 @@
-.searchContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px;
-    background-color: #f8f9fa;
-    border-radius: 8px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
+.container {
+    width: 100%;
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 0 10px;
+    background-color: #000a25;
+  }
 
-.inputContainer {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+.form {
+    margin-top: 30px;
     margin-bottom: 20px;
     width: 100%;
-    max-width: 600px;
+    border: 2px solid rgb(31, 31, 31);
+    padding: 10px;
 }
 
-.inputContainer label {
-    margin-bottom: 5px;
+.form label {
+    margin-bottom: 10px;
     font-size: 1.1em;
     font-weight: bold;
-    color: #333;
+    color: #ffffff;
 }
 
-.inputContainer select {
+.form select {
     width: 100%;
     padding: 10px;
     margin-bottom: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    font-size: 1em;
-    color: #333;
-    background-color: #fff;
+    border: 2px solid rgb(31, 31, 31);
+    border-radius: 6px;
+    color: #ffffff;
+    background-color: #000a25;
     transition: border-color 0.3s;
 }
 
-.inputContainer select:focus {
-    border-color: #007bff;
-    outline: none;
-}
-
-.inputContainer button {
+.form button {
     width: 100%;
     padding: 10px;
     border: none;
     border-radius: 4px;
-    background-color: #007bff;
+    background-color: #4ca1af;
     color: white;
     font-size: 1.1em;
     font-weight: bold;
     cursor: pointer;
     transition: background-color 0.3s, transform 0.3s;
     text-align: center;
-}
-
-.inputContainer button:hover {
-    background-color: #0056b3;
-    transform: scale(1.05);
 }
 
 .resultsContainer {
@@ -88,7 +74,7 @@
 
 .resultItem span.phoneNumber {
     cursor: pointer;
-    color: #007bff;
+    color: #4ca1af;
     text-decoration: underline;
 }
 .getRequestTable {
