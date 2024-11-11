@@ -14,7 +14,7 @@ const FormMailPagePochta = () => {
 
     useEffect(() => {
         if (!savedFormData) {
-            alert('FormPage ma\'lumotlari topilmadi.');
+            alert('FormMailPage ma\'lumotlari topilmadi.');
             navigate('/pochta');
         }
     }, [savedFormData, navigate]);
