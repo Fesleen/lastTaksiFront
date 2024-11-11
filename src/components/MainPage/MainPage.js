@@ -10,6 +10,7 @@ const MainPage = () => {
     const [lastName, setLastName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState(''); // Ensure phoneNumber state is initialized
 
+    
     useEffect(() => {
         const fetchUserData = async () => {
             try {
