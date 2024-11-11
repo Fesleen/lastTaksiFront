@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './FormMailPage.module.css';
-import CommonComponentPochta from '../main_top_search';
+import CommonComponentPochta from '../main_top_pochta';
 
 const FormMailPagePochta = () => {
     const navigate = useNavigate();
