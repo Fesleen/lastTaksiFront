@@ -22,7 +22,7 @@ const FormMailPagePochta = () => {
             setFormData(savedFormData);
         } else {
             alert(`Form ma'lumotlari topilmadi.`);
-            navigate('/formpage');
+            navigate('/pochta');
         }
     }, [navigate]);
 

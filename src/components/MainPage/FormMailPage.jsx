@@ -17,7 +17,7 @@ const FormMailPage = () => {
         const savedFormData = JSON.parse(localStorage.getItem('formData'));
         if (!savedFormData) {
             alert('Form data not found.');
-            navigate('/formpage');
+            navigate('/pochta');
         }
     }, [navigate]);
 
