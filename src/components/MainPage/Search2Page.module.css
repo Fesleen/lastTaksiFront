@@ -12,6 +12,7 @@
     width: 100%;
     border: 2px solid rgb(31, 31, 31);
     padding: 10px;
+    border-radius: 6px;
 }
 
 .form label {

@@ -1,71 +1,69 @@
-import React, { useState } from 'react';
-import { useLocation, useNavigate } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './FormMailPage.module.css';
+import CommonComponentPochta from '../main_top_pochta';
 
-
-const FormPage = () => {
-    const location = useLocation();
+const FormMailPage = () => {
     const navigate = useNavigate();
-    const params = new URLSearchParams(location.search);
-    const requestType = params.get('type') || 'pochta_berish';
-
-    const toshkentDistricts = ["Toshkent", "Mirobod", "Mirzo Ulug'bek", "Sirg'ali", "Chilonzor", "Yakkasaroy", "Shayxontohur", "Yunusobod", "Olmazor"];
-    const samarqandDistricts = ["Samarqand", "Kattakurgan", "Jomboy", "Narpay", "Oqdarya", "Pastdargom", "Payariq", "Bulung'ur", "Tayloq"]
-
-    const originalWhereOptions = ['toshkent', 'samarqand'];
-    const originalWhereToOptions = ['toshkent', 'samarqand'];
-
     const [formData, setFormData] = useState({
-        request_type: requestType,
-        where: originalWhereOptions[0],
-        whereTo: originalWhereToOptions[0],
         phone_number: '',
-        yolovchiSoni: 1,
-        tuman: '',
-        tuman2: ''
+        where: 'toshkent',
+        whereTo: 'samarqand',
     });
-    const [submitted, setSubmitted] = useState(false);
+
+    useEffect(() => {
+        // LocalStorage'dan mavjud ma'lumotlarni tekshirish
+        const savedFormData = JSON.parse(localStorage.getItem('formData'));
+        if (!savedFormData) {
+            alert('Form data not found.');
+            navigate('/formpage');
+        }
+    }, [navigate]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
             ...formData,
-            [name]: value.toLowerCase()
+            [name]: value
         });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Ma'lumotlarni localStorage'ga saqlash
+        localStorage.setItem('formData', JSON.stringify(formData));
+
+        // API ga ma'lumot yuborish
         try {
-            const token = localStorage.getItem('accessToken');
-            const response = await axios.get('https://taksibot.pythonanywhere.com/users/profile/', {
-                headers: { Authorization: `JWT ${token}` }
-            });
-            const userId = response.data.id;
+            const token = localStorage.getItem('accessToken');  // Tokenni olish
+            if (!token) {
+                alert('Authorization token not found.');
+                return;
+            }
 
-            await axios.post('https://taksibot.pythonanywhere.com/requests/', {
-                ...formData,
-                user: userId,
-                is_active: false
-            }, {
-                headers: { Authorization: `JWT ${token}` }
+            // API so'rovini yuborish
+            const response = await axios.post('https://taksibot.pythonanywhere.com/requests/', formData, {
+                headers: { Authorization: `JWT ${token}` },
             });
-            setSubmitted(true);
+
+            if (response.status === 200) {
+                alert('Sizning so\'rovingiz muvaffaqqiyatli jo\'natildi!');
+                navigate('/pochta');  // Success: Navigate to /pochta
+            } else {
+                alert('Xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring.');
+            }
         } catch (error) {
-            console.error('Error submitting request:', error);
-            alert('An error occurred while submitting the request.');
+            console.error('Error:', error);
+            alert('Xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring.');
         }
-    };
-
-    const handleReturn = () => {
-        navigate('/');
     };
 
     return (
         <>
-        <div className={styles.container}>
-            {!submitted ? (
+            <CommonComponentPochta />
+            <div className={styles.container}>
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <label className={styles.form_label}>
                         Qayerdan:
@@ -75,11 +73,8 @@ const FormPage = () => {
                             value={formData.where}
                             onChange={handleChange}
                         >
-                            {toshkentDistricts.map((option, index) => (
-                                <option key={index} value={originalWhereOptions[index]}>
-                                    {option}
-                                </option>
-                            ))}
+                            <option value="toshkent">Toshkent</option>
+                            <option value="samarqand">Samarqand</option>
                         </select>
                     </label>
                     <label className={styles.form_label}>
@@ -90,35 +85,15 @@ const FormPage = () => {
                             value={formData.whereTo}
                             onChange={handleChange}
                         >
-                            {samarqandDistricts.map((option, index) => (
-                                <option key={index} value={originalWhereToOptions[index]}>
-                                    {option}
-                                </option>
-                            ))}
+                            <option value="toshkent">Toshkent</option>
+                            <option value="samarqand">Samarqand</option>
                         </select>
-                    </label>
-                    <label className={styles.form_label}>
-                        Telefon Raqam:
-                        <input
-                            className={styles.input}
-                            type="text"
-                            name="phone_number"
-                            value={formData.phone_number}
-                            onChange={handleChange}
-                            required
-                        />
                     </label>
                     <button className={styles.button} type="submit">Yuborish</button>
                 </form>
-            ) : (
-                <div className={styles.returnContainer}>
-                    <p>Sizning so'rovingiz muvaffaqqiyatli jo'natildi adminlar so'rovni ko'rib chiqishadi va balans hisobingizga tushadi</p>
-                    <button className={styles.button} onClick={handleReturn}>Sahifaga qaytish</button>
-                </div>
-            )}
-        </div>
+            </div>
         </>
     );
 };
 
-export default FormPage;
+export default FormMailPage;

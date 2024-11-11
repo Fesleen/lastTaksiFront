@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import styles from './FormPage.module.css';
+import axios from 'axios';
+import CommonComponent from '../main_top';
 
 const FormPage = () => {
     const location = useLocation();
@@ -38,38 +39,30 @@ const FormPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const token = localStorage.getItem('accessToken');
-        if (!token) {
-            alert('Authorization token not found. Please log in again.');
-            return;
-        }
 
         try {
-            const response = await axios.get('https://taksibot.pythonanywhere.com/users/profile/', {
-                headers: { Authorization: `JWT ${token}` }
-            });
-            const userId = response.data.id;
+            const response = await axios.post('https://your-api-endpoint.com/submit', formData);
 
-            await axios.post('https://taksibot.pythonanywhere.com/requests/', {
-                ...formData,
-                user: userId,
-                is_active: false
-            }, {
-                headers: { Authorization: `JWT ${token}` }
-            });
-            setSubmitted(true);
+            if (response.status === 200) {
+
+                localStorage.setItem('formData', JSON.stringify(formData));
+
+                setSubmitted(true);
+
+                navigate('/formpage2');
+            } else {
+
+                alert('So\'rov yuborishda xatolik yuz berdi.');
+            }
         } catch (error) {
-            console.error('Error submitting request:', error);
-            alert('An error occurred while submitting the request.');
+            console.error('Error submitting form data:', error);
+            alert('So\'rov yuborishda xatolik yuz berdi.');
         }
-    };
-
-    const handleReturn = () => {
-        navigate('/');
     };
 
     return (
         <>
+            <CommonComponent />
             <div className={styles.container}>
                 {!submitted ? (
                     <form className={styles.form} onSubmit={handleSubmit}>
@@ -158,50 +151,11 @@ const FormPage = () => {
                             </div>
                         )}
 
-                        <label className={styles.label}>Telefon Raqam:</label>
-                        <input
-                            className={styles.input}
-                            type="text"
-                            name="phone_number"
-                            value={formData.phone_number}
-                            onChange={handleChange}
-                            required
-                        />
-
-                        <label className={styles.label}>Yo'lovchilar soni:</label>
-                        <input
-                            className={styles.input}
-                            type="number"
-                            name="yolovchiSoni"
-                            value={formData.yolovchiSoni}
-                            onChange={handleChange}
-                        />
-
-                        <label className={styles.label}>Jins:</label>
-                        <select
-                            name="gender"
-                            className={styles.select}
-                            value={formData.gender}
-                            onChange={handleChange}
-                        >
-                            <option value="">Tanlang</option>
-                            <option value="male">Erkak</option>
-                            <option value="female">Ayol</option>
-                        </select>
-                        <label className={styles.label}>Narxni kiriting</label>
-                        <input
-                            className={styles.input}
-                            type="number"
-                            name="Narxni kiriting"
-                            value={formData.price}
-                            onChange={handleChange}
-                        />
                         <button className={styles.button} type="submit">Yuborish</button>
                     </form>
                 ) : (
                     <div className={styles.returnContainer}>
                         <p>Sizning so'rovingiz muvaffaqqiyatli jo'natildi, adminlar so'rovni ko'rib chiqishadi va balans hisobingizga tushadi</p>
-                        <button className={styles.button} onClick={handleReturn}>Sahifaga qaytish</button>
                     </div>
                 )}
             </div>

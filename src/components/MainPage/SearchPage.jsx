@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './SearchPage.module.css';
 
+
 const SearchPage = () => {
     const [where, setWhere] = useState('toshkent');
     const [whereTo, setWhereTo] = useState('qo\'qon');
@@ -94,23 +95,32 @@ const SearchPage = () => {
             <div className={styles.container}>
                 <form className={styles.form}>
                     <label className='form_label'>Qayerdan:</label>
-                        <select value={where} onChange={(e) => setWhere(e.target.value)}>
-                            <option value="toshkent">TASHKENT</option>
-                            <option value="bog'dod-rishton-buvayda">BAGHDAD-RISHTON-BUVAYDA</option>
-                            <option value="qo'qon">QO'QAN</option>
-                            <option value="uchko'prik">UCHKOPRIK</option>
-                            <option value="toshkent-viloyati">TOSHKENT VILOYATI</option>
-                            <option value="uch-uy-oltiariq-xongiz-chimyon-mindon">UCH UY OLTIARIQ XONGIZ CHIMYON MINDON</option>
-                        </select>
-                        <label className='form_label'>Qayerga:</label>
-                        <select value={whereTo} onChange={(e) => setWhereTo(e.target.value)}>
-                            <option value="toshkent">TASHKENT</option>
-                            <option value="bog'dod-rishton-buvayda">BAGHDAD-RISHTON-BUVAYDA</option>
-                            <option value="qo'qon">QO'QAN</option>
-                            <option value="uchko'prik">UCHKOPRIK</option>
-                            <option value="toshkent-viloyati">TOSHKENT VILOYATI</option>
-                            <option value="uch-uy-oltiariq-xongiz-chimyon-mindon">UCH UY OLTIARIQ XONGIZ CHIMYON MINDON</option>
-                        </select>
+                    <select value={where} onChange={(e) => setWhere(e.target.value)}>
+                        <option value="toshkent">TOSHKENT</option>
+                        <option value="bektemir">Bektemir</option>
+                        <option value="mirzo-ulugbek">Mirzo Ulug'bek</option>
+                        <option value="chilonzor">Chilonzor</option>
+                        <option value="shayxontohur">Shayxontohur</option>
+                        <option value="sergeli">Sergeli</option>
+                        <option value="olmazor">Olmazor</option>
+                        <option value="yashnobod">Yashnobod</option>
+                        <option value="yunusobod">Yunusobod</option>
+                        <option value="zafarabad">Zafarabad</option>
+                        <option value="uch-uy-oltiariq-xongiz-chimyon-mindon">UCH UY OLTIARIQ XONGIZ CHIMYON MINDON</option>
+                    </select>
+                    <label>Qayerga:</label>
+                    <select value={whereTo} onChange={(e) => setWhereTo(e.target.value)}>
+                        <option value="samarqand">SAMARQAND</option>
+                        <option value="bulungur">Bulung'ur</option>
+                        <option value="jomboy">Jomboy</option>
+                        <option value="narpay">Narpay</option>
+                        <option value="oqdaryo">Oqdaryo</option>
+                        <option value="payshanba">Payshanba</option>
+                        <option value="pastdargom">Pastdarg'om</option>
+                        <option value="tayloq">Tayloq</option>
+                        <option value="urgut">Urgut</option>
+                        <option value="sirdaryo">Sirdaryo</option>
+                    </select>
                     <button onClick={handleSearch}>Qidirish</button>
                 </form>
                 <div className={styles.resultsContainer}>
@@ -149,7 +159,6 @@ const SearchPage = () => {
                                 {getRequestData.slice(-1).map((request) => (
                                     <tr key={request.id}>
                                         <td>{request.phone_number}</td>
-
                                     </tr>
                                 ))}
                             </tbody>

@@ -1,0 +1,49 @@
+.container {
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 0px;  
+  }
+  
+  .Box {
+    padding: 20px;
+  }
+  
+  .Box__h1 {
+    color: #008d88;
+    font-family: 'Roboto', sans-serif;
+    font-size: 24px;
+    margin-bottom: 20px;
+  }
+  
+  .Box__card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    text-align: center;
+  }
+  
+  .Box__card__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 10px;
+  }
+  
+  .box__p {
+    color: rgb(249, 249, 249);
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    font-size: 14px;
+  }
+  
+  @media (max-width: 400px) {
+    .Box__h1 {
+      font-size: 18px; 
+    }
+  
+    .box__p {
+      font-size: 12px; 
+      color: #d9d9d9;
+    }
+  }
