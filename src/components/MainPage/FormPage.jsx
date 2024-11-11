@@ -20,12 +20,8 @@ const FormPage = () => {
         request_type: requestType,
         where: 'toshkent',
         whereTo: 'samarqand',
-        phone_number: '',
-        yolovchiSoni: '',
         tuman: '',
         tuman2: '',
-        gender: '',
-        price: ''
     });
     const [submitted, setSubmitted] = useState(false);
 
@@ -41,7 +37,7 @@ const FormPage = () => {
         e.preventDefault();
 
         try {
-            const response = await axios.post('https://your-api-endpoint.com/submit', formData);
+            const response = await axios.post('https://taksibot.pythonanywhere.com/requests/', formData);
 
             if (response.status === 200) {
 
@@ -49,7 +45,7 @@ const FormPage = () => {
 
                 setSubmitted(true);
 
-                navigate('/formpage2');
+                navigate('/form2');
             } else {
 
                 alert('So\'rov yuborishda xatolik yuz berdi.');

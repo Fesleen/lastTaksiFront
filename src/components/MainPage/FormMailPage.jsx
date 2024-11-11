@@ -13,11 +13,14 @@ const FormMailPage = () => {
     });
 
     useEffect(() => {
-        // LocalStorage'dan mavjud ma'lumotlarni tekshirish
+        // Check if form data exists in localStorage
         const savedFormData = JSON.parse(localStorage.getItem('formData'));
         if (!savedFormData) {
             alert('Form data not found.');
             navigate('/pochta');
+        } else {
+            // If found, set formData with the saved data
+            setFormData(savedFormData);
         }
     }, [navigate]);
 
@@ -32,31 +35,30 @@ const FormMailPage = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        // Ma'lumotlarni localStorage'ga saqlash
+        // Save form data to localStorage
         localStorage.setItem('formData', JSON.stringify(formData));
 
-        // API ga ma'lumot yuborish
         try {
-            const token = localStorage.getItem('accessToken');  // Tokenni olish
+            const token = localStorage.getItem('accessToken');
             if (!token) {
                 alert('Authorization token not found.');
                 return;
             }
 
-            // API so'rovini yuborish
+            // Send API request
             const response = await axios.post('https://taksibot.pythonanywhere.com/requests/', formData, {
                 headers: { Authorization: `JWT ${token}` },
             });
 
             if (response.status === 200) {
-                alert('Sizning so\'rovingiz muvaffaqqiyatli jo\'natildi!');
-                navigate('/pochta');  // Success: Navigate to /pochta
+                alert("Sizning so'rovingiz muvaffaqqiyatli jo'natildi!");
+                navigate('/pochta');
             } else {
-                alert('Xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring.');
+                alert("Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.");
             }
         } catch (error) {
             console.error('Error:', error);
-            alert('Xatolik yuz berdi. Iltimos, qaytadan urinib ko\'ring.');
+            alert("Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.");
         }
     };
 

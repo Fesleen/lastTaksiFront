@@ -18,7 +18,7 @@ const FormPage2 = () => {
     useEffect(() => {
         if (!savedFormData) {
             alert('FormPage ma\'lumotlari topilmadi.');
-            navigate('/formpage');
+            navigate('/form2');
         }
     }, [savedFormData, navigate]);
 
