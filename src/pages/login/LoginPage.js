@@ -43,9 +43,10 @@ const LoginPage = () => {
         <div className="container">
             <form onSubmit={handleSubmit}>
                 <h1>Farovon taksining haydovchilar bo'limiga <br /> XUSH KELIBSIZ!</h1>
+                <div className="inputGroup">
                 <label htmlFor="number">Telefon raqam:</label>
                 <input
-                    className='input'
+                    className="input"
                     type="text"
                     id="number"
                     placeholder='Telefon raqamingizni kiriting'
@@ -53,6 +54,8 @@ const LoginPage = () => {
                     onChange={(e) => setNumber(e.target.value)}
                     required
                 />
+                </div>
+                <div className="inputGroup">
                 <label htmlFor="password">Parol:</label>
                 <input
                     className='input'
@@ -63,6 +66,7 @@ const LoginPage = () => {
                     onChange={(e) => setPassword(e.target.value)}
                     required
                 />
+                </div>
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
                 <p className="register-link">
                     Agar ro'yhatdan o'tmagan bo'lsangiz, <Link to="/register">Ro'yhatdan o'ting</Link>.

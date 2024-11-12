@@ -21,6 +21,7 @@
   border-radius: 6px;
 }
 .input_group{
+  width: 100%;
   display: flex;
   flex-direction: column;
 }
