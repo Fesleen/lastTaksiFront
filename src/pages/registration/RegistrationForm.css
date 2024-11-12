@@ -48,21 +48,14 @@ input[type="file"] {
   color: #fff;
   margin-bottom: 25px;
   width: 100%;
-  max-width: 100%; /* Ensures input does not exceed container width */
-  box-sizing: border-box; /* Includes padding/border in width */
+  box-sizing: border-box; /* Ensures input does not exceed container width */
+  transition: all 0.3s ease; /* Ensures smooth transition of properties */
 }
 
-.submitButton {
-  padding: 12px;
-  font-size: 18px;
-  font-weight: 500;
-  border: none;
-  border-radius: 5px;
-  background-color: #008d88;
-  color: white;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
-  width: 100%;
+.input:focus,
+input[type="file"]:focus {
+  border-color: #008d88; /* Change border color on focus */
+  outline: none; /* Remove outline to prevent double borders */
 }
 
 /* Media Queries */

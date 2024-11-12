@@ -47,8 +47,8 @@
   background-color: transparent;
   color: #fff;
   width: 100%;
-  max-width: 100%; /* Ensures input stays within screen */
-  box-sizing: border-box; /* Includes padding/border in width */
+  max-width: 100%;
+  box-sizing: border-box; /* Ensures input stays within screen */
 }
 
 .input:focus {
@@ -130,7 +130,7 @@
   .input {
     font-size: 12px;
     padding: 6px;
-    max-width: 100%;
+    max-width: 100%; /* Ensures input doesn't expand beyond screen */
   }
   .container button {
     font-size: 12px;
@@ -157,4 +157,19 @@
   .register-link {
     font-size: 12px;
   }
+}
+
+/* Preventing input from expanding beyond container width */
+.container form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  border: 2px solid #232323;
+  padding: 20px;
+  border-radius: 6px;
+  box-sizing: border-box; /* Avoid shifting layout */
+}
+
+.input {
+  box-sizing: border-box; /* Ensures padding doesn't cause overflow */
 }
