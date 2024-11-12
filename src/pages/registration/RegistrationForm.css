@@ -5,26 +5,28 @@
   padding: 20px;
   background-color: #000a25;
 }
+
 .container h2 {
   font-size: 28px;
   color: #fff;
   font-family: "Roboto", sans-serif;
-  
 }
-.form_group{
-  display: flex;
+
+.form_group {
   display: flex;
   flex-direction: column;
   gap: 20px;
-  border: 1px solid #232323;
+  border: 2px solid #232323;
   padding: 20px;
   border-radius: 6px;
 }
-.input_group{
+
+.input_group {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
+
 .label {
   font-size: 18px;
   color: #fff;
@@ -33,7 +35,7 @@
 }
 
 .input {
-  font-size: 22px;
+  font-size: 20px;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   padding: 10px;
@@ -42,19 +44,20 @@
   background-color: transparent;
   color: #fff;
   margin-bottom: 25px;
+  width: 100%;
 }
 
 input[type="file"] {
-  font-size: 22px;
-  font-family: 'Roboto', sans-serif;
-  font-weight: 500;
+  font-size: 18px;
   padding: 10px;
   border-radius: 5px;
   border: 1px solid #fff;
   background-color: transparent;
   color: #fff;
   margin-bottom: 25px;
+  width: 100%;
 }
+
 .submitButton {
   padding: 12px;
   font-size: 18px;
@@ -65,16 +68,17 @@ input[type="file"] {
   color: white;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  width: 100%;
 }
+
+/* Media Queries */
 @media (max-width: 1024px) {
   .container {
-    width: 100%;
     max-width: 480px;
     padding: 15px;
   }
 
-  .input {
-    width: 100%;
+  .input, input[type="file"] {
     font-size: 16px;
     padding: 8px;
   }
@@ -87,13 +91,11 @@ input[type="file"] {
 
 @media (max-width: 768px) {
   .container {
-    width: 100%;
     max-width: 450px;
     padding: 12px;
   }
 
-  .input {
-    width: 100%;
+  .input, input[type="file"] {
     font-size: 14px;
     padding: 10px;
   }
@@ -106,13 +108,11 @@ input[type="file"] {
 
 @media (max-width: 600px) {
   .container {
-    width: 100%;
     max-width: 400px;
     padding: 10px;
   }
 
-  .input {
-    width: 100%;
+  .input, input[type="file"] {
     font-size: 14px;
     padding: 8px;
   }
@@ -125,19 +125,12 @@ input[type="file"] {
 
 @media (max-width: 480px) {
   .container {
-    width: 100%;
     max-width: 320px;
     padding: 8px;
   }
 
-  .input {
-    width: 100%;
-    padding: 6px;
+  .input, input[type="file"] {
     font-size: 12px;
-  }
-
-  input[type="file"] {
-    width: 100%;
     padding: 6px;
   }
 
@@ -154,18 +147,11 @@ input[type="file"] {
 
 @media (max-width: 400px) {
   .container {
-    width: 100%;
     padding: 5px;
   }
 
-  .input {
-    width: 100%;
-    padding: 5px;
+  .input, input[type="file"] {
     font-size: 12px;
-  }
-
-  input[type="file"] {
-    width: 100%;
     padding: 5px;
   }
 

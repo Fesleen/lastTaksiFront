@@ -16,46 +16,44 @@
 }
 
 .container form {
-  margin-top: 30px;
   display: flex;
   flex-direction: column;
-  border: 2px solid rgb(32, 32, 32);
-  padding: 10px;
-  border-radius: 5px;
+  gap: 20px;
+  border: 2px solid #232323;
+  padding: 20px;
+  border-radius: 6px;
 }
+
 .inputGroup {
   width: 100%;
   display: flex;
   flex-direction: column;
 }
+
 .container label {
-  margin-bottom: 0.5rem;
-  text-align: left;
+  font-size: 18px;
   color: #fff;
+  margin-bottom: 10px;
+  font-family: "Roboto", sans-serif;
 }
 
 .input {
   font-size: 18px;
-  font-family: "Roboto", sans-serif;
-  padding: 3px;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+  padding: 10px;
   border-radius: 5px;
+  border: 1px solid #fff;
   background-color: transparent;
   color: #fff;
-  margin-bottom: 25px;
-  border: 2px solid #4ca1af;
-  /* Border color for input */
   width: 100%;
-  /* Ensure inputs take full width of container */
   box-sizing: border-box;
-  /* Prevent inputs from overflowing */
 }
 
 .input:focus {
   outline: none;
   border: 2px solid #2c8f89;
-  /* Change border color on focus */
 }
-
 
 .container button {
   padding: 0.7rem;
@@ -71,30 +69,6 @@
 .container button:disabled {
   background-color: #7f8c8d;
   cursor: not-allowed;
-}
-
-.container button .spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  border-radius: 50%;
-  border-top: 4px solid #fff;
-  width: 20px;
-  height: 20px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin-left: -10px;
-  margin-top: -10px;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  100% {
-    transform: rotate(360deg);
-  }
 }
 
 .error-message {
@@ -120,72 +94,30 @@
   text-decoration: underline;
 }
 
-/* Spinner styling */
-.spinner {
-  border: 4px solid rgba(0, 0, 0, 0.1);
-  width: 18px;
-  height: 18px;
-  border-radius: 50%;
-  border-left-color: #09f;
-  animation: spin 1s linear infinite;
-}
-
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Media Queries */
-@media (max-width: 1024px) {
-  .container {
-    width: 100%;
-    max-width: 100%;
-    margin: 0 auto;
-    padding: 10px;
-  }
-
-  .input {
-    font-size: 16px;
-    padding: 10px;
-    width: 100%;
-  }
-
-  .submitButton {
-    font-size: 16px;
-    padding: 12px;
-  }
-}
-
+/* Responsive Adjustments */
 @media (max-width: 768px) {
   .container {
-    max-width: 100%;
     padding: 10px;
   }
-
   .input {
-    font-size: 14px;
-    padding: 8px;
-    width: 100%;
-  }
-
-  .submitButton {
     font-size: 16px;
-    padding: 12px;
+    padding: 8px;
+  }
+  .container button {
+    font-size: 16px;
+    padding: 10px;
   }
 }
 
 @media (max-width: 600px) {
   .container {
-    max-width: 100%;
     padding: 10px;
   }
-
   .input {
-    width: 100%;
+    font-size: 14px;
+    padding: 8px;
   }
-
-  .submitButton {
+  .container button {
     font-size: 14px;
     padding: 10px;
   }
@@ -193,57 +125,34 @@
 
 @media (max-width: 480px) {
   .container {
-    max-width: 100%;
     padding: 8px;
   }
-
   .input {
-    width: 100%;
-    padding: 3px;
     font-size: 12px;
-  }
-
-  input[type="file"] {
-    width: 100%;
     padding: 6px;
   }
-
-  .submitButton {
-    font-size: 14px;
-    padding: 10px;
-  }
-
-  .customFileButton {
-    padding: 6px 12px;
+  .container button {
     font-size: 12px;
+    padding: 8px;
   }
-
   .register-link {
     font-size: 12px;
   }
-
-  .register-link a {
-    font-size: 14px;
-  }
 }
 
-@media (min-width: 413px) {
+@media (max-width: 360px) {
   .container {
-    max-width: 412px;
-    margin: 0 auto;
-  }
-}
-
-@media (max-width: 400px) {
-  .container {
-    width: 100%;
     padding: 5px;
-    max-width: 100%;
   }
-
-  .input,
-  .submitButton,
-  input[type="file"] {
-    width: 100%;
+  .input {
+    font-size: 12px;
+    padding: 5px;
+  }
+  .container button {
+    font-size: 12px;
+    padding: 7px;
+  }
+  .register-link {
+    font-size: 12px;
   }
 }
