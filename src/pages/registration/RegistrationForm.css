@@ -1,9 +1,11 @@
+/* Global Styles */
 .container {
   width: 100%;
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
   background-color: #000a25;
+  box-sizing: border-box;
 }
 
 .container h2 {
@@ -34,7 +36,8 @@
   font-family: "Roboto", sans-serif;
 }
 
-.input {
+.input,
+input[type="file"] {
   font-size: 20px;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
@@ -45,17 +48,8 @@
   color: #fff;
   margin-bottom: 25px;
   width: 100%;
-}
-
-input[type="file"] {
-  font-size: 18px;
-  padding: 10px;
-  border-radius: 5px;
-  border: 1px solid #fff;
-  background-color: transparent;
-  color: #fff;
-  margin-bottom: 25px;
-  width: 100%;
+  max-width: 100%; /* Ensures input does not exceed container width */
+  box-sizing: border-box; /* Includes padding/border in width */
 }
 
 .submitButton {
@@ -132,16 +126,12 @@ input[type="file"] {
   .input, input[type="file"] {
     font-size: 12px;
     padding: 6px;
+    max-width: 100%;
   }
 
   .submitButton {
     font-size: 14px;
     padding: 10px;
-  }
-
-  .customFileButton {
-    padding: 6px 12px;
-    font-size: 12px;
   }
 }
 
@@ -153,15 +143,11 @@ input[type="file"] {
   .input, input[type="file"] {
     font-size: 12px;
     padding: 5px;
+    max-width: 100%;
   }
 
   .submitButton {
     font-size: 12px;
     padding: 8px;
-  }
-
-  .customFileButton {
-    padding: 5px 10px;
-    font-size: 12px;
   }
 }

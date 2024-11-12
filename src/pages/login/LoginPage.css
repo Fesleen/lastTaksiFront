@@ -47,7 +47,8 @@
   background-color: transparent;
   color: #fff;
   width: 100%;
-  box-sizing: border-box;
+  max-width: 100%; /* Ensures input stays within screen */
+  box-sizing: border-box; /* Includes padding/border in width */
 }
 
 .input:focus {
@@ -63,7 +64,6 @@
   color: #fff;
   font-weight: bold;
   cursor: pointer;
-  position: relative;
 }
 
 .container button:disabled {
@@ -130,6 +130,7 @@
   .input {
     font-size: 12px;
     padding: 6px;
+    max-width: 100%;
   }
   .container button {
     font-size: 12px;
@@ -147,6 +148,7 @@
   .input {
     font-size: 12px;
     padding: 5px;
+    max-width: 100%;
   }
   .container button {
     font-size: 12px;
