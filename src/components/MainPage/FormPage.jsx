@@ -35,19 +35,22 @@ const FormPage = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
+    
         try {
-            const response = await axios.post('https://taksibot.pythonanywhere.com/requests/', formData);
-
+            const token = localStorage.getItem('authToken'); // Replace 'authToken' with the actual key if different
+            const headers = token ? { Authorization: `Bearer ${token}` } : {};
+    
+            const response = await axios.post(
+                'https://samarqandtaksi.pythonanywhere.com/requests/',
+                formData,
+                { headers }
+            );
+    
             if (response.status === 200) {
-
                 localStorage.setItem('formData', JSON.stringify(formData));
-
                 setSubmitted(true);
-
                 navigate('/form2');
             } else {
-
                 alert('So\'rov yuborishda xatolik yuz berdi.');
             }
         } catch (error) {
@@ -55,6 +58,7 @@ const FormPage = () => {
             alert('So\'rov yuborishda xatolik yuz berdi.');
         }
     };
+    
 
     return (
         <>
@@ -76,24 +80,22 @@ const FormPage = () => {
                             ))}
                         </select>
 
-                        {formData.where === 'toshkent' && (
-                            <div className={styles.select_group}>
-                                <label className={styles.label}>Tuman:</label>
-                                <select
-                                    className={styles.select}
-                                    name="tuman"
-                                    value={formData.tuman}
-                                    onChange={handleChange}
-                                >
-                                    <option value="">Tumanni tanlang</option>
-                                    {toshkentDistricts.map((tuman, index) => (
-                                        <option key={index} value={tuman}>
-                                            {tuman.toUpperCase()}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                        )}
+                        <div className={styles.select_group}>
+                            <label className={styles.label}>Tuman:</label>
+                            <select
+                                className={styles.select}
+                                name="tuman"
+                                value={formData.tuman}
+                                onChange={handleChange}
+                            >
+                                <option value="">Tumanni tanlang</option>
+                                {(formData.where === 'toshkent' ? toshkentDistricts : samarqandDistricts).map((tuman, index) => (
+                                    <option key={index} value={tuman}>
+                                        {tuman.toUpperCase()}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
 
                         <label className={styles.label}>Qayerga:</label>
                         <select
@@ -109,45 +111,24 @@ const FormPage = () => {
                             ))}
                         </select>
 
-                        {formData.whereTo === 'toshkent' && (
-                            <div className={styles.select_group}>
-                                <label className={styles.label}>Tuman:</label>
-                                <select
-                                    className={styles.select}
-                                    name="tuman2"
-                                    value={formData.tuman2}
-                                    onChange={handleChange}
-                                >
-                                    <option value="">Tumanni tanlang</option>
-                                    {toshkentDistricts.map((tuman, index) => (
-                                        <option key={index} value={tuman}>
-                                            {tuman.toUpperCase()}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                        )}
+                        <div className={styles.select_group}>
+                            <label className={styles.label}>Tuman:</label>
+                            <select
+                                className={styles.select}
+                                name="tuman2"
+                                value={formData.tuman2}
+                                onChange={handleChange}
+                            >
+                                <option value="">Tumanni tanlang</option>
+                                {(formData.whereTo === 'toshkent' ? toshkentDistricts : samarqandDistricts).map((tuman, index) => (
+                                    <option key={index} value={tuman}>
+                                        {tuman.toUpperCase()}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
 
-                        {formData.whereTo === 'samarqand' && (
-                            <div className={styles.select_group}>
-                                <label className={styles.label}>Tuman:</label>
-                                <select
-                                    className={styles.select}
-                                    name="tuman2"
-                                    value={formData.tuman2}
-                                    onChange={handleChange}
-                                >
-                                    <option value="">Tumanni tanlang</option>
-                                    {samarqandDistricts.map((tuman, index) => (
-                                        <option key={index} value={tuman}>
-                                            {tuman.toUpperCase()}
-                                        </option>
-                                    ))}
-                                </select>
-                            </div>
-                        )}
-
-                        <button className={styles.button} type="submit">Yuborish</button>
+                        <button className={styles.button} type="submit">Keyingisi</button>
                     </form>
                 ) : (
                     <div className={styles.returnContainer}>

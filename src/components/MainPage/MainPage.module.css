@@ -39,6 +39,12 @@
     gap: 10px;
     flex-wrap: wrap;
 }
+.loading{
+    color: #ffffff;
+    color: #ffffff;
+    font-family: "Roboto" , sans-serif;
+    font-size: 18px;
+}
 
 .button {
     margin: 10px;

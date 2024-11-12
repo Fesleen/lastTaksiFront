@@ -8,31 +8,30 @@ const MainPage = () => {
     const [balance, setBalance] = useState(0);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState(''); // Ensure phoneNumber state is initialized
+    const [phoneNumber, setPhoneNumber] = useState('');
+    const [loading, setLoading] = useState(true);  // Loading state added to wait for data
 
-    
     useEffect(() => {
         const fetchUserData = async () => {
             try {
                 const accessToken = localStorage.getItem('accessToken');
                 console.log('Access Token:', accessToken);
 
-
                 if (!accessToken) {
                     throw new Error('No access token found');
                 }
 
-                const response = await axios.get('https://taksibot.pythonanywhere.com/users/profile/', {
+                const response = await axios.get('https://samarqandtaksi.pythonanywhere.com/users/profile/', {
                     headers: {
                         'Authorization': `JWT ${accessToken}`,
                     },
                 });
 
                 const userData = response.data;
-                console.log(userData); // Log the response to check if phone_number is present
+                console.log(userData); 
 
                 if (userData) {
-                    setPhoneNumber(userData.phone_number || '');  // Check if phone_number exists
+                    setPhoneNumber(userData.phone_number || ''); 
                     setFirstName(userData.first_name || '');
                     setLastName(userData.last_name || '');
                     setBalance(userData.balance || 0);
@@ -44,6 +43,8 @@ const MainPage = () => {
                 if (error.response && error.response.status === 401) {
                     navigate('/login');
                 }
+            } finally {
+                setLoading(false);  // Data is fetched, stop loading
             }
         };
 
@@ -78,6 +79,11 @@ const MainPage = () => {
         }
         navigate(route);
     };
+
+    // If data is still loading, show loading message
+    if (loading) {
+        return <div className={styles.loading}>Yuklanmoqda...</div>;
+    }
 
     return (
         <div className={styles.container}>

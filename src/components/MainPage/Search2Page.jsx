@@ -15,7 +15,7 @@ const Search2Page = () => {
             try {
                 const token = localStorage.getItem('accessToken');
                 if (token) {
-                    const response = await axios.get('https://taksibot.pythonanywhere.com/users/profile/', {
+                    const response = await axios.get('https://samarqandtaksi.pythonanywhere.com/users/profile/', {
                         headers: { Authorization: `JWT ${token}` }
                     });
                     const { id } = response.data;
@@ -30,7 +30,7 @@ const Search2Page = () => {
 
     const handleSearch = async () => {
         try {
-            const response = await axios.get(`https://taksibot.pythonanywhere.com/search/?where=${where}&whereTo=${whereTo}`);
+            const response = await axios.get(`https://samarqandtaksi.pythonanywhere.com/search/?where=${where}&whereTo=${whereTo}`);
             const filteredResults = response.data.filter(result => result.request_type === 'pochta_berish');
             setResults(filteredResults);
         } catch (error) {
@@ -48,7 +48,7 @@ const Search2Page = () => {
                     return;
                 }
 
-                const response = await axios.post('https://taksibot.pythonanywhere.com/getrequests/', {
+                const response = await axios.post('https://samarqandtaksi.pythonanywhere.com/getrequests/', {
                     user: userId,
                     request: requestId,
                     getrequest_type: 'pochta_olish',
@@ -68,14 +68,14 @@ const Search2Page = () => {
                 alert(`Telefon raqami pastdagi jadvalda chiqadi`);
 
                 // Fetch getrequest data
-                const getRequestResponse = await axios.get('https://taksibot.pythonanywhere.com/getrequests/', {
+                const getRequestResponse = await axios.get('https://samarqandtaksi.pythonanywhere.com/getrequests/', {
                     headers: { Authorization: `JWT ${token}` }
                 });
                 const getRequestData = getRequestResponse.data;
 
                 // Fetch request data for each getrequest
                 const requestDetails = await Promise.all(getRequestData.map(async (getRequest) => {
-                    const requestResponse = await axios.get(`https://taksibot.pythonanywhere.com/requests/${getRequest.request}/`, {
+                    const requestResponse = await axios.get(`https://samarqandtaksi.pythonanywhere.com/${getRequest.request}/`, {
                         headers: { Authorization: `JWT ${token}` }
                     });
                     return { ...getRequest, phone_number: requestResponse.data.phone_number };

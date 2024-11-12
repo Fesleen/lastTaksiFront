@@ -40,7 +40,7 @@ const FormPage2 = () => {
         }
 
         try {
-            await axios.post('https://taksibot.pythonanywhere.com/requests/', {
+            await axios.post('https://samarqandtaksi.pythonanywhere.com/requests/', {
                 ...savedFormData,  
                 ...formData2,   
             }, {

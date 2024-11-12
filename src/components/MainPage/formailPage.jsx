@@ -38,7 +38,7 @@ const FormMailPagePochta = () => {
 
         try {
             // Send request to the API with combined form data
-            await axios.post('https://taksibot.pythonanywhere.com/requests/', {
+            await axios.post('https://samarqandtaksi.pythonanywhere.com/requests/', {
                 ...savedFormData,  // Data from FormPage or previous page
                 ...formData,       // Data from current form
             }, {

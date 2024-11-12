@@ -46,7 +46,7 @@ const FormMailPage = () => {
             }
 
             // Send API request
-            const response = await axios.post('https://taksibot.pythonanywhere.com/requests/', formData, {
+            const response = await axios.post('https://samarqandtaksi.pythonanywhere.com/requests/', formData, {
                 headers: { Authorization: `JWT ${token}` },
             });
 

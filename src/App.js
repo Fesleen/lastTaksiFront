@@ -6,7 +6,7 @@ import FormPage from './components/MainPage/FormPage';
 import FormMailPage from './components/MainPage/FormMailPage';
 import SearchPage from './components/MainPage/SearchPage';
 import Search2Page from './components/MainPage/Search2Page';
-import MainPage from './pages/mainPage/MainPage'; 
+import MainPage from './components/MainPage/MainPage'; 
 import './App.css'; 
 import FormPage2 from './components/MainPage/formpage2';
 import FormPagePochta from './components/MainPage/formailPage';
