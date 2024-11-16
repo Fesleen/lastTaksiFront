@@ -4,13 +4,12 @@
   max-width: 500px;
   margin: 0 auto;
   padding: 20px;
-  background-color: #000a25;
   box-sizing: border-box;
 }
 
 .container h2 {
   font-size: 28px;
-  color: #fff;
+  color: #000000;
   font-family: "Roboto", sans-serif;
 }
 
@@ -30,34 +29,24 @@
   flex-direction: column;
 }
 
-.label {
+.container label {
   font-size: 18px;
-  color: #fff;
+  color: #000000;
   margin-bottom: 10px;
   font-family: "Roboto", sans-serif;
 }
 
-.input,
-input[type="file"] {
-  font-size: 20px;
+.container input,
+.container input[type="file"] {
   font-family: 'Roboto', sans-serif;
-  font-weight: 500;
-  padding: 10px;
   border-radius: 5px;
-  border: 1px solid #fff;
-  background-color: transparent;
-  color: #fff;
-  margin-bottom: 25px;
+  border: 1px solid #000000;
+  color: #000000;
   width: 100%;
   box-sizing: border-box; /* Ensures input does not exceed container width */
   transition: all 0.3s ease; /* Ensures smooth transition of properties */
 }
 
-.input:focus,
-input[type="file"]:focus {
-  border-color: #008d88; /* Change border color on focus */
-  outline: none; /* Remove outline to prevent double borders */
-}
 
 /* Media Queries */
 @media (max-width: 1024px) {
@@ -66,7 +55,7 @@ input[type="file"]:focus {
     padding: 15px;
   }
 
-  .input, input[type="file"] {
+  .container input,container input[type="file"] {
     font-size: 16px;
     padding: 8px;
   }
@@ -83,7 +72,7 @@ input[type="file"]:focus {
     padding: 12px;
   }
 
-  .input, input[type="file"] {
+  .container input, .container input[type="file"] {
     font-size: 14px;
     padding: 10px;
   }
@@ -100,7 +89,7 @@ input[type="file"]:focus {
     padding: 10px;
   }
 
-  .input, input[type="file"] {
+  .container input,.container input[type="file"] {
     font-size: 14px;
     padding: 8px;
   }
@@ -111,32 +100,13 @@ input[type="file"]:focus {
   }
 }
 
-@media (max-width: 480px) {
-  .container {
-    max-width: 320px;
-    padding: 8px;
-  }
-
-  .input, input[type="file"] {
-    font-size: 12px;
-    padding: 6px;
-    max-width: 100%;
-  }
-
-  .submitButton {
-    font-size: 14px;
-    padding: 10px;
-  }
-}
 
 @media (max-width: 400px) {
   .container {
     padding: 5px;
   }
 
-  .input, input[type="file"] {
-    font-size: 12px;
-    padding: 5px;
+  .container input,.container input[type="file"] {
     max-width: 100%;
   }
 

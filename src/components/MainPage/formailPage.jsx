@@ -3,12 +3,18 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import styles from './FormPage2.module.css';
 import CommonComponent from '../main_top';
+import { useTheme } from '../theme';
 
 const FormMailPagePochta = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         phone_number: '',
     });
+    
+    const { isBlue, toggleTheme } = useTheme();  // toggleTheme va isBlue ni destructur qilish
+    useEffect(() => {
+        toggleTheme(); 
+    }, []);  
 
     const savedFormData = JSON.parse(localStorage.getItem('formData'));
 
@@ -37,10 +43,9 @@ const FormMailPagePochta = () => {
         }
 
         try {
-            // Send request to the API with combined form data
             await axios.post('https://samarqandtaksi.pythonanywhere.com/requests/', {
-                ...savedFormData,  // Data from FormPage or previous page
-                ...formData,       // Data from current form
+                ...savedFormData,  
+                ...formData,       
             }, {
                 headers: { Authorization: `JWT ${token}` },
             });

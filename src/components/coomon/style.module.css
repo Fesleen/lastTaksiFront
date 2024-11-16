@@ -1,0 +1,65 @@
+.container{
+    max-width: 1260px;
+    margin: 0 auto;
+    padding: 0 10px;
+    width: 100%;
+}.Buttonsgroup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+}
+
+.Buttonsgrouph1 {
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+
+.buttonOne {
+    height: 40px;
+    padding: 10px;
+    color: #ffffff;
+    cursor: pointer;
+    border: none;
+    border-radius: 40px;
+    font-family: "Roboto", sans-serif;
+    background-color: #008d88;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.buttonh1 {
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+
+.buttonTop {
+    height: 40px;
+    padding: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background-color: #008d88;
+    display: block;
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+}
+
+.textOnWhiteP {
+    color: #009851;
+    font-family: "Roboto", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.textOnBlueP {
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}

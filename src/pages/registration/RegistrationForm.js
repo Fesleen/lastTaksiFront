@@ -66,9 +66,8 @@ const RegistrationForm = () => {
       <form className="form_group" onSubmit={handleSubmit}>
         <h2>Ro'yxatdan o'tish!</h2>
         <div className="input_group">
-          <label className='label' htmlFor="first_name">Ismingiz:</label>
+          <label  htmlFor="first_name">Ismingiz:</label>
           <input
-            className='input'
             type="text"
             id="first_name"
             name="first_name"
@@ -79,9 +78,8 @@ const RegistrationForm = () => {
           />
         </div>
         <div className="input_group">
-          <label className='label' htmlFor="last_name">Familya:</label>
+          <label  htmlFor="last_name">Familya:</label>
           <input
-            className='input'
             type="text"
             id="last_name"
             name="last_name"
@@ -92,9 +90,8 @@ const RegistrationForm = () => {
           />
         </div>
         <div className="input_group">
-          <label className='label' htmlFor="phone_number">Telefon Raqam:</label>
+          <label  htmlFor="phone_number">Telefon Raqam:</label>
           <input
-            className='input'
             type="text"
             id="phone_number"
             name="phone_number"
@@ -105,9 +102,8 @@ const RegistrationForm = () => {
           />
         </div>
         <div className="input_group">
-          <label className='label' htmlFor="passport_photo">Passport Rasm:</label>
+          <label  htmlFor="passport_photo">Passport Rasm:</label>
           <input
-            className='input'
             type="file"
             id="passport_photo"
             name="passport_photo"
@@ -116,9 +112,8 @@ const RegistrationForm = () => {
           />
         </div>
         <div className="input_group">
-          <label className='label' htmlFor="prava_photo">Haydovchilik guvohnomasi fotosurati:</label>
+          <label  htmlFor="prava_photo">Haydovchilik guvohnomasi fotosurati:</label>
           <input
-            className='input'
             type="file"
             id="prava_photo"
             name="prava_photo"

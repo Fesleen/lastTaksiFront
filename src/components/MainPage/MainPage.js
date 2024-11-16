@@ -1,102 +1,108 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import styles from './MainPage.module.css';
+import BedtimeIcon from '@mui/icons-material/Bedtime';
+import styles from './MainPage.module.css'; // CSS faylini to'g'ri import qiling
+import { useTheme } from '../theme'; // useTheme hook'ini import qiling
+import PersonAddIcon from '@mui/icons-material/PersonAdd';
+import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
+import PersonIcon from '@mui/icons-material/Person';
+import HouseIcon from '@mui/icons-material/House';
+import ListIcon from '@mui/icons-material/List';
 
 const MainPage = () => {
     const navigate = useNavigate();
     const [balance, setBalance] = useState(0);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const [phoneNumber, setPhoneNumber] = useState('');
-    const [loading, setLoading] = useState(true);  // Loading state added to wait for data
+    const { isBlue, toggleTheme } = useTheme(); // Mavzu hook'ini ishlatish
+
+    useEffect(() => {
+        // Sahifa yuklanganda faqat bir marta mavzuni o'zgartirish
+        toggleTheme();
+    }, []); // Dependency array bo'sh - bu faqat bir marta chaqiriladi
 
     useEffect(() => {
         const fetchUserData = async () => {
             try {
                 const accessToken = localStorage.getItem('accessToken');
-                console.log('Access Token:', accessToken);
+                if (!accessToken) throw new Error('No access token found');
 
-                if (!accessToken) {
-                    throw new Error('No access token found');
-                }
-
-                const response = await axios.get('https://samarqandtaksi.pythonanywhere.com/users/profile/', {
+                const response = await axios.get('https://your-api-url.com/users/profile/', {
                     headers: {
                         'Authorization': `JWT ${accessToken}`,
                     },
                 });
 
                 const userData = response.data;
-                console.log(userData); 
-
-                if (userData) {
-                    setPhoneNumber(userData.phone_number || ''); 
-                    setFirstName(userData.first_name || '');
-                    setLastName(userData.last_name || '');
-                    setBalance(userData.balance || 0);
-                } else {
-                    console.error('User data is undefined.');
-                }
+                setFirstName(userData.first_name || '');
+                setLastName(userData.last_name || '');
+                setBalance(userData.balance || 0);
             } catch (error) {
-                console.error('Error fetching user data:', error);
                 if (error.response && error.response.status === 401) {
-                    navigate('/login');
+                    navigate('/login'); // Agar autentifikatsiya muvaffaqiyatsiz bo'lsa, login sahifasiga o'tish
                 }
-            } finally {
-                setLoading(false);  // Data is fetched, stop loading
+                console.error('Error fetching user data:', error);
             }
         };
 
-        fetchUserData();
+        fetchUserData(); // Funksiyani chaqirish
     }, [navigate]);
 
     const handleButtonClick = (type) => {
-        let route;
-        switch (type) {
-            case 'Give mail':
-                route = '/form-mail';
-                break;
-            case 'Get mail':
-                if (balance < 5000) {
-                    alert('Balansni to\'ldiring');
-                    return;
-                }
-                route = '/search2';
-                break;
-            case 'Give a passenger':
-                route = '/form';
-                break;
-            case 'Get a passenger':
-                if (balance < 7500) {
-                    alert('Balansni to\'ldiring');
-                    return;
-                }
-                route = '/search';
-                break;
-            default:
-                route = '/';
-        }
+        const route = type === 'Get a passenger' ? '/form' : '/form-mail';
         navigate(route);
     };
-
-    // If data is still loading, show loading message
-    if (loading) {
-        return <div className={styles.loading}>Yuklanmoqda...</div>;
-    }
+    
 
     return (
         <div className={styles.container}>
-            <div className={styles.header}>
-                <h1 className={styles.userName}>{firstName} {lastName}</h1>
-                <h2 className={styles.phoneNumber}>Telefon raqam: {phoneNumber || 'No phone number available'}</h2>
-                <h3 className={styles.balance}>Hisob: {balance}</h3>
+             <div className={styles.container}>
+                <div className={styles.Buttonsgroup}>
+                    <p className={isBlue ? styles.textOnBlueP : styles.textOnWhiteP}>Farovon Yo'l</p>
+                    <button onClick={toggleTheme} className={styles.buttonTop}>
+                        <BedtimeIcon />
+                    </button>
+                    <button className={styles.buttonTop} onClick={() => handleButtonClick('/profil')}>
+                        <PersonIcon />
+                    </button>
+                </div>
             </div>
-            <div className={styles.buttonContainer}>
-                <button className={styles.button} onClick={() => handleButtonClick('Give a passenger')}>Yo'lovchi berish</button>
-                <button className={styles.button} onClick={() => handleButtonClick('Get a passenger')}>Yo'lovchi olish</button>
-                <button className={styles.button} onClick={() => handleButtonClick('Give mail')}>Pochta berish</button>
-                <button className={styles.button} onClick={() => handleButtonClick('Get mail')}>Pochta olish</button>
+            <div className={isBlue ? styles.backgroundBlue : styles.backgroundWhite}>
+                <h2 className={isBlue ? styles.textOnBlue : styles.textOnWhite}>
+                    Salom, <span className={isBlue ? styles.textOnBlueP : styles.textOnWhiteP}>{firstName} {lastName}</span>
+                </h2>
+                <h3 className={isBlue ? styles.textOnBlue : styles.textOnWhite}>
+                    Hisobingiz: {balance} so'm
+                </h3>
+                <div className={isBlue ? styles.Buttonscomponent2 : styles.Buttonscomponent}>
+                    <div className={styles.buttoncomponentitem}>
+                        <button className={styles.button} onClick={() => handleButtonClick('Get a passenger')}>
+                            <PersonAddIcon sx={{ fontSize: 30 }} />
+                            <h1 className={styles.h1}>Yo'lovchi olish</h1>
+                        </button>
+                        <button className={styles.button1} onClick={() => handleButtonClick('Give a passenger')}>
+                            <PeopleAltIcon sx={{ fontSize: 30 }} />
+                            <h1 className={styles.h1}>Yo'lovchi berish</h1>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div className={styles.containerBottom}>
+                <div className={isBlue ? styles.ButtonBottom : styles.ButtonBottom2}>
+                    <div className={styles.ButtonBottomitem}>
+                        <button onClick={() => navigate('/')}><HouseIcon /></button>
+                        <span className={isBlue ? styles.textOnBluespan : styles.textOnWhitespan}>Asosiy</span>
+                    </div>
+                    <div className={styles.ButtonBottomitem}>
+                        <button onClick={() => navigate('/order')}><ListIcon /></button>
+                        <span className={isBlue ? styles.textOnBluespan : styles.textOnWhitespan}>Buyurtmalar</span>
+                    </div>
+                    <div className={styles.ButtonBottomitem}>
+                        <button onClick={() => navigate('/profile')}><PersonIcon /></button>
+                        <span className={isBlue ? styles.textOnBluespan : styles.textOnWhitespan}>Profil</span>
+                    </div>
+                </div>
             </div>
         </div>
     );

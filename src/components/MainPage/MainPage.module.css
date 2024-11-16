@@ -1,15 +1,14 @@
 .container {
-    background-color: #000a25;
-    padding: 20px;
+    max-width: 1260px;
     box-sizing: border-box;
     margin: 0 auto;
+    padding: 0 10px;
+    
 }
 
 .header {
     width: 100%;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    display: block;
     margin-bottom: 20px;
 }
 
@@ -18,71 +17,288 @@
     color: #ffffff;
     font-size: 24px;
     font-weight: bold;
-    font-family: "Roboto" , sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 .balance {
     margin: 0;
     color: #ffffff;
-    font-family: "Roboto" , sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 18px;
 }
-.phoneNumber{
+
+.phoneNumber {
     margin: 0;
     color: #ffffff;
-    font-family: "Roboto" , sans-serif;
+    font-family: "Roboto", sans-serif;
     font-size: 18px;
 }
+
+.loading {
+    color: #8f8f8f;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+
+.Buttonsgroup {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 10px;
+}
+
+.Buttonsgrouph1 {
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+
+.buttonOne {
+    height: 40px;
+    padding: 10px;
+    color: #ffffff;
+    cursor: pointer;
+    border: none;
+    border-radius: 40px;
+    font-family: "Roboto", sans-serif;
+    background-color: #008d88;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.buttonh1 {
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+
+.buttonTop {
+    height: 40px;
+    padding: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background-color: #008d88;
+    display: block;
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+}
+
 .buttonContainer {
+    max-width: 1260px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.backgroundBlue{
+    border: 1px solid rgb(255, 255, 255);
+    margin-top: 30px;
+    padding: 10px;
+    border-radius: 10px;
+}
+.backgroundWhite{
+    border: 1px solid rgb(255, 255, 255);
+    margin-top: 30px;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+}
+.Buttonscomponent {
+    padding: 10px;
+    border-radius: 10px;
+}
+.Buttonscomponent2 {
+    padding: 10px;
+    border-radius: 10px;
+}
+
+
+.buttoncomponentitem {
     display: flex;
     justify-content: center;
     gap: 10px;
     flex-wrap: wrap;
 }
-.loading{
-    color: #ffffff;
-    color: #ffffff;
-    font-family: "Roboto" , sans-serif;
-    font-size: 18px;
-}
 
 .button {
-    margin: 10px;
     padding: 10px 20px;
     font-size: 16px;
-    cursor: pointer;
     border: none;
     border-radius: 5px;
     background-color: #008d88;
     color: white;
-    transition: background-color 0.3s ease;
-    flex: 1 1 200px; /* Ensures buttons have equal width */
+}
+
+.button1 {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #009851;
+    color: white;
 }
 
 .button:hover {
     background-color: #323232;
 }
+
+.button1:hover {
+    background-color: #323232;
+}
+
+.h1 {
+    margin: 0;
+    padding: 0;
+    display: block;
+    color: #ffffff;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+
+/* Conditional styles based on background color */
+.textOnWhite {
+    color: black;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+.textOnWhitespan {
+    color: black;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    display: block;
+}
+
+.textOnWhiteP {
+    color: #009851;
+    font-family: "Roboto", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.textOnBlue {
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+}
+.textOnBluespan {
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    display: block;
+}
+
+.textOnBlueP {
+    color: white;
+    font-family: "Roboto", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.containerBottom {
+    max-width: 1260px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    padding: 0;
+}
+
+.ButtonBottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 80px;
+    padding: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+.ButtonBottom2 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    margin-top: 80px;
+    padding: 10px;
+    box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+}
+
+.ButtonBottomitem {
+    display: block;
+    text-align: center;
+}
+
+.ButtonBottomitem button {
+    padding: 5px 10px;
+    font-size: 18px;
+    border: none;
+    border-radius: 5px;
+    background-color: #008d88;
+    color: white;
+}
+
+
 @media (max-width: 1024px) {
     .userName {
         font-size: 20px;
     }
-    
+
     .balance {
         font-size: 14px;
     }
-    .phoneNumber{
+
+    .phoneNumber {
         font-size: 14px;
     }
 }
-@media (max-width: 400px) {
+
+@media (max-width: 430px) {
     .userName {
         font-size: 16px;
     }
-    
+
     .balance {
         font-size: 12px;
     }
-    .phoneNumber{
+
+    .phoneNumber {
         font-size: 12px;
     }
+
+    .buttonOne {
+        height: 35px;
+        border-radius: 33px;
+        font-size: 14px;
+    }
+
+    .textOnBlueP {
+        font-size: 18px;
+    }
+
+    .textOnWhiteP {
+        color: #009851;
+        font-family: "Roboto", sans-serif;
+        font-size: 18px;
+    }
+
+    .buttonTop {
+        height: 35px;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    .button {
+        padding: 30px 35px;
+        width: 100%;
+        font-size: 24px;
+        border-radius: 8px;
+    }
+
+    .button1 {
+        padding: 30px 35px;
+        width: 100%;
+        font-size: 24px;
+        border-radius: 8px;
+    }
+
 }

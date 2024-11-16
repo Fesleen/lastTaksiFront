@@ -1,18 +1,9 @@
 /* Global Styles */
-.container {
-  width: 100%;
-  max-width: 1260px;
-  margin: 0 auto;
-  padding: 0 10px;
-  background-color: #000a25;
-  box-sizing: border-box;
-}
-
 .container h1 {
   font-size: 22px;
   margin-bottom: 20px;
   font-family: "Roboto", sans-serif;
-  color: #fff;
+  color: #000000;
 }
 
 .container form {
@@ -33,29 +24,24 @@
 
 .container label {
   font-size: 18px;
-  color: #fff;
+  color: #000000;
   margin-bottom: 10px;
   font-family: "Roboto", sans-serif;
 }
 
 .input {
-  font-size: 18px;
   font-family: 'Roboto', sans-serif;
   font-weight: 500;
   padding: 10px;
   border-radius: 5px;
-  border: 1px solid #fff;
+  border: 5px solid #000000;
   background-color: transparent;
-  color: #fff;
+  color: #000000;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box; /* Ensures input stays within screen */
 }
 
-.input:focus {
-  outline: none;
-  border: 2px solid #2c8f89;
-}
 
 .container button {
   padding: 0.7rem;
@@ -67,10 +53,6 @@
   cursor: pointer;
 }
 
-.container button:disabled {
-  background-color: #7f8c8d;
-  cursor: not-allowed;
-}
 
 .error-message {
   color: #e74c3c;
@@ -82,7 +64,7 @@
   margin-top: 20px;
   font-size: 14px;
   font-family: "Roboto", sans-serif;
-  color: #fff;
+  color: #000000;
 }
 
 .register-link a {
@@ -101,7 +83,6 @@
     padding: 10px;
   }
   .input {
-    font-size: 16px;
     padding: 8px;
   }
   .container button {
@@ -115,7 +96,6 @@
     padding: 10px;
   }
   .input {
-    font-size: 14px;
     padding: 8px;
   }
   .container button {
@@ -129,7 +109,6 @@
     padding: 8px;
   }
   .input {
-    font-size: 12px;
     padding: 6px;
     max-width: 100%; /* Ensures input doesn't expand beyond screen */
   }
@@ -147,7 +126,6 @@
     padding: 5px;
   }
   .input {
-    font-size: 12px;
     padding: 5px;
     max-width: 100%;
   }

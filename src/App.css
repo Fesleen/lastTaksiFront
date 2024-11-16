@@ -9,9 +9,10 @@ body {
 
 .container {
     width: 100%;
-    max-width: 500px;
+    max-width: 1260px;
     margin: 0 auto;
     padding: 0 10px;
+    box-sizing: border-box;
 }
 
 .nav {

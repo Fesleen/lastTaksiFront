@@ -4,7 +4,6 @@
 }
 
 .container {  
-    background-color: #000a25;
     padding: 20px;
     margin: 0 auto;
 }
@@ -15,16 +14,24 @@
     background: transparent;
     border-radius: 10px;
     padding: 10px;
-    border: 2px solid rgb(35, 35, 35);
     box-sizing: border-box;
 }
 
+
 /* Label Styling */
-.label {
+.labelBlue {
     margin-bottom: 15px;
     font-size: 18px;
     font-weight: bold; /* Make label text bold */
     color: #ffffff;
+    width: 100%;
+    text-align: left;
+}
+.labelWhite {
+    margin-bottom: 15px;
+    font-size: 18px;
+    font-weight: bold; /* Make label text bold */
+    color: #070038;
     width: 100%;
     text-align: left;
 }
@@ -34,7 +41,7 @@
     width: 100%;
 }
 
-.input {
+.inputBlue {
     padding: 12px;
     margin-bottom: 15px;
     font-size: 16px;
@@ -42,10 +49,23 @@
     width: 100%; /* Ensure full width */
     background-color: transparent;
     color: #ffffff;
-    border: 1px solid #e2e8f0;
+    border: 1px solid #7d7d7d;
     transition: border-color 0.3s, box-shadow 0.3s;
     box-sizing: border-box; /* Prevent overflow */
 }
+.inputWhite {
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 100%; /* Ensure full width */
+    background-color: transparent;
+    color: #000000;
+    border: 1px solid #7d7d7d;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; /* Prevent overflow */
+}
+
 
 /* Specific styling for select */
 .select {
@@ -53,7 +73,7 @@
     margin-bottom: 15px;
     border-radius: 8px;
     width: 100%; /* Ensure full width */
-    background-color: #000a25;
+    background-color: #070038 ;
     color: #ffffff;
     border: 1px solid #e2e8f0;
     transition: border-color 0.3s, box-shadow 0.3s;
@@ -61,21 +81,32 @@
 }
 
 /* Button Styling */
-.button {
+.buttoncomponent{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.submitButton {
     background-color: #008d88;
     color: #ffffff;
-    padding: 12px 24px;
+    padding: 5px;
     border: none;
     border-radius: 8px;
     cursor: pointer;
     font-size: 16px;
-    font-weight: bold; /* Make button text bold */
     text-align: center;
     transition: background-color 0.3s, transform 0.2s;
-    display: flex;
-    justify-content: center;
-    box-sizing: border-box; /* Prevent overflow */
     margin-top: 10px;
+}
+
+.button:hover {
+    border: 2px solid #393939;
+    transform: translateY(-2px);
+}
+
+.button:active {
+    border: 2px solid #2c2c2c;
+    transform: translateY(1px);
 }
 
 .button:hover {

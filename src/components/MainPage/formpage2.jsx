@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import styles from './FormPage2.module.css';
 import CommonComponent from '../main_top';
+import { useTheme } from '../theme';
 
 const FormPage2 = () => {
     const navigate = useNavigate();
+    const { isBlue } = useTheme(); 
     const [formData2, setFormData2] = useState({
-        phone_number: '',
-        yolovchiSoni: '',
-        gender: '',
-        price: ''
+        additionalInfo: '',
+        price: '',
+        Yolovchilar: ''
     });
 
     const savedFormData = JSON.parse(localStorage.getItem('formData'));
@@ -18,7 +18,7 @@ const FormPage2 = () => {
     useEffect(() => {
         if (!savedFormData) {
             alert('FormPage ma\'lumotlari topilmadi.');
-            navigate('/form2');
+            navigate('/form1');
         }
     }, [savedFormData, navigate]);
 
@@ -30,31 +30,24 @@ const FormPage2 = () => {
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        const token = localStorage.getItem('accessToken');
-        if (!token) {
-            alert('Authorization token not found.');
+
+        if (!formData2.price || !formData2.Yolovchilar) {
+            alert('Iltimos, barcha maydonlarni to\'ldiring.');
             return;
         }
 
-        try {
-            await axios.post('https://samarqandtaksi.pythonanywhere.com/requests/', {
-                ...savedFormData,  
-                ...formData2,   
-            }, {
-                headers: { Authorization: `JWT ${token}` },
-            });
 
-
-            alert('Request successfully submitted.');
-
-            alert(`Sizning so'rovingiz muvaffaqqiyatli jo'natildi!`);
-        } catch (error) {
-            console.error('Error:', error);
-            alert('An error occurred.');
+        if (isNaN(formData2.price)) {
+            alert('Narx raqam bo\'lishi kerak.');
+            return;
         }
+
+
+        localStorage.setItem('formData', JSON.stringify({ ...savedFormData, ...formData2 }));
+        navigate('/form3'); // 
     };
 
     return (
@@ -62,45 +55,28 @@ const FormPage2 = () => {
             <CommonComponent />
             <div className={styles.container}>
                 <form className={styles.form} onSubmit={handleSubmit}>
-                    <label className={styles.label}>Telefon raqamingiz:</label>
+                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Yo'lovchilar soni:</label>
                     <input
-                        className={styles.input}
+                        className={isBlue ? styles.inputBlue : styles.inputWhite}
                         type="text"
-                        name="phone_number"
-                        value={formData2.phone_number}
+                        name="Yolovchilar" 
+                        value={formData2.Yolovchilar}
                         onChange={handleChange}
+                        required
                     />
-
-                    <label className={styles.label}>Yolovchi soni:</label>
+                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Narxni kiriting:</label>
                     <input
-                        className={styles.input}
-                        type="text"
-                        name="yolovchiSoni"
-                        value={formData2.yolovchiSoni}
-                        onChange={handleChange}
-                    />
-
-                    <label className={styles.label}>Jins:</label>
-                    <select
-                        className={styles.select}
-                        name="gender"
-                        value={formData2.gender}
-                        onChange={handleChange}
-                    >
-                        <option value="male">Erkak</option>
-                        <option value="female">Ayol</option>
-                    </select>
-
-                    <label className={styles.label}>Narx:</label>
-                    <input
-                        className={styles.input}
+                        className={isBlue ? styles.inputBlue : styles.inputWhite}
                         type="text"
                         name="price"
-                        value={formData2.price}
+                        value={formData2.price} 
                         onChange={handleChange}
+                        required 
                     />
-
-                    <button className={styles.button} type="submit">Yuborish</button>
+                    <div className={styles.buttoncomponent}>
+                        <button className={styles.submitButton} onClick={() => navigate(-1)}> Orqaga </button>
+                        <button type="submit" className={styles.submitButton}>Keyingisi</button>
+                    </div>
                 </form>
             </div>
         </>
