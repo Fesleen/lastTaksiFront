@@ -24,6 +24,7 @@ const MainPage = () => {
 
     useEffect(() => {
         const fetchUserData = async () => {
+            setLoading(true); // Ma'lumotlarni yuklashdan oldin loadingni o'rnatamiz
             try {
                 const accessToken = localStorage.getItem('accessToken');
                 if (!accessToken) throw new Error('No access token found');
@@ -96,7 +97,7 @@ const MainPage = () => {
                     </div>
                 </div>
             </div>
-            <div className={styles.containerBottom}>
+            <div className ={styles.containerBottom}>
                 <div className={isBlue ? styles.ButtonBottom : styles.ButtonBottom2}>
                     <div className={styles.ButtonBottomitem}>
                         <button onClick={() => navigate('/')}><HouseIcon /></button>
@@ -116,4 +117,4 @@ const MainPage = () => {
     );
 };
 
-export default MainPage; 
+export default MainPage;
