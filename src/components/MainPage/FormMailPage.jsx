@@ -1,28 +1,37 @@
-import React, { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './FormMailPage.module.css';
-import CommonComponentPochta from '../main_top_pochta';
+import CommonComponent from '../main_top';
+import { useTheme } from '../theme';
 
 const FormMailPage = () => {
+    const { isBlue, toggleTheme } = useTheme();
+    const location = useLocation();
     const navigate = useNavigate();
+    const params = new URLSearchParams(location.search);
+    const requestType = params.get('type') || 'yolovchi_berish';
+
+    const toshkentDistricts = [
+        "Bektemir", "Mirobod", "Mirzo Ulug'bek", "Sirg'ali", "Chilonzor", "Yakkasaroy", "Shayxontohur", "Yunusobod", "Olmazor"
+    ];
+    const samarqandDistricts = [
+        "Samarqand", "Kattakurgan", "Jomboy", "Narpay", "Oqdarya", "Pastdargom", "Payariq", "Bulung'ur", "Tayloq"
+    ];
+
+    const originalWhereOptions = ['toshkent', 'samarqand'];
+
     const [formData, setFormData] = useState({
-        phone_number: '',
-        where: 'toshkent',
-        whereTo: 'samarqand',
+        request_type: requestType,
+        where: '',
+        whereTo: '',
+        tuman: '',
+        tuman2: '',
+        is_active: true 
     });
 
     useEffect(() => {
-        // Check if form data exists in localStorage
-        const savedFormData = JSON.parse(localStorage.getItem('formData'));
-        if (!savedFormData) {
-            alert('Form data not found.');
-            navigate('/pochta');
-        } else {
-            // If found, set formData with the saved data
-            setFormData(savedFormData);
-        }
-    }, [navigate]);
+        toggleTheme();
+    }, []); 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -32,66 +41,102 @@ const FormMailPage = () => {
         });
     };
 
-    const handleSubmit = async (e) => {
+    const handleSubmit = (e) => {
         e.preventDefault();
 
-        // Save form data to localStorage
-        localStorage.setItem('formData', JSON.stringify(formData));
 
-        try {
-            const token = localStorage.getItem('accessToken');
-            if (!token) {
-                alert('Authorization token not found.');
-                return;
-            }
-
-            // Send API request
-            const response = await axios.post('https://samarqandtaksi.pythonanywhere.com/requests/', formData, {
-                headers: { Authorization: `JWT ${token}` },
-            });
-
-            if (response.status === 200) {
-                alert("Sizning so'rovingiz muvaffaqqiyatli jo'natildi!");
-                navigate('/pochta');
-            } else {
-                alert("Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.");
-            }
-        } catch (error) {
-            console.error('Error:', error);
-            alert("Xatolik yuz berdi. Iltimos, qaytadan urinib ko'ring.");
+        if (!formData.where || !formData.tuman || !formData.whereTo || !formData.tuman2) {
+            alert('Iltimos, barcha maydonlarni to\'ldiring.');
+            return;
         }
+
+        localStorage.setItem('formData', JSON.stringify(formData));
+        navigate('/form2'); 
     };
 
+    
     return (
         <>
-            <CommonComponentPochta />
+            <CommonComponent />
             <div className={styles.container}>
                 <form className={styles.form} onSubmit={handleSubmit}>
-                    <label className={styles.form_label}>
-                        Qayerdan:
+                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>So'rov turini tanlang:</label>
+                    <select
+                        className={isBlue ? styles.selectBlue : styles.selectWhite}
+                        name="request_type"
+                        value={formData.request_type}
+                        onChange={handleChange}
+                    >
+                        <option value="yolovchi_berish">Yo'lovchi berish</option>
+                        <option value="pochta_berish">Pochta berish</option>
+                    </select>
+
+                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Qayer dan(viloyat):</label>
+                    <select
+                        className={isBlue ? styles.selectBlue : styles.selectWhite}
+                        name="where"
+                        value={formData.where}
+                        onChange={handleChange}
+                    >
+                        <option value="">Viloyatni tanlang</option>
+                        {originalWhereOptions.map((option, index) => (
+                            <option key={index} value={option}>
+                                {option.toUpperCase()}
+                            </option>
+                        ))}
+                    </select>
+
+                    <div className={styles.select_group}>
+                        <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Tuman:</label>
                         <select
-                            className={styles.select}
-                            name="where"
-                            value={formData.where}
+                            className={isBlue ? styles.selectBlue : styles.selectWhite}
+                            name="tuman"
+                            value={formData.tuman}
+                            onChange={handleChange }>
+                            <option value="">Tumanni tanlang</option>
+                            {(formData.where === 'toshkent' ? toshkentDistricts : samarqandDistricts).map((tuman, index) => (
+                                <option key={index} value={tuman}>
+                                    {tuman.toUpperCase()}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+                    
+                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Qayerga(viloyat):</label>
+                    <select
+                        className={isBlue ? styles.selectBlue : styles.selectWhite}
+                        name="whereTo"
+                        value={formData.whereTo}
+                        onChange={handleChange}
+                    >
+                        <option value="">Viloyatni tanlang</option>
+                        {originalWhereOptions.map((option, index) => (
+                            <option key={index} value={option}>
+                                {option.toUpperCase()}
+                            </option>
+                        ))}
+                    </select>
+
+                    <div className={styles.select_group}>
+                        <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Tuman:</label>
+                        <select
+                            className={isBlue ? styles.selectBlue : styles.selectWhite}
+                            name="tuman2"
+                            value={formData.tuman2}
                             onChange={handleChange}
                         >
-                            <option value="toshkent">Toshkent</option>
-                            <option value="samarqand">Samarqand</option>
+                            <option value="">Tumanni tanlang</option>
+                            {(formData.whereTo === 'toshkent' ? toshkentDistricts : samarqandDistricts).map((tuman, index) => (
+                                <option key={index} value={tuman}>
+                                    {tuman.toUpperCase()}
+                                </option>
+                            ))}
                         </select>
-                    </label>
-                    <label className={styles.form_label}>
-                        Qayerga:
-                        <select
-                            className={styles.select}
-                            name="whereTo"
-                            value={formData.whereTo}
-                            onChange={handleChange}
-                        >
-                            <option value="toshkent">Toshkent</option>
-                            <option value="samarqand">Samarqand</option>
-                        </select>
-                    </label>
-                    <button className={styles.button} type="submit">Yuborish</button>
+                    </div>
+                    <div className={styles.buttoncomponent}>
+                        <button type="button" className={styles.submitButton} onClick={() => navigate(-1)}> Orqaga </button>
+                        <button type="submit" className={styles.submitButton}>Keyingisi</button>
+                    </div>
                 </form>
             </div>
         </>

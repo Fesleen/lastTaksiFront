@@ -35,7 +35,7 @@
 }
 
 .loading {
-    color: #8f8f8f;
+    color: #a7a7a7;
     font-family: "Roboto", sans-serif;
     font-size: 18px;
 }
@@ -193,7 +193,7 @@
 .textOnBlueP {
     color: white;
     font-family: "Roboto", sans-serif;
-    font-size: 18px;
+    font-size: 22px;
     font-weight: 600;
 }
 

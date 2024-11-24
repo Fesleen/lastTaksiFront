@@ -1,0 +1,67 @@
+.containerBlue {
+    max-width: 600px;
+    margin: 20px auto; /* Yuqoridan va pastdan bo'sh joy */
+    border-radius: 12px; /* Burchaklarni yumshatish */
+    border: 2px solid rgb(51, 51, 51);
+    padding: 20px; /* Ichki bo'sh joy */
+    font-family: Arial, sans-serif; /* Shrift */
+}
+.containerWhite {
+    max-width: 600px;
+    margin: 20px auto; /* Yuqoridan va pastdan bo'sh joy */
+    background-color: #ffffff;
+    border-radius: 12px; /* Burchaklarni yumshatish */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Yumshoq soyalar */
+    padding: 20px; /* Ichki bo'sh joy */
+    font-family: Arial, sans-serif; /* Shrift */
+}
+
+.titleBlue {
+    text-align: center; /* Sarlavhani markazga joylash */
+    color: #ffffff; /* Sarlavha rangi */
+    margin-bottom: 20px; /* Pastda bo'sh joy */
+}
+.titleWhite{
+    text-align: center; /* Sarlavhani markazga joylash */
+    color: #000000; /* Sarlavha rangi */
+    margin-bottom: 20px; /* Pastda bo'sh joy */
+}
+
+.orderList {
+    list-style-type: none; /* Ro'yxat belgilarini o'chirish */
+    padding: 0; /* Ichki bo'sh joyni o'chirish */
+}
+
+.orderItemBlue {
+    border: 1px solid #292929; /* Chegara rangi */
+    border-radius: 8px; /* Burchaklarni yumshatish */
+    padding: 15px; /* Ichki bo'sh joy */
+    margin: 10px 0; /* Yuqoridan va pastdan bo'sh joy */
+}
+.orderItemWhite {
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+    border-radius: 8px; /* Burchaklarni yumshatish */
+    padding: 15px; /* Ichki bo'sh joy */
+    margin: 10px 10px; /* Yuqoridan va pastdan bo'sh joy */
+
+}
+
+.orderItempBlue {
+    margin: 5px 0; /* Har bir paragraf orasida bo'sh joy */
+    margin-bottom: 10px;
+    color: #ffffff;
+}
+
+.loading {
+    text-align: center; /* Yuklanayotganda markazga joylash */
+    font-size: 20px; /* Matn o'lchami */
+    color: #666; /* Yuklanmoqda matni rangi */
+}
+
+.accepted {
+    color: green; /* Qabul qilingan buyurtmalar uchun yashil rang */
+}
+
+.rejected {
+    color: red; /* Qabul qilinmagan buyurtmalar uchun qizil rang */
+}

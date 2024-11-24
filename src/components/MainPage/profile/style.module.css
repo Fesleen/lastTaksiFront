@@ -1,0 +1,96 @@
+.containerBlue {
+    max-width: 600px;
+    margin: 20px auto; /* Yuqoridan va pastdan bo'sh joy */
+    border-radius: 12px; /* Burchaklarni yumshatish */
+    border: 2px solid rgb(51, 51, 51);
+    padding: 20px; /* Ichki bo'sh joy */
+    font-family: Arial, sans-serif; /* Shrift */
+}
+.containerWhite {
+    max-width: 600px;
+    margin: 20px auto; /* Yuqoridan va pastdan bo'sh joy */
+    background-color: #ffffff;
+    border-radius: 12px; /* Burchaklarni yumshatish */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Yumshoq soyalar */
+    padding: 20px; /* Ichki bo'sh joy */
+    font-family: Arial, sans-serif; /* Shrift */
+}
+
+.titleBlue {
+    text-align: center;
+    color: #ffffff;
+    margin-bottom: 20px;
+}
+.titleWhite {
+    text-align: center;
+    color: #000000;
+    margin-bottom: 20px;
+}
+
+.profileImage {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.profileImages {
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border: 4px solid #5a5a5a;
+}
+
+.editIconBlue {
+    position: absolute;
+    bottom: 0px;
+    background: rgba(255, 255, 255, 0.8);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    color: rgb(0, 0, 0);
+}
+.editIconWhite {
+    position: absolute;
+    bottom: 0px;
+    background: rgba(0, 0, 0, 0.8);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+}
+
+
+.userInfo {
+    margin-top: 20px;
+}
+
+.h2Blue {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+.h2White {
+    color: #000000;
+    margin-bottom: 10px;
+}
+
+.pBlue {
+    color: #ffffff;
+    margin-bottom: 10px;
+}
+.pWhite {
+    color: #000000;
+    margin-bottom: 10px;
+}
+.strongBlue {
+    font-size: 16px;
+    color: #ffffff;
+    margin: 5px 0;
+}
+.strongWhite {
+    font-size: 16px;
+    color: #000000;
+    margin: 5px 0;
+}

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import BedtimeIcon from '@mui/icons-material/Bedtime';
-import styles from './MainPage.module.css'; // CSS faylini to'g'ri import qiling
-import { useTheme } from '../theme'; // useTheme hook'ini import qiling
+import styles from './MainPage.module.css'; 
+import { useTheme } from '../theme'; 
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
 import PersonIcon from '@mui/icons-material/Person';
@@ -15,12 +15,12 @@ const MainPage = () => {
     const [balance, setBalance] = useState(0);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const { isBlue, toggleTheme } = useTheme(); // Mavzu hook'ini ishlatish
+    const { isBlue, toggleTheme } = useTheme(); 
+    const [loading, setLoading] = useState(true); // Loading holatini qo'shish
 
     useEffect(() => {
-        // Sahifa yuklanganda faqat bir marta mavzuni o'zgartirish
         toggleTheme();
-    }, []); // Dependency array bo'sh - bu faqat bir marta chaqiriladi
+    }, []); 
 
     useEffect(() => {
         const fetchUserData = async () => {
@@ -40,30 +40,38 @@ const MainPage = () => {
                 setBalance(userData.balance || 0);
             } catch (error) {
                 if (error.response && error.response.status === 401) {
-                    navigate('/login'); // Agar autentifikatsiya muvaffaqiyatsiz bo'lsa, login sahifasiga o'tish
+                    navigate('/login'); 
                 }
                 console.error('Error fetching user data:', error);
+            } finally {
+                setLoading(false); // Ma'lumotlar yuklangandan so'ng loadingni o'chirish
             }
         };
 
-        fetchUserData(); // Funksiyani chaqirish
+        fetchUserData(); 
     }, [navigate]);
 
-    const handleButtonClick = (type) => {
-        const route = type === 'Get a passenger' ? '/form' : '/form-mail';
-        navigate(route);
+    const handleButtonClick = (path) => {
+        navigate(path);
     };
-    
+
+    if (loading) {
+        return (
+            <div className={styles.loadingContainer}>
+                <h2 className={styles.loading}>Loading...</h2> {/* Loading indikatorini ko'rsatish */}
+            </div>
+        );
+    }
 
     return (
         <div className={styles.container}>
-             <div className={styles.container}>
+            <div className={styles.container}>
                 <div className={styles.Buttonsgroup}>
                     <p className={isBlue ? styles.textOnBlueP : styles.textOnWhiteP}>Farovon Yo'l</p>
                     <button onClick={toggleTheme} className={styles.buttonTop}>
                         <BedtimeIcon />
                     </button>
-                    <button className={styles.buttonTop} onClick={() => handleButtonClick('/profil')}>
+                    <button className={styles.buttonTop} onClick={() => handleButtonClick('/profile')}>
                         <PersonIcon />
                     </button>
                 </div>
@@ -77,11 +85,11 @@ const MainPage = () => {
                 </h3>
                 <div className={isBlue ? styles.Buttonscomponent2 : styles.Buttonscomponent}>
                     <div className={styles.buttoncomponentitem}>
-                        <button className={styles.button} onClick={() => handleButtonClick('Get a passenger')}>
+                        <button className={styles.button} onClick={() => handleButtonClick('/form')}>
                             <PersonAddIcon sx={{ fontSize: 30 }} />
                             <h1 className={styles.h1}>Yo'lovchi olish</h1>
                         </button>
-                        <button className={styles.button1} onClick={() => handleButtonClick('Give a passenger')}>
+                        <button className={styles.button1} onClick={() => handleButtonClick('/form-mail')}>
                             <PeopleAltIcon sx={{ fontSize: 30 }} />
                             <h1 className={styles.h1}>Yo'lovchi berish</h1>
                         </button>
@@ -108,4 +116,4 @@ const MainPage = () => {
     );
 };
 
-export default MainPage;
+export default MainPage; 

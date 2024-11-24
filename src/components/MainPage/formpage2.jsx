@@ -9,7 +9,6 @@ const FormPage2 = () => {
     const { isBlue } = useTheme(); 
     const [formData2, setFormData2] = useState({
         additionalInfo: '',
-        price: '',
         Yolovchilar: ''
     });
 
@@ -34,16 +33,11 @@ const FormPage2 = () => {
         e.preventDefault();
 
 
-        if (!formData2.price || !formData2.Yolovchilar) {
+        if (!formData2.Yolovchilar) {
             alert('Iltimos, barcha maydonlarni to\'ldiring.');
             return;
         }
 
-
-        if (isNaN(formData2.price)) {
-            alert('Narx raqam bo\'lishi kerak.');
-            return;
-        }
 
 
         localStorage.setItem('formData', JSON.stringify({ ...savedFormData, ...formData2 }));
@@ -63,15 +57,6 @@ const FormPage2 = () => {
                         value={formData2.Yolovchilar}
                         onChange={handleChange}
                         required
-                    />
-                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Narxni kiriting:</label>
-                    <input
-                        className={isBlue ? styles.inputBlue : styles.inputWhite}
-                        type="text"
-                        name="price"
-                        value={formData2.price} 
-                        onChange={handleChange}
-                        required 
                     />
                     <div className={styles.buttoncomponent}>
                         <button className={styles.submitButton} onClick={() => navigate(-1)}> Orqaga </button>

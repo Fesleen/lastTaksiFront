@@ -46,7 +46,8 @@ const FormPage3 = () => {
 
             const data = await response.json();
             console.log(data); 
-            navigate('/success'); 
+            alert(`Sizning so'rovingiz muvaffaqqiyatli jo'natildi adminlar so'rovni ko'rib chiqishadi`); 
+            navigate('/'); 
         } catch (error) {
             console.error('There was a problem with the fetch operation:', error);
             alert('Xatolik yuz berdi: ' + error.message); 
