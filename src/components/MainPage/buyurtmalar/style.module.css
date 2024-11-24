@@ -2,7 +2,6 @@
     max-width: 600px;
     margin: 20px auto; /* Yuqoridan va pastdan bo'sh joy */
     border-radius: 12px; /* Burchaklarni yumshatish */
-    border: 2px solid rgb(51, 51, 51);
     padding: 20px; /* Ichki bo'sh joy */
     font-family: Arial, sans-serif; /* Shrift */
 }
