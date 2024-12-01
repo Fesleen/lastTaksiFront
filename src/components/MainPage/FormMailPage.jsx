@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './FormMailPage.module.css';
-import CommonComponent from '../main_top';
+import CommonComponentForm from '../main_top_pochta';
 import { useTheme } from '../theme';
 
 const FormMailPage = () => {
@@ -43,21 +43,25 @@ const FormMailPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-
+    
         if (!formData.where || !formData.tuman || !formData.whereTo || !formData.tuman2) {
             alert('Iltimos, barcha maydonlarni to\'ldiring.');
             return;
         }
-
-        localStorage.setItem('formData', JSON.stringify(formData));
+    
+        // Foydalanuvchi ma'lumotlarini olish (masalan, hardcoded yoki boshqa joydan)
+        const user = 'user_id_value'; // Bu yerda foydalanuvchi ID ni oling
+    
+        // Form ma'lumotlarini saqlash
+        const dataToSave = { ...formData, user };
+        localStorage.setItem('formData', JSON.stringify(dataToSave));
         navigate('/form2'); 
     };
 
     
     return (
         <>
-            <CommonComponent />
+            <CommonComponentForm />
             <div className={styles.container}>
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <label className={isBlue ? styles.labelBlue : styles.labelWhite}>So'rov turini tanlang:</label>

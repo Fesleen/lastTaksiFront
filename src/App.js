@@ -17,7 +17,8 @@ const App = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     useEffect(() => {
-        const token = localStorage.getItem('accessToken');
+        // Tokenni to'g'ri kalit bilan olish
+        const token = localStorage.getItem('accessToken'); // accessToken kalitini ishlatish
         if (token) {
             setIsLoggedIn(true); 
         }
@@ -35,7 +36,7 @@ const App = () => {
                             <Route path="/" element={<Navigate to="/main" />} />
                             <Route path="/main" element={<MainPage />} />
                             <Route path="/form" element={<FormPage />} />
-                            <Route path="/form-mail" element={<FormMailPage />} />
+                            <Route path="/form-mail" element={<FormMailPage/>} />
                             <Route path="/form2" element={<FormPage2 />} />
                             <Route path="/form3" element={<FormPage3 />} />
                             <Route path='/profile' element={<ProfilePage/>}/>

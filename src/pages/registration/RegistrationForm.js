@@ -47,7 +47,7 @@ const RegistrationForm = () => {
     formDataToSend.append('password', password);
 
     try {
-      await axios.post('https://samarqandtaksi.pythonanywhere.com/users/register/', formDataToSend, {
+      await axios.post('https://taxibuxoro.pythonanywhere.com/users/register/', formDataToSend, {
         headers: { 'Content-Type': 'multipart/form-data' }
       });
 

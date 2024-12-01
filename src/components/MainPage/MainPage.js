@@ -28,10 +28,9 @@ const MainPage = () => {
             try {
                 const accessToken = localStorage.getItem('accessToken');
                 if (!accessToken) throw new Error('No access token found');
-
-                const response = await axios.get('https://your-api-url.com/users/profile/', {
+                const response = await axios.get('https://taxibuxoro.pythonanywhere.com/users/profile/', {
                     headers: {
-                        'Authorization': `JWT ${accessToken}`,
+                        'Authorization': `JWT ${accessToken}`, // JWT o'rniga 
                     },
                 });
 
@@ -59,7 +58,7 @@ const MainPage = () => {
     if (loading) {
         return (
             <div className={styles.loadingContainer}>
-                <h2 className={styles.loading}>Loading...</h2> {/* Loading indikatorini ko'rsatish */}
+                <h2 className={isBlue ? styles.loadingBlue : styles.loadingWhite}>.</h2> {/* Loading indikatorini ko'rsatish */}
             </div>
         );
     }

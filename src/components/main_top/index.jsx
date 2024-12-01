@@ -21,7 +21,7 @@ const CommonComponent = () => {
   return (
     <div className={styles.container}>
       <div className={styles.Box}>
-        <h1 className={styles.Box__h1}>YO'LOVCHI  BERISH</h1>
+        <h1 className={styles.Box__h1}>YO'LOVCHI  OLISH</h1>
         <div className={styles.Box__card}>
           <div
             className={styles.Box__card__item}

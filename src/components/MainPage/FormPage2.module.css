@@ -36,10 +36,41 @@
     text-align: left;
 }
 
-/* Input and Select Styling */
-.select_group {
+
+.select {
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
     width: 100%;
+    color: #ffffff;
+    border: 1px solid #e2e8f0;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+    background-color: #070038;
 }
+.selectBlue{
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    width: 100%;
+    color: #ffffff;
+    border: 1px solid #e2e8f0;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+    background-color: #070038;
+}
+.selectWhite{
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    width: 100%;
+    color: #070038;
+    border: 1px solid #070038;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+    background-color: #ffffff;
+}
+
 
 .inputBlue {
     padding: 12px;
@@ -67,18 +98,7 @@
 }
 
 
-/* Specific styling for select */
-.select {
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    width: 100%; /* Ensure full width */
-    background-color: #070038 ;
-    color: #ffffff;
-    border: 1px solid #e2e8f0;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    box-sizing: border-box; /* Prevent overflow */
-}
+
 
 /* Button Styling */
 .buttoncomponent{

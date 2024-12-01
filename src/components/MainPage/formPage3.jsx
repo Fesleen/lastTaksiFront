@@ -1,56 +1,83 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useTheme } from '../theme'; 
-import styles from './FormPage3.module.css'; 
+import axios from 'axios';
+import styles from './FormPage3.module.css';
 import CommonComponent from '../main_top';
+import { useTheme } from '../theme';
 
 const FormPage3 = () => {
+    const { isBlue, toggleTheme } = useTheme();
     const navigate = useNavigate();
-    const { isBlue } = useTheme(); 
     const [phoneNumber, setPhoneNumber] = useState('');
-
-    const savedFormData = JSON.parse(localStorage.getItem('formData'));
+    const [loading, setLoading] = useState(false);
+    const [formData, setFormData] = useState(null);
 
     useEffect(() => {
-        if (!savedFormData) {
+        toggleTheme();
+        const storedData = JSON.parse(localStorage.getItem('formData'));
+        if (storedData) {
+            setFormData(storedData);
+        } else {
             alert('FormPage ma\'lumotlari topilmadi.');
             navigate('/form1');
         }
-    }, [savedFormData, navigate]);
+    }, [navigate, toggleTheme]);
+
+    const handleChange = (e) => {
+        setPhoneNumber(e.target.value);
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        const apiData = {
-            id: 0, 
-            user: 0, 
-            request_type: savedFormData.request_type, 
-            where: savedFormData.where, 
-            whereTo: savedFormData.whereTo, 
-            phone_number: phoneNumber, 
-            is_active: true 
-        };
-        console.log(apiData); 
+
+        if (!phoneNumber) {
+            alert('Iltimos, telefon raqamini to\'ldiring.');
+            return;
+        }
+
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            alert('Autentifikatsiya xatosi. Iltimos, qayta kirish qiling.');
+            navigate('/login');
+            return;
+        }
 
         try {
-            const response = await fetch('https://samarqandtaksi.pythonanywhere.com/requests/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(apiData),
-            });
+            setLoading(true);
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
 
-            const data = await response.json();
-            console.log(data); 
-            alert(`Sizning so'rovingiz muvaffaqqiyatli jo'natildi adminlar so'rovni ko'rib chiqishadi`); 
-            navigate('/'); 
+            const requestData = {
+                user: formData.user, // 1 va 2-pagelardan olingan foydalanuvchi ID
+                request_type: formData.request_type, // 1 va 2-pagelardan olingan so'rov turi
+                where: formData.where, // 1 va 2-pagelardan olingan joy
+                whereTo: formData.whereTo, // 1 va 2-pagelardan olingan joyga borish
+                phone_number: phoneNumber, // Faqat telefon raqami
+                is_active: true, // Faol holat
+                Yolovchilar: formData.Yolovchilar, // 1 va 2-pagelardan olingan yo'lovchilar soni
+                car: formData.car // 1 va 2-pagelardan olingan mashina turi
+            };
+
+            console.log('Yuborilayotgan ma\'lumotlar:', requestData); // Yuborilayotgan ma'lumotlarni konsolga chiqarish
+
+            await axios.post(
+                'https://taxibuxoro.pythonanywhere.com/requests/',
+                requestData,
+                {
+                    headers: {
+                        'Authorization': `JWT ${accessToken}`,
+                        'Content-Type': 'application/json',
+                    },
+                }
+            );
+
+            alert(`So'rov muvaffaqiyatli yuborildi, adminlar ko'rib chiqib siz bilan aloqaga chiqishadi!`);
+            navigate('/'); // Muvaffaqiyatli bo'lsa, asosiy sahifaga yo'naltirish
+
         } catch (error) {
-            console.error('There was a problem with the fetch operation:', error);
-            alert('Xatolik yuz berdi: ' + error.message); 
+            console.error('So\'rovni yuborishda xatolik:', error);
+            alert('Xatolik yuz berdi. Iltimos, keyinroq urinib ko\'ring.');
+        } finally {
+            setLoading(false);
         }
     };
 
@@ -59,17 +86,20 @@ const FormPage3 = () => {
             <CommonComponent />
             <div className={styles.container}>
                 <form className={styles.form} onSubmit={handleSubmit}>
-                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Telefon raqamni kiriting:</label>
+                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Telefon raqam:</label>
                     <input
                         className={isBlue ? styles.inputBlue : styles.inputWhite}
                         type="text"
+                        name="phone_number"
                         value={phoneNumber}
-                        onChange={(e) => setPhoneNumber(e.target.value)}
-                        required 
+                        onChange={handleChange}
+                        required
                     />
                     <div className={styles.buttoncomponent}>
-                        <button type="button" className={styles.submitButton} onClick={() => navigate(-1)}>Orqaga</button>
-                        <button type="submit" className={styles.submitButton}>Yuborish</button>
+                        <button className={styles.submitButton} onClick={() => navigate(-1)}> Orqaga </button>
+                        <button type="submit" className={styles.submitButton} disabled={loading}>
+                            {loading ? 'Yuborilmoqda...' : 'So\'rov yuborish'}
+                        </button>
                     </div>
                 </form>
             </div>

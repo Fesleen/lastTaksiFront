@@ -43,14 +43,18 @@ const FormPage = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-
+    
         if (!formData.where || !formData.tuman || !formData.whereTo || !formData.tuman2) {
             alert('Iltimos, barcha maydonlarni to\'ldiring.');
             return;
         }
-
-        localStorage.setItem('formData', JSON.stringify(formData));
+    
+        // Foydalanuvchi ma'lumotlarini olish (masalan, hardcoded yoki boshqa joydan)
+        const user = 'user_id_value'; // Bu yerda foydalanuvchi ID ni oling
+    
+        // Form ma'lumotlarini saqlash
+        const dataToSave = { ...formData, user };
+        localStorage.setItem('formData', JSON.stringify(dataToSave));
         navigate('/form2'); 
     };
 

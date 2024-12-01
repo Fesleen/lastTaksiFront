@@ -2,8 +2,7 @@
     max-width: 600px;
     margin: 20px auto; /* Yuqoridan va pastdan bo'sh joy */
     border-radius: 12px; /* Burchaklarni yumshatish */
-    border: 2px solid rgb(51, 51, 51);
-    padding: 20px; /* Ichki bo'sh joy */
+    padding:20px; /* Ichki bo'sh joy */
     font-family: Arial, sans-serif; /* Shrift */
 }
 .containerWhite {
@@ -13,6 +12,12 @@
     border-radius: 12px; /* Burchaklarni yumshatish */
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Yumshoq soyalar */
     padding: 20px; /* Ichki bo'sh joy */
+    font-family: Arial, sans-serif; /* Shrift */
+}
+.userCard {
+    border-radius: 12px; /* Burchaklarni yumshatish */
+    border: 2px solid rgb(51, 51, 51);
+    padding: 0 20px; /* Ichki bo'sh joy */
     font-family: Arial, sans-serif; /* Shrift */
 }
 

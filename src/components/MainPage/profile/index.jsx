@@ -1,50 +1,68 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import axios from 'axios';
 import styles from './style.module.css';
 import { useTheme } from '../../theme';
+import { useNavigate } from 'react-router-dom';
+import EditIcon from '@mui/icons-material/Edit';
 
 const ProfilePage = () => {
     const [userData, setUserData] = useState(null);
-    const [image, setImage] = useState(null);
-    const [imagePreview, setImagePreview] = useState(null);
-    const { isBlue, toggleTheme } = useTheme();
+    const { isBlue } = useTheme();
+    const navigate = useNavigate();
+    const fileInputRef = useRef(null); // Fayl inputini boshqarish uchun ref
 
-    useEffect(() => {
-        const fetchUserData = async () => {
-            try {
-                const response = await axios.get('https://dog.ceo/api/breeds/image/random'); // O'zingizning API URL'ni kiriting
-                setUserData(response.data);
-            } catch (error) {
-                console.error('Error fetching user data:', error);
+    const fetchUserData = async () => {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            console.error('Access token not found');
+            navigate('/login');
+            return;
+        }
+        try {
+            const response = await axios.get('https://taxibuxoro.pythonanywhere.com/users/profile/', {
+                headers: {
+                    'Authorization': `JWT ${accessToken}`,
+                },
+            });
+            setUserData(response.data);
+        } catch (error) {
+            if (error.response && error.response.status === 401) {
+                navigate('/login');
             }
-        };
-
-        fetchUserData();
-    }, []);
-
-    const handleImageChange = (event) => {
-        const file = event.target.files[0];
-        if (file) {
-            setImage(file);
-            setImagePreview(URL.createObjectURL(file));
+            console.error('Error fetching user data:', error);
         }
     };
 
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        const formData = new FormData();
-        formData.append('image', image);
+    useEffect(() => {
+        fetchUserData();
+    }, [navigate]);
 
-        try {
-            await axios.post('/api/user/profile/image', formData, {
-                headers: {
-                    'Content-Type': 'multipart/form-data',
-                },
-            });
-            alert('Image uploaded successfully!');
-        } catch (error) {
-            console.error('Error uploading image:', error);
+    const handleFileChange = async (event) => {
+        const file = event.target.files[0];
+
+        if (file) {
+            const accessToken = localStorage.getItem('accessToken');
+            const formData = new FormData();
+            formData.append('passport_photo', file);
+
+            try {
+                await axios.post('https://taxibuxoro.pythonanywhere.com/users/profile/', formData, {
+                    headers: {
+                        'Authorization': `JWT ${accessToken}`,
+                        'Content-Type': 'multipart/form-data',
+                    },
+                });
+                alert('Rasm muvaffaqiyatli yangilandi!');
+                fetchUserData(); // Foydalanuvchi ma'lumotlarini yangilang
+            } catch (error) {
+                console.error('Error uploading file:', error);
+                alert('Rasmni yangilashda xato!');
+            }
         }
+    };
+
+    const handleEditButtonClick = () => {
+        fileInputRef.current.click(); // Fayl inputini ochish
     };
 
     if (!userData) {
@@ -52,28 +70,30 @@ const ProfilePage = () => {
     }
 
     return (
-        <div  className={isBlue ? styles.containerBlue : styles.containerWhite}>
-            <h1 className={isBlue ? styles.titleBlue : styles.titleWhite}>User  Profile</h1>
-            <div className={styles.profileImage}>
-                <img className={styles.profileImages} src={imagePreview || userData.image} alt="User " />
-                <button className={isBlue ? styles.editIconBlue : styles.editIconWhite} onClick={() => document.getElementById('imageInput').click()}>
-                    ✎
-                </button>
-                <input
-                    type="file"
-                    id="imageInput"
-                    accept="image/*"
-                    onChange={handleImageChange}
-                    style={{ display: 'none' }}
-                />
-            </div>
-            <div className={styles.userInfo}>
-                <h2 className={isBlue ? styles.h2Blue : styles.h2White}>User Information</h2>
-                <p className={isBlue ? styles.pBlue : styles.pWhite}><strong className={isBlue ? styles.strongBlue : styles.strongWhite}>Name:</strong> {userData.name}</p>
-                <p className={isBlue ? styles.pBlue : styles.pWhite}><strong className={isBlue ? styles.strongBlue : styles.strongWhite}>Surname:</strong> {userData.surname}</p>
-                <p className={isBlue ? styles.pBlue : styles.pWhite}><strong className={isBlue ? styles.strongBlue : styles.strongWhite}>Phone:</strong> {userData.phone}</p>
-                <p className={isBlue ? styles.pBlue : styles.pWhite}><strong className={isBlue ? styles.strongBlue : styles.strongWhite}>Orders Count:</strong> {userData.ordersCount}</p>
-                <p className={isBlue ? styles.pBlue : styles.pWhite}><strong className={isBlue ? styles.strongBlue : styles.strongWhite}>Returned Orders Count:</strong> {userData.returnedOrdersCount}</p>
+        <div className={isBlue ? styles.containerBlue : styles.containerWhite}>
+            <div className={styles.userCard}>
+                <h1 className={isBlue ? styles.titleBlue : styles.titleWhite}>User  Profile</h1>
+                <div className={styles.userInfo}>
+                    <div className={styles.profileImage}>
+                        <img 
+                            src={`https://taxibuxoro.pythonanywhere.com${userData.passport_photo}`} 
+                            alt="Passport" 
+                            className={styles.profileImages} 
+                        />
+                        <button className={styles.editIcon} onClick={handleEditButtonClick}>
+                            <EditIcon />
+                        </button>
+                    </div>
+                    <input 
+                        type="file" 
+                        onChange={handleFileChange} 
+                        ref={fileInputRef} 
+                        style={{ display: 'none' }} // Ko'rinmas qilib qo'yish
+                    />
+                    <p className={isBlue ? styles.pBlue : styles.pWhite}><strong>Buyurtmachi:</strong> {userData.first_name} {userData.last_name}</p>
+                    <p className={isBlue ? styles.pBlue : styles.pWhite}><strong>Phone:</strong> {userData.phone_number}</p>
+                    <p className={isBlue ? styles.pBlue : styles.pWhite}><strong>Orders :</strong> {userData.orders_count}</p>
+                </div>
             </div>
         </div>
     );
