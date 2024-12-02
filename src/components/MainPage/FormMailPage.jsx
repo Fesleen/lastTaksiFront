@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './FormMailPage.module.css';
-import CommonComponentForm from '../main_top_pochta';
+import CommonComponent from '../main_top';
 import { useTheme } from '../theme';
 
 const FormMailPage = () => {
@@ -31,7 +31,7 @@ const FormMailPage = () => {
 
     useEffect(() => {
         toggleTheme();
-    }, []); 
+    }, []); // Bu yerda dependency array bo'sh, shuning uchun faqat bir marta chaqiriladi
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -39,6 +39,9 @@ const FormMailPage = () => {
             ...formData,
             [name]: value
         });
+
+        // Agar siz har bir o'zgarishda tema o'zgartirishni xohlasangiz
+        // toggleTheme(); // Bu qatorda faqat agar kerak bo'lsa qo'shing
     };
 
     const handleSubmit = (e) => {
@@ -49,19 +52,15 @@ const FormMailPage = () => {
             return;
         }
     
-        // Foydalanuvchi ma'lumotlarini olish (masalan, hardcoded yoki boshqa joydan)
         const user = 'user_id_value'; // Bu yerda foydalanuvchi ID ni oling
-    
-        // Form ma'lumotlarini saqlash
         const dataToSave = { ...formData, user };
         localStorage.setItem('formData', JSON.stringify(dataToSave));
         navigate('/form2'); 
     };
 
-    
     return (
         <>
-            <CommonComponentForm />
+            <CommonComponent />
             <div className={styles.container}>
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <label className={isBlue ? styles.labelBlue : styles.labelWhite}>So'rov turini tanlang:</label>
@@ -96,7 +95,7 @@ const FormMailPage = () => {
                             className={isBlue ? styles.selectBlue : styles.selectWhite}
                             name="tuman"
                             value={formData.tuman}
-                            onChange={handleChange }>
+                            onChange={handleChange}>
                             <option value="">Tumanni tanlang</option>
                             {(formData.where === 'toshkent' ? toshkentDistricts : samarqandDistricts).map((tuman, index) => (
                                 <option key={index} value={tuman}>
@@ -106,7 +105,7 @@ const FormMailPage = () => {
                         </select>
                     </div>
                     
-                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Qayerga(viloyat):</label>
+                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Qayerga (viloyat):</label>
                     <select
                         className={isBlue ? styles.selectBlue : styles.selectWhite}
                         name="whereTo"
@@ -125,7 +124,7 @@ const FormMailPage = () => {
                         <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Tuman:</label>
                         <select
                             className={isBlue ? styles.selectBlue : styles.selectWhite}
-                            name="tuman2"
+                            name ="tuman2"
                             value={formData.tuman2}
                             onChange={handleChange}
                         >

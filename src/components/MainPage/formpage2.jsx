@@ -6,7 +6,7 @@ import { useTheme } from '../theme';
 
 const FormPage2 = () => {
     const navigate = useNavigate();
-    const { isBlue, toggleTheme } = useTheme(); // toggleTheme ni qo'shamiz
+    const { isBlue, toggleTheme } = useTheme();
     const [formData2, setFormData2] = useState({
         additionalInfo: '',
         Yolovchilar: '',
@@ -19,11 +19,8 @@ const FormPage2 = () => {
         if (!savedFormData) {
             alert('FormPage ma\'lumotlari topilmadi.');
             navigate('/form1');
-        } else {
-            // Tema o'zgarishini chaqirish
-            toggleTheme(); // Bu yerda tema o'zgarishini chaqirish
         }
-    }, [savedFormData, navigate, toggleTheme]);
+    }, [savedFormData, navigate]); // toggleTheme ni dependency array ga qo'shmaymiz
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -31,6 +28,9 @@ const FormPage2 = () => {
             ...formData2,
             [name]: value
         });
+
+        // Agar siz har bir o'zgarishda tema o'zgartirishni xohlasangiz
+        // toggleTheme(); // Bu qatorda faqat agar kerak bo'lsa qo'shing
     };
 
     const handleSubmit = (e) => {
@@ -76,7 +76,7 @@ const FormPage2 = () => {
                         <option value="Captiva">Captiva</option>
                     </select>
                     <div className={styles.buttoncomponent}>
-                        <button className={styles.submitButton} onClick={() => navigate(-1)}> Orqaga </button>
+                        <button type="button" className={styles.submitButton} onClick={() => navigate(-1)}> Orqaga </button>
                         <button type="submit" className={styles.submitButton}>Keyingisi</button>
                     </div>
                 </form>
@@ -85,4 +85,4 @@ const FormPage2 = () => {
     );
 };
 
-export default FormPage2; 
+export default FormPage2;

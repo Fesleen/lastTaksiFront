@@ -31,7 +31,7 @@ const FormPage = () => {
 
     useEffect(() => {
         toggleTheme();
-    }, [toggleTheme]); // toggleTheme har safar chaqiriladi
+    }, []); // Bu yerda dependency array bo'sh, shuning uchun faqat bir marta chaqiriladi
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -146,4 +146,4 @@ const FormPage = () => {
     );
 };
 
-export default FormPage; 
+export default FormPage;
