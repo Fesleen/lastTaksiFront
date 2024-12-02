@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import styles from './MainPage.module.css';
+import { useTheme } from '../theme';
+import PersonIcon from '@mui/icons-material/Person';
 import BedtimeIcon from '@mui/icons-material/Bedtime';
-import styles from './MainPage.module.css'; 
-import { useTheme } from '../theme'; 
 import PersonAddIcon from '@mui/icons-material/PersonAdd';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import PersonIcon from '@mui/icons-material/Person';
 import HouseIcon from '@mui/icons-material/House';
 import ListIcon from '@mui/icons-material/List';
 
@@ -15,30 +15,29 @@ const MainPage = () => {
     const [balance, setBalance] = useState(0);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const { isBlue, toggleTheme } = useTheme(); 
+    const { isBlue, toggleTheme } = useTheme();
     const [loading, setLoading] = useState(true); // Loading holatini qo'shish
 
     useEffect(() => {
-        toggleTheme();
-    }, []); 
-
-    useEffect(() => {
         const fetchUserData = async () => {
-            setLoading(true); // Ma'lumotlarni yuklashdan oldin loadingni o'rnatamiz
+            setLoading(true);
             try {
                 const accessToken = localStorage.getItem('accessToken');
-                
-                if (!accessToken) throw new Error('No access token found');
-                
-                // Agar accessToken tugagan bo'lsa, uni tekshiramiz
+
+                if (!accessToken) {
+                    navigate('/login'); // Agar access token bo'lmasa, login sahifasiga o'tish
+                    return;
+                }
+
+                // Tokenning muddati tugaganligini tekshirish
                 if (isAccessTokenExpired(accessToken)) {
-                    navigate('/login'); // Token muddati tugagan bo'lsa, login sahifasiga o'tish
+                    navigate('/login'); // Agar token muddati o'tgan bo'lsa, login sahifasiga o'tish
                     return;
                 }
 
                 const response = await axios.get('https://taxibuxoro.pythonanywhere.com/users/profile/', {
                     headers: {
-                        'Authorization': `JWT ${accessToken}`, // Bearer prefiksi bilan yuborish
+                        'Authorization': `JWT ${accessToken}`,
                     },
                 });
 
@@ -47,48 +46,39 @@ const MainPage = () => {
                 setLastName(userData.last_name || '');
                 setBalance(userData.balance || 0);
             } catch (error) {
-                if (error.response && error.response.status === 401) {
-                    navigate('/login'); // Agar 401 xato bo'lsa, login sahifasiga o'tish
-                }
                 console.error('Error fetching user data:', error);
+                navigate('/login'); // Agar 401 yoki boshqa xatolik bo'lsa, login sahifasiga o'tish
             } finally {
-                setLoading(false); // Ma'lumotlar yuklangandan so'ng loadingni o'chirish
+                setLoading(false);
             }
         };
 
-        fetchUserData(); 
+        fetchUserData();
     }, [navigate]);
 
-    // Access tokenning muddati tugaganini tekshirish
     const isAccessTokenExpired = (token) => {
-        const { exp } = JSON.parse(atob(token.split('.')[1])); // Tokenni dekodlash
-        return exp < Math.floor(Date.now() / 1000); // Agar token muddati o'tgan bo'lsa, true qaytaradi
-    };
-
-    const handleButtonClick = (path) => {
-        navigate(path);
+        const { exp } = JSON.parse(atob(token.split('.')[1]));
+        return exp < Math.floor(Date.now() / 1000);
     };
 
     if (loading) {
         return (
             <div className={styles.loadingContainer}>
-                <h2 className={isBlue ? styles.loadingBlue : styles.loadingWhite}>.</h2> {/* Loading indikatorini ko'rsatish */}
+                <h2 className={isBlue ? styles.loadingBlue : styles.loadingWhite}>.</h2>
             </div>
         );
     }
 
     return (
         <div className={styles.container}>
-            <div className={styles.container}>
-                <div className={styles.Buttonsgroup}>
-                    <p className={isBlue ? styles.textOnBlueP : styles.textOnWhiteP}>Farovon Yo'l</p>
-                    <button onClick={toggleTheme} className={styles.buttonTop}>
-                        <BedtimeIcon />
-                    </button>
-                    <button className={styles.buttonTop} onClick={() => handleButtonClick('/profile')}>
-                        <PersonIcon />
-                    </button>
-                </div>
+            <div className={styles.Buttonsgroup}>
+                <p className={isBlue ? styles.textOnBlueP : styles.textOnWhiteP}>Farovon Yo'l</p>
+                <button onClick={toggleTheme} className={styles.buttonTop}>
+                    <BedtimeIcon />
+                </button>
+                <button className={styles.buttonTop} onClick={() => navigate('/profile')}>
+                    <PersonIcon />
+                </button>
             </div>
             <div className={isBlue ? styles.backgroundBlue : styles.backgroundWhite}>
                 <h2 className={isBlue ? styles.textOnBlue : styles.textOnWhite}>
@@ -99,18 +89,18 @@ const MainPage = () => {
                 </h3>
                 <div className={isBlue ? styles.Buttonscomponent2 : styles.Buttonscomponent}>
                     <div className={styles.buttoncomponentitem}>
-                        <button className={styles.button} onClick={() => handleButtonClick('/form')}>
+                        <button className={styles.button} onClick={() => navigate('/form')}>
                             <PersonAddIcon sx={{ fontSize: 30 }} />
                             <h1 className={styles.h1}>Yo'lovchi olish</h1>
                         </button>
-                        <button className={styles.button1} onClick={() => handleButtonClick('/form-mail')}>
+                        <button className={styles.button1} onClick={() => navigate('/form-mail')}>
                             <PeopleAltIcon sx={{ fontSize: 30 }} />
                             <h1 className={styles.h1}>Yo'lovchi berish</h1>
                         </button>
                     </div>
                 </div>
             </div>
-            <div className ={styles.containerBottom}>
+            <div className={styles.containerBottom}>
                 <div className={isBlue ? styles.ButtonBottom : styles.ButtonBottom2}>
                     <div className={styles.ButtonBottomitem}>
                         <button onClick={() => navigate('/')}><HouseIcon /></button>
