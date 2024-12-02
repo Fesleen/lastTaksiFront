@@ -26,7 +26,6 @@
     width: 100%;
     text-align: left;
 }
-
 .labelWhite {
     margin-bottom: 15px;
     font-size: 18px;
@@ -37,40 +36,63 @@
 }
 
 /* Input and Select Styling */
-.input, .select, .selectBlue, .selectWhite {
+.select_group {
+    width: 100%;
+}
+
+.input {
+    padding: 12px;
+    margin-bottom: 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    width: 100%; /* Ensure full width */
+    background-color: transparent;
+    color: #ffffff;
+    border: 1px solid #e2e8f0;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box; /* Prevent overflow */
+}
+
+.select {
     padding: 12px;
     margin-bottom: 15px;
     border-radius: 8px;
     width: 100%;
+    color: #ffffff;
     border: 1px solid #e2e8f0;
     transition: border-color 0.3s, box-shadow 0.3s;
     box-sizing: border-box;
-}
-
-/* Specific color overrides for input/select based on theme */
-.select, .selectBlue, .selectWhite {
     background-color: #070038;
-    color: #ffffff;
 }
-
-.selectWhite {
-    background-color: #ffffff;
+.selectBlue{
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    width: 100%;
+    color: #ffffff;
+    border: 1px solid #e2e8f0;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+    background-color: #070038;
+}
+.selectWhite{
+    padding: 12px;
+    margin-bottom: 15px;
+    border-radius: 8px;
+    width: 100%;
     color: #070038;
     border: 1px solid #070038;
-}
-
-.selectBlue {
-    background-color: #070038;
-    color: #ffffff;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    box-sizing: border-box;
+    background-color: #ffffff;
 }
 
 /* Button Styling */
-.buttoncomponent {
+.buttoncomponent{
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
-
 .submitButton {
     background-color: #008d88;
     color: #ffffff;
@@ -84,46 +106,61 @@
     margin-top: 10px;
 }
 
-.submitButton:hover {
-    background-color: #006f64;  /* Hover effect */
+.button:hover {
+    border: 2px solid #393939;
     transform: translateY(-2px);
 }
 
-.submitButton:active {
-    background-color: #005c4f;  /* Active effect */
+.button:active {
+    border: 2px solid #2c2c2c;
     transform: translateY(1px);
 }
 
-/* Button container with space between buttons */
-.buttoncomponent {
+.returnContainer {
+    width: 100%;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    justify-content: center;
+    margin-top: 20px;
 }
 
-/* Responsivlik */
+.returnContainer .button {
+    background-color: #34c759;
+    font-weight: bold; 
+}
+
+.returnContainer .button:hover {
+    background-color: #28a745;
+}
+
+.returnContainer .button:active {
+    background-color: #218838;
+}
+
+
 @media (max-width: 600px) {
     .form {
-        padding: 5px; /* Smaller padding for mobile */
-    }
-
-    .input, .select {
-        font-size: 14px; /* Smaller font size */
         padding: 10px;
     }
 
-    .submitButton {
-        padding: 10px 20px; /* Make button larger on mobile */
-    }
-}
-
-@media (max-width: 900px) {
-    .form {
-        padding: 15px;  /* Add some space on medium screens */
+    .button {
+        padding: 10px 20px;
     }
 
     .input, .select {
-        font-size: 16px;  /* Medium screen font size */
+        width: 100%;
+        font-size: 14px; 
+        padding: 10px;
     }
 }
 
+
+@media (max-width: 900px) {
+    .form {
+        padding: 10px;
+    }
+
+    .input, .select {
+        width: 100%;
+        font-size: 14px;
+    }
+}

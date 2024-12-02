@@ -15,7 +15,7 @@ const MainPage = () => {
     const [balance, setBalance] = useState(0);
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
-    const { isBlue, toggleTheme } = useTheme();
+    const { isBlue, toggleTheme } = useTheme(); // isBlue va toggleTheme ni olish
     const [loading, setLoading] = useState(true); // Loading holatini qo'shish
 
     useEffect(() => {
@@ -23,24 +23,24 @@ const MainPage = () => {
             setLoading(true);
             try {
                 const accessToken = localStorage.getItem('accessToken');
-
+    
                 if (!accessToken) {
                     navigate('/login'); // Agar access token bo'lmasa, login sahifasiga o'tish
                     return;
                 }
-
+    
                 // Tokenning muddati tugaganligini tekshirish
                 if (isAccessTokenExpired(accessToken)) {
                     navigate('/login'); // Agar token muddati o'tgan bo'lsa, login sahifasiga o'tish
                     return;
                 }
-
+    
                 const response = await axios.get('https://taxibuxoro.pythonanywhere.com/users/profile/', {
                     headers: {
                         'Authorization': `JWT ${accessToken}`,
                     },
                 });
-
+    
                 const userData = response.data;
                 setFirstName(userData.first_name || '');
                 setLastName(userData.last_name || '');
@@ -52,9 +52,10 @@ const MainPage = () => {
                 setLoading(false);
             }
         };
-
+    
         fetchUserData();
-    }, [navigate]);
+    }, [navigate]); // `navigate`ga bo'lgan qaramlikni tuzatish
+    
 
     const isAccessTokenExpired = (token) => {
         const { exp } = JSON.parse(atob(token.split('.')[1]));

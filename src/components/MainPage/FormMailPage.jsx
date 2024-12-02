@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './FormMailPage.module.css';
-import CommonComponentForm from '../main_top_pochta';
+import CommonComponent from '../main_top';
 import { useTheme } from '../theme';
 
 const FormMailPage = () => {
@@ -30,8 +30,9 @@ const FormMailPage = () => {
     });
 
     useEffect(() => {
+        // Tema o'zgarishi
         toggleTheme();
-    }, []); 
+    }, [toggleTheme]); 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -49,19 +50,16 @@ const FormMailPage = () => {
             return;
         }
     
-        // Foydalanuvchi ma'lumotlarini olish (masalan, hardcoded yoki boshqa joydan)
-        const user = 'user_id_value'; // Bu yerda foydalanuvchi ID ni oling
+        const user = 'user_id_value'; // Foydalanuvchi ID ni oling
     
-        // Form ma'lumotlarini saqlash
         const dataToSave = { ...formData, user };
         localStorage.setItem('formData', JSON.stringify(dataToSave));
         navigate('/form2'); 
     };
 
-    
     return (
         <>
-            <CommonComponentForm />
+            <CommonComponent />
             <div className={styles.container}>
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <label className={isBlue ? styles.labelBlue : styles.labelWhite}>So'rov turini tanlang:</label>
@@ -96,7 +94,8 @@ const FormMailPage = () => {
                             className={isBlue ? styles.selectBlue : styles.selectWhite}
                             name="tuman"
                             value={formData.tuman}
-                            onChange={handleChange }>
+                            onChange={handleChange}
+                        >
                             <option value="">Tumanni tanlang</option>
                             {(formData.where === 'toshkent' ? toshkentDistricts : samarqandDistricts).map((tuman, index) => (
                                 <option key={index} value={tuman}>
@@ -137,10 +136,10 @@ const FormMailPage = () => {
                             ))}
                         </select>
                     </div>
-                    <div className={styles.buttoncomponent}>
-                        <button type="button" className={styles.submitButton} onClick={() => navigate(-1)}> Orqaga </button>
-                        <button type="submit" className={styles.submitButton}>Keyingisi</button>
-                    </div>
+
+                    <button type="submit" className={styles.submitButton}>
+                        Jo'natish
+                    </button>
                 </form>
             </div>
         </>
