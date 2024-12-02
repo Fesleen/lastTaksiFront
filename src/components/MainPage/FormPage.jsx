@@ -30,9 +30,8 @@ const FormPage = () => {
     });
 
     useEffect(() => {
-        // Tema o'zgarishi
         toggleTheme();
-    }, [toggleTheme]); 
+    }, []); 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -50,13 +49,16 @@ const FormPage = () => {
             return;
         }
     
-        const user = 'user_id_value'; // Foydalanuvchi ID ni oling
+        // Foydalanuvchi ma'lumotlarini olish (masalan, hardcoded yoki boshqa joydan)
+        const user = 'user_id_value'; // Bu yerda foydalanuvchi ID ni oling
     
+        // Form ma'lumotlarini saqlash
         const dataToSave = { ...formData, user };
         localStorage.setItem('formData', JSON.stringify(dataToSave));
         navigate('/form2'); 
     };
 
+    
     return (
         <>
             <CommonComponent />
@@ -94,8 +96,7 @@ const FormPage = () => {
                             className={isBlue ? styles.selectBlue : styles.selectWhite}
                             name="tuman"
                             value={formData.tuman}
-                            onChange={handleChange}
-                        >
+                            onChange={handleChange }>
                             <option value="">Tumanni tanlang</option>
                             {(formData.where === 'toshkent' ? toshkentDistricts : samarqandDistricts).map((tuman, index) => (
                                 <option key={index} value={tuman}>
@@ -136,10 +137,10 @@ const FormPage = () => {
                             ))}
                         </select>
                     </div>
-
-                    <button type="submit" className={styles.submitButton}>
-                        Jo'natish
-                    </button>
+                    <div className={styles.buttoncomponent}>
+                        <button type="button" className={styles.submitButton} onClick={() => navigate(-1)}> Orqaga </button>
+                        <button type="submit" className={styles.submitButton}>Keyingisi</button>
+                    </div>
                 </form>
             </div>
         </>
