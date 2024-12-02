@@ -12,21 +12,24 @@ const FormPage3 = () => {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState(null);
 
+    // Sahifa yuklanganda ma'lumotlarni olish
     useEffect(() => {
-        toggleTheme();
+        toggleTheme(); // Ranglar o'zgarishi
         const storedData = JSON.parse(localStorage.getItem('formData'));
         if (storedData) {
             setFormData(storedData);
         } else {
             alert('FormPage ma\'lumotlari topilmadi.');
-            navigate('/form1');
+            navigate('/form1'); // Agar ma'lumotlar bo'lmasa, boshqa sahifaga o'tish
         }
     }, [navigate, toggleTheme]);
 
+    // Telefon raqamini o'zgartirish
     const handleChange = (e) => {
         setPhoneNumber(e.target.value);
     };
 
+    // Formani yuborish
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -45,21 +48,18 @@ const FormPage3 = () => {
         try {
             setLoading(true);
 
-
             const requestData = {
-                user: formData.user, // 1 va 2-pagelardan olingan foydalanuvchi ID
-                request_type: formData.request_type, // 1 va 2-pagelardan olingan so'rov turi
-                where: formData.where, // 1 va 2-pagelardan olingan joy
-                whereTo: formData.whereTo, // 1 va 2-pagelardan olingan joyga borish
-                phone_number: phoneNumber, // Faqat telefon raqami
-                is_active: true, // Faol holat
-                Yolovchilar: formData.Yolovchilar, // 1 va 2-pagelardan olingan yo'lovchilar soni
-                car: formData.car // 1 va 2-pagelardan olingan mashina turi
+                user: formData.user,
+                request_type: formData.request_type,
+                where: formData.where,
+                whereTo: formData.whereTo,
+                phone_number: phoneNumber,
+                is_active: true,
+                Yolovchilar: formData.Yolovchilar,
+                car: formData.car
             };
 
-            console.log('Yuborilayotgan ma\'lumotlar:', requestData); // Yuborilayotgan ma'lumotlarni konsolga chiqarish
-
-            await axios.post(
+            const response = await axios.post(
                 'https://taxibuxoro.pythonanywhere.com/requests/',
                 requestData,
                 {
@@ -70,8 +70,12 @@ const FormPage3 = () => {
                 }
             );
 
-            alert(`So'rov muvaffaqiyatli yuborildi, adminlar ko'rib chiqib siz bilan aloqaga chiqishadi!`);
-            navigate('/'); // Muvaffaqiyatli bo'lsa, asosiy sahifaga yo'naltirish
+            if (response.status === 200) {
+                alert(`So'rov muvaffaqiyatli yuborildi, adminlar ko'rib chiqib siz bilan aloqaga chiqishadi!`);
+                navigate('/'); // Muvaffaqiyatli bo'lsa, asosiy sahifaga yo'naltirish
+            } else {
+                alert('So\'rov yuborishda xatolik yuz berdi. Iltimos, keyinroq urinib ko\'ring.');
+            }
 
         } catch (error) {
             console.error('So\'rovni yuborishda xatolik:', error);
