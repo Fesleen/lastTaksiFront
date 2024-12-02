@@ -64,7 +64,7 @@ const MainPage = () => {
     if (loading) {
         return (
             <div className={styles.loadingContainer}>
-                <h2 className={isBlue ? styles.loadingBlue : styles.loadingWhite}>.</h2>
+                <h2 className={isBlue ? styles.loadingBlue : styles.loadingWhite}>loading</h2>
             </div>
         );
     }
