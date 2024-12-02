@@ -13,7 +13,7 @@ const FormPage3 = () => {
     const [formData, setFormData] = useState(null);
 
     useEffect(() => {
-        toggleTheme();  // Faqat bir marta ishlaydi, birinchi renderda
+        toggleTheme();
         const storedData = JSON.parse(localStorage.getItem('formData'));
         if (storedData) {
             setFormData(storedData);
@@ -21,8 +21,7 @@ const FormPage3 = () => {
             alert('FormPage ma\'lumotlari topilmadi.');
             navigate('/form1');
         }
-    }, [navigate]);  // toggleTheme() ni dependency arrayga qo'shmaslik kerak
-
+    }, [navigate, toggleTheme]);
 
     const handleChange = (e) => {
         setPhoneNumber(e.target.value);
