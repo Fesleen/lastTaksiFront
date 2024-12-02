@@ -26,6 +26,7 @@
     width: 100%;
     text-align: left;
 }
+
 .labelWhite {
     margin-bottom: 15px;
     font-size: 18px;
@@ -36,63 +37,40 @@
 }
 
 /* Input and Select Styling */
-.select_group {
-    width: 100%;
-}
-
-.input {
-    padding: 12px;
-    margin-bottom: 15px;
-    font-size: 16px;
-    border-radius: 8px;
-    width: 100%; /* Ensure full width */
-    background-color: transparent;
-    color: #ffffff;
-    border: 1px solid #e2e8f0;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    box-sizing: border-box; /* Prevent overflow */
-}
-
-.select {
+.input, .select, .selectBlue, .selectWhite {
     padding: 12px;
     margin-bottom: 15px;
     border-radius: 8px;
     width: 100%;
-    color: #ffffff;
     border: 1px solid #e2e8f0;
     transition: border-color 0.3s, box-shadow 0.3s;
     box-sizing: border-box;
-    background-color: #070038;
 }
-.selectBlue{
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    width: 100%;
+
+/* Specific color overrides for input/select based on theme */
+.select, .selectBlue, .selectWhite {
+    background-color: #070038;
     color: #ffffff;
-    border: 1px solid #e2e8f0;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    box-sizing: border-box;
-    background-color: #070038;
 }
-.selectWhite{
-    padding: 12px;
-    margin-bottom: 15px;
-    border-radius: 8px;
-    width: 100%;
+
+.selectWhite {
+    background-color: #ffffff;
     color: #070038;
     border: 1px solid #070038;
-    transition: border-color 0.3s, box-shadow 0.3s;
-    box-sizing: border-box;
-    background-color: #ffffff;
+}
+
+.selectBlue {
+    background-color: #070038;
+    color: #ffffff;
 }
 
 /* Button Styling */
-.buttoncomponent{
+.buttoncomponent {
     display: flex;
     align-items: center;
     justify-content: space-between;
 }
+
 .submitButton {
     background-color: #008d88;
     color: #ffffff;
@@ -106,61 +84,46 @@
     margin-top: 10px;
 }
 
-.button:hover {
-    border: 2px solid #393939;
+.submitButton:hover {
+    background-color: #006f64;  /* Hover effect */
     transform: translateY(-2px);
 }
 
-.button:active {
-    border: 2px solid #2c2c2c;
+.submitButton:active {
+    background-color: #005c4f;  /* Active effect */
     transform: translateY(1px);
 }
 
-.returnContainer {
-    width: 100%;
+/* Button container with space between buttons */
+.buttoncomponent {
     display: flex;
-    justify-content: center;
-    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.returnContainer .button {
-    background-color: #34c759;
-    font-weight: bold; 
-}
-
-.returnContainer .button:hover {
-    background-color: #28a745;
-}
-
-.returnContainer .button:active {
-    background-color: #218838;
-}
-
-
+/* Responsivlik */
 @media (max-width: 600px) {
     .form {
-        padding: 10px;
-    }
-
-    .button {
-        padding: 10px 20px;
+        padding: 5px; /* Smaller padding for mobile */
     }
 
     .input, .select {
-        width: 100%;
-        font-size: 14px; 
+        font-size: 14px; /* Smaller font size */
         padding: 10px;
     }
-}
 
+    .submitButton {
+        padding: 10px 20px; /* Make button larger on mobile */
+    }
+}
 
 @media (max-width: 900px) {
     .form {
-        padding: 10px;
+        padding: 15px;  /* Add some space on medium screens */
     }
 
     .input, .select {
-        width: 100%;
-        font-size: 14px;
+        font-size: 16px;  /* Medium screen font size */
     }
 }
+

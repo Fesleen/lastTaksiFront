@@ -35,15 +35,19 @@
   font-family: "Roboto", sans-serif;
 }
 
+/* O'zgartirilgan input uslubi */
 .input {
   font-family: 'Roboto', sans-serif;
+  font-size: 16px;  /* Matnning o'lchamini tekshirib sozlash */
   border-radius: 5px;
-  border: 5px solid #000000;
+  border: 2px solid #000000; /* Borderni ingichka qilish */
   background-color: transparent;
   color: #000000;
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
+  padding: 10px; /* paddingni 10px qilib o'zgartirish */
+  line-height: 1.5;  /* Matnni yanada aniq joylash */
 }
 
 .container button {

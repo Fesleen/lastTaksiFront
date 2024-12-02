@@ -56,6 +56,7 @@ const LoginPage = () => {
                         placeholder="Telefon raqamingizni kiriting"
                         value={number}
                         onChange={(e) => setNumber(e.target.value)}
+                        autoComplete="tel" // To'g'ri yozilish: autoComplete
                         required
                     />
                 </div>
@@ -68,6 +69,7 @@ const LoginPage = () => {
                         placeholder="Parolingizni kiriting"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
+                        autoComplete="current-password" // To'g'ri yozilish: autoComplete
                         required
                     />
                 </div>
