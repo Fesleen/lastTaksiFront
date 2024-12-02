@@ -221,7 +221,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-top: 80px;
+    margin-top: 95px;
     padding: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
@@ -231,7 +231,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-top: 80px;
+    margin-top: 95px;
     padding: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
@@ -255,6 +255,10 @@
     .userName {
         font-size: 20px;
     }
+    .ButtonBottom {
+        width: 100%;
+        margin-top: 120px;
+    }
 
     .balance {
         font-size: 14px;
@@ -265,9 +269,13 @@
     }
 }
 
-@media (max-width: 430px) {
+@media (max-width: 450px) {
     .userName {
         font-size: 16px;
+    }
+    .ButtonBottom {
+        width: 100%;
+        margin-top: 120px;
     }
 
     .balance {

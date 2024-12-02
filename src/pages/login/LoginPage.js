@@ -1,5 +1,5 @@
 // LoginPage.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './LoginPage.css';
 
@@ -8,7 +8,21 @@ const LoginPage = () => {
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
     const [loading, setLoading] = useState(false);
+    const [rememberMe, setRememberMe] = useState(false); // Eslab qolish holati
     const navigate = useNavigate();
+
+    // Sahna yuklanganda, agar ma'lumotlar mavjud bo'lsa, ularni o'rnatish
+    useEffect(() => {
+        const savedNumber = localStorage.getItem('savedNumber');
+        const savedPassword = localStorage.getItem('savedPassword');
+
+        if (savedNumber) {
+            setNumber(savedNumber);
+        }
+        if (savedPassword) {
+            setPassword(savedPassword);
+        }
+    }, []);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -30,6 +44,15 @@ const LoginPage = () => {
                 // Tokenlarni localStorage-da saqlash
                 localStorage.setItem('accessToken', access);
                 localStorage.setItem('refreshToken', refresh);
+
+                // Eslab qolish holati
+                if (rememberMe) {
+                    localStorage.setItem('savedNumber', number);
+                    localStorage.setItem('savedPassword', password);
+                } else {
+                    localStorage.removeItem('savedNumber');
+                    localStorage.removeItem('savedPassword');
+                }
 
                 // Muvaffaqiyatli login holatida asosiy sahifaga o'tkazish
                 navigate('/main', { state: { user } });
@@ -77,6 +100,10 @@ const LoginPage = () => {
                 <p className="register-link">
                     Agar ro'yhatdan o'tmagan bo'lsangiz, <Link to="/register">Ro'yhatdan o'ting</Link>.
                 </p>
+                <div className="checkbox-group">
+                    <label htmlFor="remember-me" className="checkbox-label">Raqam va Parol eslab qolinsinmi?</label>
+                    <input type="checkbox" id="remember-me" className="checkbox" />
+                </div>
                 <button type="submit" disabled={loading}>
                     {loading ? <div className="spinner"></div> : 'Kirish'}
                 </button>
