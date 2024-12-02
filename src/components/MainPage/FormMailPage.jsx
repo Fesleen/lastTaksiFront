@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, {useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './FormMailPage.module.css';
 import CommonComponent from '../main_top';
 import { useTheme } from '../theme';
 
 const FormMailPage = () => {
-    const { isBlue, toggleTheme } = useTheme();
+    const { isBlue } = useTheme();
     const location = useLocation();
     const navigate = useNavigate();
     const params = new URLSearchParams(location.search);
@@ -28,10 +28,6 @@ const FormMailPage = () => {
         tuman2: '',
         is_active: true 
     });
-
-    useEffect(() => {
-        toggleTheme();
-    }, []); // Bu yerda dependency array bo'sh, shuning uchun faqat bir marta chaqiriladi
 
     const handleChange = (e) => {
         const { name, value } = e.target;

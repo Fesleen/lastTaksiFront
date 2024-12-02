@@ -6,7 +6,7 @@ import { useTheme } from '../theme';
 
 const FormPage2 = () => {
     const navigate = useNavigate();
-    const { isBlue, toggleTheme } = useTheme();
+    const { isBlue } = useTheme();
     const [formData2, setFormData2] = useState({
         additionalInfo: '',
         Yolovchilar: '',
@@ -21,6 +21,7 @@ const FormPage2 = () => {
             navigate('/form1');
         }
     }, [savedFormData, navigate]); // toggleTheme ni dependency array ga qo'shmaymiz
+
 
     const handleChange = (e) => {
         const { name, value } = e.target;
