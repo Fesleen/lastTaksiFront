@@ -27,10 +27,18 @@ const MainPage = () => {
             setLoading(true); // Ma'lumotlarni yuklashdan oldin loadingni o'rnatamiz
             try {
                 const accessToken = localStorage.getItem('accessToken');
+                
                 if (!accessToken) throw new Error('No access token found');
+                
+                // Agar accessToken tugagan bo'lsa, uni tekshiramiz
+                if (isAccessTokenExpired(accessToken)) {
+                    navigate('/login'); // Token muddati tugagan bo'lsa, login sahifasiga o'tish
+                    return;
+                }
+
                 const response = await axios.get('https://taxibuxoro.pythonanywhere.com/users/profile/', {
                     headers: {
-                        'Authorization': `JWT ${accessToken}`, // JWT o'rniga 
+                        'Authorization': `JWT ${accessToken}`, // Bearer prefiksi bilan yuborish
                     },
                 });
 
@@ -40,7 +48,7 @@ const MainPage = () => {
                 setBalance(userData.balance || 0);
             } catch (error) {
                 if (error.response && error.response.status === 401) {
-                    navigate('/login'); 
+                    navigate('/login'); // Agar 401 xato bo'lsa, login sahifasiga o'tish
                 }
                 console.error('Error fetching user data:', error);
             } finally {
@@ -50,6 +58,12 @@ const MainPage = () => {
 
         fetchUserData(); 
     }, [navigate]);
+
+    // Access tokenning muddati tugaganini tekshirish
+    const isAccessTokenExpired = (token) => {
+        const { exp } = JSON.parse(atob(token.split('.')[1])); // Tokenni dekodlash
+        return exp < Math.floor(Date.now() / 1000); // Agar token muddati o'tgan bo'lsa, true qaytaradi
+    };
 
     const handleButtonClick = (path) => {
         navigate(path);
