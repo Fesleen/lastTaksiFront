@@ -6,7 +6,7 @@ import CommonComponent from '../main_top';
 import { useTheme } from '../theme';
 
 const FormPage3 = () => {
-    const { isBlue, toggleTheme } = useTheme();
+    const { isBlue } = useTheme();
     const navigate = useNavigate();
     const [phoneNumber, setPhoneNumber] = useState('');
     const [loading, setLoading] = useState(false);
@@ -22,10 +22,7 @@ const FormPage3 = () => {
         }
     }, [navigate]);
 
-    // Tema o'zgartirish
-    useEffect(() => {
-        toggleTheme(); // Sahifa yuklanganda tema o'zgartirish
-    }, []); // Bu faqat bir marta, sahifa yuklanganda chaqiriladi
+
 
     const handleChange = (e) => {
         setPhoneNumber(e.target.value);
