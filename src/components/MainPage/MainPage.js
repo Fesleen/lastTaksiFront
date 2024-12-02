@@ -56,8 +56,13 @@ const MainPage = () => {
     }, [navigate]);
 
     const isAccessTokenExpired = (token) => {
-        const { exp } = JSON.parse(atob(token.split('.')[1]));
-        return exp < Math.floor(Date.now() / 1000);
+        try {
+            const { exp } = JSON.parse(atob(token.split('.')[1]));
+            return exp < Math.floor(Date.now() / 1000);
+        } catch (error) {
+            console.error('Error decoding token:', error);
+            return true; // Agar tokenni dekodlashda xatolik bo'lsa, uni muddati o'tgan deb hisoblang
+        }
     };
 
     if (loading) {
@@ -80,7 +85,7 @@ const MainPage = () => {
                 </button>
             </div>
             <div className={isBlue ? styles.backgroundBlue : styles.backgroundWhite}>
-                <h2 className={isBlue ? styles.textOnBlue : styles.textOnWhite}>
+                <h2 className={isBlue ? styles.textOnBlue : styles.textOnWhite }>
                     Salom, <span className={isBlue ? styles.textOnBlueP : styles.textOnWhiteP}>{firstName} {lastName}</span>
                 </h2>
                 <h3 className={isBlue ? styles.textOnBlue : styles.textOnWhite}>
@@ -110,7 +115,7 @@ const MainPage = () => {
                         <span className={isBlue ? styles.textOnBluespan : styles.textOnWhitespan}>Buyurtmalar</span>
                     </div>
                     <div className={styles.ButtonBottomitem}>
-                        <button onClick={() => navigate('/profile')}><PersonIcon /></button>
+                        < button onClick={() => navigate('/profile')}><PersonIcon /></button>
                         <span className={isBlue ? styles.textOnBluespan : styles.textOnWhitespan}>Profil</span>
                     </div>
                 </div>
