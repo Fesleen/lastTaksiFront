@@ -6,7 +6,7 @@ import { useTheme } from '../theme';
 
 const FormPage2 = () => {
     const navigate = useNavigate();
-    const { isBlue } = useTheme(); 
+    const { isBlue, toggleTheme } = useTheme(); // toggleTheme ni qo'shamiz
     const [formData2, setFormData2] = useState({
         additionalInfo: '',
         Yolovchilar: '',
@@ -19,8 +19,11 @@ const FormPage2 = () => {
         if (!savedFormData) {
             alert('FormPage ma\'lumotlari topilmadi.');
             navigate('/form1');
+        } else {
+            // Tema o'zgarishini chaqirish
+            toggleTheme(); // Bu yerda tema o'zgarishini chaqirish
         }
-    }, [savedFormData, navigate]);
+    }, [savedFormData, navigate, toggleTheme]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -82,4 +85,4 @@ const FormPage2 = () => {
     );
 };
 
-export default FormPage2;
+export default FormPage2; 

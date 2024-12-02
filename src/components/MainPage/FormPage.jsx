@@ -31,7 +31,7 @@ const FormPage = () => {
 
     useEffect(() => {
         toggleTheme();
-    }, []); 
+    }, [toggleTheme]); // toggleTheme har safar chaqiriladi
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -39,6 +39,9 @@ const FormPage = () => {
             ...formData,
             [name]: value
         });
+
+        // Agar siz har bir o'zgarishda tema o'zgartirishni xohlasangiz
+        // toggleTheme(); // Bu qatorda faqat agar kerak bo'lsa qo'shing
     };
 
     const handleSubmit = (e) => {
@@ -49,16 +52,12 @@ const FormPage = () => {
             return;
         }
     
-        // Foydalanuvchi ma'lumotlarini olish (masalan, hardcoded yoki boshqa joydan)
         const user = 'user_id_value'; // Bu yerda foydalanuvchi ID ni oling
-    
-        // Form ma'lumotlarini saqlash
         const dataToSave = { ...formData, user };
         localStorage.setItem('formData', JSON.stringify(dataToSave));
         navigate('/form2'); 
     };
 
-    
     return (
         <>
             <CommonComponent />
@@ -96,7 +95,7 @@ const FormPage = () => {
                             className={isBlue ? styles.selectBlue : styles.selectWhite}
                             name="tuman"
                             value={formData.tuman}
-                            onChange={handleChange }>
+                            onChange={handleChange}>
                             <option value="">Tumanni tanlang</option>
                             {(formData.where === 'toshkent' ? toshkentDistricts : samarqandDistricts).map((tuman, index) => (
                                 <option key={index} value={tuman}>
@@ -106,7 +105,7 @@ const FormPage = () => {
                         </select>
                     </div>
                     
-                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Qayerga(viloyat):</label>
+                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Qayerga (viloyat):</label>
                     <select
                         className={isBlue ? styles.selectBlue : styles.selectWhite}
                         name="whereTo"
@@ -125,7 +124,7 @@ const FormPage = () => {
                         <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Tuman:</label>
                         <select
                             className={isBlue ? styles.selectBlue : styles.selectWhite}
-                            name="tuman2"
+                            name ="tuman2"
                             value={formData.tuman2}
                             onChange={handleChange}
                         >
@@ -147,4 +146,4 @@ const FormPage = () => {
     );
 };
 
-export default FormPage;
+export default FormPage; 

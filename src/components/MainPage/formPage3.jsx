@@ -12,24 +12,25 @@ const FormPage3 = () => {
     const [loading, setLoading] = useState(false);
     const [formData, setFormData] = useState(null);
 
-    // Sahifa yuklanganda ma'lumotlarni olish
     useEffect(() => {
-        toggleTheme(); // Ranglar o'zgarishi
         const storedData = JSON.parse(localStorage.getItem('formData'));
         if (storedData) {
             setFormData(storedData);
         } else {
             alert('FormPage ma\'lumotlari topilmadi.');
-            navigate('/form1'); // Agar ma'lumotlar bo'lmasa, boshqa sahifaga o'tish
+            navigate('/form1');
         }
-    }, [navigate, toggleTheme]);
+    }, [navigate]);
 
-    // Telefon raqamini o'zgartirish
+    // Tema o'zgartirish
+    useEffect(() => {
+        toggleTheme(); // Sahifa yuklanganda tema o'zgartirish
+    }, []); // Bu faqat bir marta, sahifa yuklanganda chaqiriladi
+
     const handleChange = (e) => {
         setPhoneNumber(e.target.value);
     };
 
-    // Formani yuborish
     const handleSubmit = async (e) => {
         e.preventDefault();
 
@@ -59,7 +60,9 @@ const FormPage3 = () => {
                 car: formData.car
             };
 
-            const response = await axios.post(
+            console.log('Yuborilayotgan ma\'lumotlar:', requestData);
+
+            await axios.post(
                 'https://taxibuxoro.pythonanywhere.com/requests/',
                 requestData,
                 {
@@ -70,12 +73,8 @@ const FormPage3 = () => {
                 }
             );
 
-            if (response.status === 200) {
-                alert(`So'rov muvaffaqiyatli yuborildi, adminlar ko'rib chiqib siz bilan aloqaga chiqishadi!`);
-                navigate('/'); // Muvaffaqiyatli bo'lsa, asosiy sahifaga yo'naltirish
-            } else {
-                alert('So\'rov yuborishda xatolik yuz berdi. Iltimos, keyinroq urinib ko\'ring.');
-            }
+            alert(`So'rov muvaffaqiyatli yuborildi, adminlar ko'rib chiqib siz bilan aloqaga chiqishadi!`);
+            navigate('/');
 
         } catch (error) {
             console.error('So\'rovni yuborishda xatolik:', error);
@@ -111,4 +110,4 @@ const FormPage3 = () => {
     );
 };
 
-export default FormPage3;
+export default FormPage3; 
