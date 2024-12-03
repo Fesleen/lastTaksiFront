@@ -1,4 +1,4 @@
-import React, {useState } from 'react';
+import React, { useState } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
 import styles from './FormMailPage.module.css';
 import CommonComponent from '../main_top';
@@ -11,14 +11,62 @@ const FormMailPage = () => {
     const params = new URLSearchParams(location.search);
     const requestType = params.get('type') || 'yolovchi_berish';
 
-    const toshkentDistricts = [
-        "Bektemir", "Mirobod", "Mirzo Ulug'bek", "Sirg'ali", "Chilonzor", "Yakkasaroy", "Shayxontohur", "Yunusobod", "Olmazor"
-    ];
-    const samarqandDistricts = [
-        "Samarqand", "Kattakurgan", "Jomboy", "Narpay", "Oqdarya", "Pastdargom", "Payariq", "Bulung'ur", "Tayloq"
-    ];
+    const districts = {
+        toshkent: [
+            "Bektemir", "Mirobod", "Mirzo Ulug'bek", "Sirg'ali",
+            "Chilonzor", "Yakkasaroy", "Shayxontohur", "Yunusobod", "Olmazor"
+        ],
+        samarqand: [
+            "Samarqand", "Kattakurgan", "Jomboy", "Narpay",
+            "Oqdarya", "Pastdargom", "Payariq", "Bulung'ur", "Tayloq"
+        ],
+        andijon: [
+            "Andijon", "Asaka", "Buloqboshi", "Izboskan",
+            "Jalaquduq", "Marhamat", "Oltinqo'rg'on", "Shahrixon", "Xo'jaobod"
+        ],
+        buxoro: [
+            "Buxoro", "Qorako'l", "G'ijduvon", "Kogon",
+            "Jondor", "Shofirkon", "Vobkent", "Romitan", "Peshku"
+        ],
+        jizzax: [
+            "Jizzax", "Baxmal", "Zarbdor", "G'alaba",
+            "Do'stlik", "Yangiyer", "Mirzacho'l"
+        ],
+        qashqadaryo: [
+            "Qarshi", "Shahrisabz", "Kitob", "Dehqonobod",
+            "Koson", "Muborak", "Nishon", "Yakkabog'"
+        ],
+        navoi: [
+            "Navoi", "Zafarobod", "Karmana", "Nurota",
+            "Tomdi", "Uchquduq", "Konimex"
+        ],
+        namangan: [
+            "Namangan", "Chortoq", "Chust", "Kosonsoy",
+            "Mingbuloq", "Norin", "Pop", "Uychi"
+        ],
+        fargona: [
+            "Farg'ona", "Qo'qon", "Marg'ilon", "Oltiariq",
+            "Beshariq", "Rishton", "Uchko'prik", "Yazyovon"
+        ],
+        xorazm: [
+            "Urganch", "Xiva", "Gurlan", "Yangibozor",
+            "Shovot", "Qo'shko'pir", "Bog'ot"
+        ],
+        qoraqalpoq: [
+            "Nukus", "Chimboy", "Qanlikul", "Taxtako'pir",
+            "Ellikqal'a", "Beruniy", "Kegeyli", "Shumanay"
+        ],
+        surxandaryo: [
+            "Termiz", "Angor", "Boysun", "Denov",
+            "Jarqo'rg'on", "Muzrabot", "Oltinsoy", "Sariosiyo", "Sherobod"
+        ],
+        sirdaryo: [
+            "Guliston", "Boyovut", "Oqoltin", "Sirdaryo",
+            "Sardoba", "Mirzaobod", "Yangiyer"
+        ]
+    };
 
-    const originalWhereOptions = ['toshkent', 'samarqand'];
+    const originalWhereOptions = Object.keys(districts);
 
     const [formData, setFormData] = useState({
         request_type: requestType,
@@ -26,7 +74,7 @@ const FormMailPage = () => {
         whereTo: '',
         tuman: '',
         tuman2: '',
-        is_active: true 
+        is_active: true
     });
 
     const handleChange = (e) => {
@@ -35,23 +83,20 @@ const FormMailPage = () => {
             ...formData,
             [name]: value
         });
-
-        // Agar siz har bir o'zgarishda tema o'zgartirishni xohlasangiz
-        // toggleTheme(); // Bu qatorda faqat agar kerak bo'lsa qo'shing
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-    
+
         if (!formData.where || !formData.tuman || !formData.whereTo || !formData.tuman2) {
             alert('Iltimos, barcha maydonlarni to\'ldiring.');
             return;
         }
-    
+
         const user = 'user_id_value'; // Bu yerda foydalanuvchi ID ni oling
         const dataToSave = { ...formData, user };
         localStorage.setItem('formData', JSON.stringify(dataToSave));
-        navigate('/form2'); 
+        navigate('/form2');
     };
 
     return (
@@ -70,7 +115,7 @@ const FormMailPage = () => {
                         <option value="pochta_berish">Pochta berish</option>
                     </select>
 
-                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Qayer dan(viloyat):</label>
+                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Qayerdan(viloyat):</label>
                     <select
                         className={isBlue ? styles.selectBlue : styles.selectWhite}
                         name="where"
@@ -93,15 +138,15 @@ const FormMailPage = () => {
                             value={formData.tuman}
                             onChange={handleChange}>
                             <option value="">Tumanni tanlang</option>
-                            {(formData.where === 'toshkent' ? toshkentDistricts : samarqandDistricts).map((tuman, index) => (
+                            {(formData.where ? districts[formData.where] : []).map((tuman, index) => (
                                 <option key={index} value={tuman}>
                                     {tuman.toUpperCase()}
                                 </option>
                             ))}
                         </select>
                     </div>
-                    
-                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Qayerga (viloyat):</label>
+
+                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Qayerga(viloyat):</label>
                     <select
                         className={isBlue ? styles.selectBlue : styles.selectWhite}
                         name="whereTo"
@@ -120,12 +165,12 @@ const FormMailPage = () => {
                         <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Tuman:</label>
                         <select
                             className={isBlue ? styles.selectBlue : styles.selectWhite}
-                            name ="tuman2"
+                            name="tuman2"
                             value={formData.tuman2}
                             onChange={handleChange}
                         >
                             <option value="">Tumanni tanlang</option>
-                            {(formData.whereTo === 'toshkent' ? toshkentDistricts : samarqandDistricts).map((tuman, index) => (
+                            {(formData.whereTo ? districts[formData.whereTo] : []).map((tuman, index) => (
                                 <option key={index} value={tuman}>
                                     {tuman.toUpperCase()}
                                 </option>
