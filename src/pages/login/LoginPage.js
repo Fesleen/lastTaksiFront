@@ -1,4 +1,3 @@
-// LoginPage.js
 import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './LoginPage.css';
@@ -11,7 +10,6 @@ const LoginPage = () => {
     const [rememberMe, setRememberMe] = useState(false); // Eslab qolish holati
     const navigate = useNavigate();
 
-    // Sahna yuklanganda, agar ma'lumotlar mavjud bo'lsa, ularni o'rnatish
     useEffect(() => {
         const savedNumber = localStorage.getItem('savedNumber');
         const savedPassword = localStorage.getItem('savedPassword');
@@ -41,7 +39,6 @@ const LoginPage = () => {
             if (response.ok) {
                 const { access, refresh, user } = result;
 
-                // Tokenlarni localStorage-da saqlash
                 localStorage.setItem('accessToken', access);
                 localStorage.setItem('refreshToken', refresh);
 
@@ -54,7 +51,6 @@ const LoginPage = () => {
                     localStorage.removeItem('savedPassword');
                 }
 
-                // Muvaffaqiyatli login holatida asosiy sahifaga o'tkazish
                 navigate('/main', { state: { user } });
             } else {
                 setErrorMessage(result.detail || 'Login muvaffaqiyatsiz. Iltimos, qayta urinib ko‘ring.');
@@ -79,7 +75,7 @@ const LoginPage = () => {
                         placeholder="Telefon raqamingizni kiriting"
                         value={number}
                         onChange={(e) => setNumber(e.target.value)}
-                        autoComplete="tel" // To'g'ri yozilish: autoComplete
+                        autoComplete="tel"
                         required
                     />
                 </div>
@@ -92,7 +88,7 @@ const LoginPage = () => {
                         placeholder="Parolingizni kiriting"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
-                        autoComplete="current-password" // To'g'ri yozilish: autoComplete
+                        autoComplete="current-password"
                         required
                     />
                 </div>
@@ -102,7 +98,13 @@ const LoginPage = () => {
                 </p>
                 <div className="checkbox-group">
                     <label htmlFor="remember-me" className="checkbox-label">Raqam va Parol eslab qolinsinmi?</label>
-                    <input type="checkbox" id="remember-me" className="checkbox" />
+                    <input 
+                        type="checkbox" 
+                        id="remember-me" 
+                        className="checkbox" 
+                        checked={rememberMe} 
+                        onChange={(e) => setRememberMe(e.target.checked)} // Checkbox hol atini yangilash
+                    />
                 </div>
                 <button type="submit" disabled={loading}>
                     {loading ? <div className="spinner"></div> : 'Kirish'}

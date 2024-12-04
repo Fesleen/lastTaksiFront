@@ -4,6 +4,7 @@ import styles from './style.module.css';
 import { useTheme } from '../../theme';
 import { useNavigate } from 'react-router-dom';
 import EditIcon from '@mui/icons-material/Edit';
+import KeyboardBackspaceIcon from '@mui/icons-material/KeyboardBackspace'; // Orqaga tugmasi uchun ikonka
 
 const ProfilePage = () => {
     const [userData, setUserData] = useState(null);
@@ -65,14 +66,21 @@ const ProfilePage = () => {
         fileInputRef.current.click(); // Fayl inputini ochish
     };
 
+    const handleBackButtonClick = () => {
+        navigate(-1); // Orqaga o'tish
+    };
+
     if (!userData) {
         return <div>Loading...</div>;
     }
 
     return (
         <div className={isBlue ? styles.containerBlue : styles.containerWhite}>
+            <button className={styles.backButton} onClick={handleBackButtonClick}>
+                <KeyboardBackspaceIcon /> 
+            </button>
             <div className={styles.userCard}>
-                <h1 className={isBlue ? styles.titleBlue : styles.titleWhite}>User  Profile</h1>
+                <h1 className={isBlue ? styles.titleBlue : styles.titleWhite}>User   Profile</h1>
                 <div className={styles.userInfo}>
                     <div className={styles.profileImage}>
                         <img 
@@ -91,7 +99,7 @@ const ProfilePage = () => {
                         style={{ display: 'none' }} // Ko'rinmas qilib qo'yish
                     />
                     <p className={isBlue ? styles.pBlue : styles.pWhite}><strong>Buyurtmachi:</strong> {userData.first_name} {userData.last_name}</p>
-                    <p className={isBlue ? styles.pBlue : styles.pWhite}><strong>Phone:</strong> {userData.phone_number}</p>
+                    <p className={isBlue ? styles.pBlue : styles.pWhite}><strong>Phone:</strong> {userData.phone_number}</ p>
                     <p className={isBlue ? styles.pBlue : styles.pWhite}><strong>Orders :</strong> {userData.orders_count}</p>
                 </div>
             </div>

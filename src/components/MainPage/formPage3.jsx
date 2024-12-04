@@ -53,7 +53,7 @@ const FormPage3 = () => {
                 whereTo: formData.whereTo,
                 phone_number: phoneNumber,
                 is_active: true,
-                Yolovchilar: formData.Yolovchilar,
+                yolovchiSoni: formData.yolovchiSoni,
                 car: formData.car
             };
 

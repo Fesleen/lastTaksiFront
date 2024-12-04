@@ -18,14 +18,14 @@ const OrdersPage = () => {
             navigate('/login'); // Token topilmasa, login sahifasiga yo'naltirish
             return;
         }
-
+    
         try {
             const response = await axios.get('https://taxibuxoro.pythonanywhere.com/requests/', {
                 headers: {
                     'Authorization': `JWT ${accessToken}`, // Tokenni headerga qo'shish
                 }
             });
-
+    
             // API dan olingan ma'lumotlarni kerakli formatga o'tkazish
             const orders = response.data.map(order => ({
                 id: order.id, // Buyurtma ID
@@ -37,7 +37,10 @@ const OrdersPage = () => {
                 yolovchiSoni: order.yolovchiSoni, // Yo'lovchilar soni
                 isActive: order.is_active // Faoliyat holati
             }));
-
+    
+            // Buyurtmalarni 'id' bo'yicha saralash (eng yangi buyurtmalar yuqorida)
+            orders.sort((a, b) => b.id - a.id);
+    
             setOrders(orders); // Buyurtmalarni holatga o'rnatish
         } catch (error) {
             console.error('Error fetching orders:', error);

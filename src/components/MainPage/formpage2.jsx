@@ -9,7 +9,7 @@ const FormPage2 = () => {
     const { isBlue } = useTheme();
     const [formData2, setFormData2] = useState({
         additionalInfo: '',
-        Yolovchilar: '',
+        yolovchiSoni: '',
         car: ''
     });
 
@@ -37,7 +37,7 @@ const FormPage2 = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!formData2.Yolovchilar || !formData2.car) {
+        if (!formData2.yolovchiSoni || !formData2.car) {
             alert('Iltimos, barcha maydonlarni to\'ldiring.');
             return;
         }
@@ -56,8 +56,8 @@ const FormPage2 = () => {
                     <input
                         className={isBlue ? styles.inputBlue : styles.inputWhite}
                         type="text"
-                        name="Yolovchilar" 
-                        value={formData2.Yolovchilar}
+                        name="yolovchiSoni" 
+                        value={formData2.yolovchiSoni}
                         onChange={handleChange}
                         required
                     />

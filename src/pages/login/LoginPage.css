@@ -1,11 +1,10 @@
 /* Global Styles */
 .container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center; /* O'rtaga joylash */
-  align-items: center; /* O'rtaga joylash */
-  min-height: 100vh; /* Ekran balandligi bo'yicha markazlashtirish */
-  padding: 20px; /* Umumiy padding */
+  width: 100%;
+  max-width: 1260px;
+  margin: 0 auto;
+  padding: 0 10px;
+  box-sizing: border-box;
 }
 
 .container h1 {
