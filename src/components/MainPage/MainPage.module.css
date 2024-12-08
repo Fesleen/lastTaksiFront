@@ -221,7 +221,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-top: 115px;
+    margin-top: 125px;
     padding: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
@@ -231,7 +231,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-top: 115px;
+    margin-top: 125px;
     padding: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
@@ -257,11 +257,11 @@
     }
     .ButtonBottom {
         width: 100%;
-        margin-top:115px;
+        margin-top:125px;
     }
     .ButtonBottom2 {
         width: 100%;
-        margin-top:115px;
+        margin-top:125px;
     }
 
     .balance {
@@ -279,11 +279,11 @@
     }
     .ButtonBottom {
         width: 100%;
-        margin-top: 115px;
+        margin-top: 125px;
     }
     .ButtonBottom2 {
         width: 100%;
-        margin-top:115px;
+        margin-top:125px;
     }
 
     .balance {
@@ -337,10 +337,10 @@
     }
     .ButtonBottom {
         width: 100%;
-        margin-top: 115px;
+        margin-top: 125px;
     }
     .ButtonBottom2 {
         width: 100%;
-        margin-top:115px;
+        margin-top:125px;
     }
 }
