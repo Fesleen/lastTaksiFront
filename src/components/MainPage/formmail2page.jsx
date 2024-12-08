@@ -1,32 +1,31 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import styles from './FormPage2.module.css';
-import CommonComponent from '../main_top';
+import styles from './formmail2.module.css';
+import CommonComponentForm2 from '../main_top_pochta';
 import { useTheme } from '../theme';
 
-const FormPage2 = () => {
+const FormMailPage2 = () => {
     const navigate = useNavigate();
     const { isBlue } = useTheme();
-    const [formData2, setFormData2] = useState({
+    const [formMailData2, setformMailData2] = useState({
         additionalInfo: '',
         yolovchiSoni: '',
-        car: ''
     });
 
-    const savedFormData = JSON.parse(localStorage.getItem('formData'));
+    const savedformMailData = JSON.parse(localStorage.getItem('formMailData'));
 
     useEffect(() => {
-        if (!savedFormData) {
+        if (!savedformMailData) {
             alert('FormPage ma\'lumotlari topilmadi.');
-            navigate('/form');
+            navigate('/form-mail');
         }
-    }, [savedFormData, navigate]); // toggleTheme ni dependency array ga qo'shmaymiz
+    }, [savedformMailData, navigate]); // toggleTheme ni dependency array ga qo'shmaymiz
 
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData2({
-            ...formData2,
+        setformMailData2({
+            ...formMailData2,
             [name]: value
         });
 
@@ -37,19 +36,19 @@ const FormPage2 = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        if (!formData2.yolovchiSoni || !formData2.car) {
+        if (!formMailData2.yolovchiSoni) {
             alert('Iltimos, barcha maydonlarni to\'ldiring.');
             return;
         }
 
         // Ma'lumotlarni saqlash
-        localStorage.setItem('formData', JSON.stringify({ ...savedFormData, ...formData2 }));
-        navigate('/form3'); // Keyingi sahifaga o'tish
+        localStorage.setItem('formMailData', JSON.stringify({ ...savedformMailData, ...formMailData2 }));
+        navigate('/formmail3'); // Keyingi sahifaga o'tish
     };
 
     return (
         <>
-            <CommonComponent />
+            <CommonComponentForm2 />
             <div className={styles.container}>
                 <form className={styles.form} onSubmit={handleSubmit}>
                     <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Yo'lovchilar soni:</label>
@@ -57,25 +56,10 @@ const FormPage2 = () => {
                         className={isBlue ? styles.inputBlue : styles.inputWhite}
                         type="text"
                         name="yolovchiSoni" 
-                        value={formData2.yolovchiSoni}
+                        value={formMailData2.yolovchiSoni}
                         onChange={handleChange}
                         required
                     />
-                    <label className={isBlue ? styles.labelBlue : styles.labelWhite}>Mashina turi:</label>
-                    <select
-                        className={isBlue ? styles.selectBlue : styles.selectWhite}
-                        name="car"
-                        value={formData2.car}
-                        onChange={handleChange}
-                        required
-                    >
-                        <option value="">Mashina turini tanlang</option>
-                        <option value="Cobalt">Cobalt</option>
-                        <option value="Lacetti">Lacetti</option>
-                        <option value="Nexia">Nexia</option>
-                        <option value="Gentra">Gentra</option>
-                        <option value="Captiva">Captiva</option>
-                    </select>
                     <div className={styles.buttoncomponent}>
                         <button type="button" className={styles.submitButton} onClick={() => navigate(-1)}> Orqaga </button>
                         <button type="submit" className={styles.submitButton}>Keyingisi</button>
@@ -86,4 +70,4 @@ const FormPage2 = () => {
     );
 };
 
-export default FormPage2;
+export default FormMailPage2;

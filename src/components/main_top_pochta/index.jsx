@@ -5,7 +5,7 @@ import PersonIcon from '@mui/icons-material/Person';
 import GroupsIcon from '@mui/icons-material/Groups';
 import styles from "./style.module.css";
 
-const CommonComponentForm = () => {
+const CommonComponentForm2 = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -32,17 +32,17 @@ const CommonComponentForm = () => {
           </div>
           <div
             className={styles.Box__card__item}
-            onClick={() => handleNavigate('/form2')}
+            onClick={() => handleNavigate('/formmail2')}
           >
-            <GroupsIcon sx={{ color: getColor('/form2') }} />
-            <p className={styles.box__p} style={{ color: getColor('/form2') }}>Yo'lovchilar va narx</p>
+            <GroupsIcon sx={{ color: getColor('/formmail2') }} />
+            <p className={styles.box__p} style={{ color: getColor('/formmail2') }}>Yo'lovchilar va narx</p>
           </div>
           <div
             className={styles.Box__card__item}
-            onClick={() => handleNavigate('/form3')}
+            onClick={() => handleNavigate('/formmail3')}
           >
-            <PersonIcon sx={{ color: getColor('/form3') }} />
-            <p className={styles.box__p} style={{ color: getColor('/form3') }}>Shaxsiy ma'lumot</p>
+            <PersonIcon sx={{ color: getColor('/formmail3') }} />
+            <p className={styles.box__p} style={{ color: getColor('/formmail3') }}>Shaxsiy ma'lumot</p>
           </div>
         </div>
       </div>
@@ -50,4 +50,4 @@ const CommonComponentForm = () => {
   );
 };
 
-export default CommonComponentForm;
+export default CommonComponentForm2;

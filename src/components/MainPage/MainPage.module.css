@@ -221,7 +221,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-top: 95px;
+    margin-top: 105px;
     padding: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
@@ -231,7 +231,7 @@
     align-items: center;
     justify-content: space-between;
     width: 100%;
-    margin-top: 95px;
+    margin-top: 105px;
     padding: 10px;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
@@ -257,7 +257,11 @@
     }
     .ButtonBottom {
         width: 100%;
-        margin-top:95px;
+        margin-top:105px;
+    }
+    .ButtonBottom2 {
+        width: 100%;
+        margin-top:105px;
     }
 
     .balance {
@@ -269,13 +273,17 @@
     }
 }
 
-@media (max-width: 450px) {
+@media (max-width: 430px) {
     .userName {
         font-size: 16px;
     }
     .ButtonBottom {
         width: 100%;
-        margin-top: 95px;
+        margin-top: 105px;
+    }
+    .ButtonBottom2 {
+        width: 100%;
+        margin-top:105px;
     }
 
     .balance {
@@ -330,5 +338,9 @@
     .ButtonBottom {
         width: 100%;
         margin-top: 110px;
+    }
+    .ButtonBottom2 {
+        width: 100%;
+        margin-top:105px;
     }
 }
